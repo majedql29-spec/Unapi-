@@ -1136,6 +1136,7 @@ window.addEventListener('message', (event) => {
 });
 
 async function handleOAuthToken(supabaseToken) {
+    if (window.__oauthResolve) { window.__oauthResolve(); window.__oauthResolve = null; }
     try {
         const res = await fetch('/api/oauth-login', {
             method: 'POST',
@@ -1166,16 +1167,22 @@ function handleOAuth(provider) {
     const left = Math.max(0, (screen.width - w) / 2), top = Math.max(0, (screen.height - h) / 2);
     authError.style.display = 'none';
     oauthSpinner.classList.add('show');
-    oauthPopup = window.open(url, 'oauth', 'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top + ',menubar=no,toolbar=no,location=yes');
-    if (!oauthPopup || oauthPopup.closed) {
-        oauthSpinner.classList.remove('show');
-        showAuthError('Popup blocked. Please allow popups for this site.');
-    }
-    const checkClosed = setInterval(() => {
+    let oauthDone = false;
+    const onOauthResult = () => { oauthDone = true; };
+    window.__oauthResolve = onOauthResult;
+    setTimeout(() => {
+        oauthPopup = window.open(url, 'oauth', 'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top + ',menubar=no,toolbar=no,location=yes');
         if (!oauthPopup || oauthPopup.closed) {
+            oauthSpinner.classList.remove('show');
+            showAuthError('Popup blocked. Please allow popups for this site.');
+        }
+    }, 80);
+    const checkClosed = setInterval(() => {
+        if ((!oauthPopup || oauthPopup.closed) && !oauthDone) {
             clearInterval(checkClosed);
             oauthSpinner.classList.remove('show');
         }
+        if (oauthDone) clearInterval(checkClosed);
     }, 500);
 }
 
