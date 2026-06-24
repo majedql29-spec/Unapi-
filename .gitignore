@@ -5,3 +5,8 @@ data/
 venv/
 .vscode/
 .idea/
+*.log
+server_err.txt
+server_out.txt
+workspaces/
+test_page.html
