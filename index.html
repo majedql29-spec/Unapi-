@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Editor</title>
+<style>.CodeMirror{font-family:monospace;height:300px;color:#000;direction:ltr}.CodeMirror-lines{padding:4px 0}.CodeMirror pre.CodeMirror-line,.CodeMirror pre.CodeMirror-line-like{padding:0 4px}.CodeMirror-gutter-filler,.CodeMirror-scrollbar-filler{background-color:#fff}.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7;white-space:nowrap}.CodeMirror-linenumber{padding:0 3px 0 5px;min-width:20px;text-align:right;color:#999;white-space:nowrap}.CodeMirror-guttermarker{color:#000}.CodeMirror-guttermarker-subtle{color:#999}.CodeMirror-cursor{border-left:1px solid #000;border-right:none;width:0}.CodeMirror div.CodeMirror-secondarycursor{border-left:1px solid silver}.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0!important;background:#7e7}.cm-fat-cursor div.CodeMirror-cursors{z-index:1}.cm-fat-cursor .CodeMirror-line::selection,.cm-fat-cursor .CodeMirror-line>span::selection,.cm-fat-cursor .CodeMirror-line>span>span::selection{background:0 0}.cm-fat-cursor .CodeMirror-line::-moz-selection,.cm-fat-cursor .CodeMirror-line>span::-moz-selection,.cm-fat-cursor .CodeMirror-line>span>span::-moz-selection{background:0 0}.cm-fat-cursor{caret-color:transparent}@-moz-keyframes blink{50%{background-color:transparent}}@-webkit-keyframes blink{50%{background-color:transparent}}@keyframes blink{50%{background-color:transparent}}.cm-tab{display:inline-block;text-decoration:inherit}.CodeMirror-rulers{position:absolute;left:0;right:0;top:-50px;bottom:0;overflow:hidden}.CodeMirror-ruler{border-left:1px solid #ccc;top:0;bottom:0;position:absolute}.cm-s-default .cm-header{color:#00f}.cm-s-default .cm-quote{color:#090}.cm-negative{color:#d44}.cm-positive{color:#292}.cm-header,.cm-strong{font-weight:700}.cm-em{font-style:italic}.cm-link{text-decoration:underline}.cm-strikethrough{text-decoration:line-through}.cm-s-default .cm-keyword{color:#708}.cm-s-default .cm-atom{color:#219}.cm-s-default .cm-number{color:#164}.cm-s-default .cm-def{color:#00f}.cm-s-default .cm-variable-2{color:#05a}.cm-s-default .cm-type,.cm-s-default .cm-variable-3{color:#085}.cm-s-default .cm-comment{color:#a50}.cm-s-default .cm-string{color:#a11}.cm-s-default .cm-string-2{color:#f50}.cm-s-default .cm-meta{color:#555}.cm-s-default .cm-qualifier{color:#555}.cm-s-default .cm-builtin{color:#30a}.cm-s-default .cm-bracket{color:#997}.cm-s-default .cm-tag{color:#170}.cm-s-default .cm-attribute{color:#00c}.cm-s-default .cm-hr{color:#999}.cm-s-default .cm-link{color:#00c}.cm-s-default .cm-error{color:red}.cm-invalidchar{color:red}.CodeMirror-composing{border-bottom:2px solid}div.CodeMirror span.CodeMirror-matchingbracket{color:#0b0}div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#a22}.CodeMirror-matchingtag{background:rgba(255,150,0,.3)}.CodeMirror-activeline-background{background:#e8f2ff}.CodeMirror{position:relative;overflow:hidden;background:#fff}.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-50px;margin-right:-50px;padding-bottom:50px;height:100%;outline:0;position:relative;z-index:0}.CodeMirror-sizer{position:relative;border-right:50px solid transparent}.CodeMirror-gutter-filler,.CodeMirror-hscrollbar,.CodeMirror-scrollbar-filler,.CodeMirror-vscrollbar{position:absolute;z-index:6;display:none;outline:0}.CodeMirror-vscrollbar{right:0;top:0;overflow-x:hidden;overflow-y:scroll}.CodeMirror-hscrollbar{bottom:0;left:0;overflow-y:hidden;overflow-x:scroll}.CodeMirror-scrollbar-filler{right:0;bottom:0}.CodeMirror-gutter-filler{left:0;bottom:0}.CodeMirror-gutters{position:absolute;left:0;top:0;min-height:100%;z-index:3}.CodeMirror-gutter{white-space:normal;height:100%;display:inline-block;vertical-align:top;margin-bottom:-50px}.CodeMirror-gutter-wrapper{position:absolute;z-index:4;background:0 0!important;border:none!important}.CodeMirror-gutter-background{position:absolute;top:0;bottom:0;z-index:4}.CodeMirror-gutter-elt{position:absolute;cursor:default;z-index:4}.CodeMirror-gutter-wrapper ::selection{background-color:transparent}.CodeMirror-gutter-wrapper ::-moz-selection{background-color:transparent}.CodeMirror-lines{cursor:text;min-height:1px}.CodeMirror pre.CodeMirror-line,.CodeMirror pre.CodeMirror-line-like{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border-width:0;background:0 0;font-family:inherit;font-size:inherit;margin:0;white-space:pre;word-wrap:normal;line-height:inherit;color:inherit;z-index:2;position:relative;overflow:visible;-webkit-tap-highlight-color:transparent;-webkit-font-variant-ligatures:contextual;font-variant-ligatures:contextual}.CodeMirror-wrap pre.CodeMirror-line,.CodeMirror-wrap pre.CodeMirror-line-like{word-wrap:break-word;white-space:pre-wrap;word-break:normal}.CodeMirror-linebackground{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0}.CodeMirror-linewidget{position:relative;z-index:2;padding:.1px}.CodeMirror-rtl pre{direction:rtl}.CodeMirror-code{outline:0}.CodeMirror-gutter,.CodeMirror-gutters,.CodeMirror-linenumber,.CodeMirror-scroll,.CodeMirror-sizer{-moz-box-sizing:content-box;box-sizing:content-box}.CodeMirror-measure{position:absolute;width:100%;height:0;overflow:hidden;visibility:hidden}.CodeMirror-cursor{position:absolute;pointer-events:none}.CodeMirror-measure pre{position:static}div.CodeMirror-cursors{visibility:hidden;position:relative;z-index:3}div.CodeMirror-dragcursors{visibility:visible}.CodeMirror-focused div.CodeMirror-cursors{visibility:visible}.CodeMirror-selected{background:#d9d9d9}.CodeMirror-focused .CodeMirror-selected{background:#d7d4f0}.CodeMirror-crosshair{cursor:crosshair}.CodeMirror-line::selection,.CodeMirror-line>span::selection,.CodeMirror-line>span>span::selection{background:#d7d4f0}.CodeMirror-line::-moz-selection,.CodeMirror-line>span::-moz-selection,.CodeMirror-line>span>span::-moz-selection{background:#d7d4f0}.cm-searching{background-color:#ffa;background-color:rgba(255,255,0,.4)}.cm-force-border{padding-right:.1px}@media print{.CodeMirror div.CodeMirror-cursors{visibility:hidden}}.cm-tab-wrap-hack:after{content:''}span.CodeMirror-selectedtext{background:0 0}
+
+</style>
+<style>.CodeMirror-hints{position:absolute;z-index:10;overflow:hidden;list-style:none;margin:0;padding:2px;-webkit-box-shadow:2px 3px 5px rgba(0,0,0,.2);-moz-box-shadow:2px 3px 5px rgba(0,0,0,.2);box-shadow:2px 3px 5px rgba(0,0,0,.2);border-radius:3px;border:1px solid silver;background:#fff;font-size:90%;font-family:monospace;max-height:20em;overflow-y:auto;box-sizing:border-box}.CodeMirror-hint{margin:0;padding:0 4px;border-radius:2px;white-space:pre;color:#000;cursor:pointer}li.CodeMirror-hint-active{background:#08f;color:#fff}
+
+</style>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 16px;
+}
+/* ===== AUTH ===== */
+#authOverlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 900;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+}
+#authOverlay.show { display: flex; }
+.auth-box {
+    background: #161b22; border: 1px solid #30363d; border-radius: 14px;
+    padding: 44px 40px 34px; width: 460px; position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    animation: authPop 0.3s ease;
+}
+@keyframes authPop {
+    0% { opacity: 0; transform: scale(0.9) translateY(10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.auth-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: linear-gradient(90deg, #238636, #4ec9b0);
+    border-radius: 12px 12px 0 0;
+}
+.auth-box .auth-close {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none; color: #555; font-size: 18px;
+    cursor: pointer; padding: 2px 6px; border-radius: 4px;
+    transition: all 0.15s;
+}
+.auth-box .auth-close:hover { color: #e6edf3; background: #21262d; }
+.auth-box .auth-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, #238636, #4ec9b0);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 22px;
+}
+.auth-box h2 {
+    color: #e6edf3; font-size: 20px; font-weight: 600;
+    text-align: center; margin-bottom: 4px;
+}
+.auth-box .auth-sub {
+    text-align: center; color: #8b949e; font-size: 13px;
+    margin-bottom: 24px;
+}
+.auth-box .auth-field {
+    position: relative; margin-bottom: 14px;
+}
+.auth-box .auth-field label {
+    display: block; font-size: 12px; color: #8b949e;
+    margin-bottom: 4px; font-weight: 500;
+}
+.auth-box .auth-field input {
+    width: 100%; padding: 10px 12px;
+    background: #0d1117; border: 1px solid #30363d; border-radius: 6px;
+    color: #e6edf3; font-size: 14px; outline: none;
+    transition: border-color 0.2s;
+}
+.auth-box .auth-field input:focus {
+    border-color: #4ec9b0; box-shadow: 0 0 0 2px rgba(78,201,176,0.15);
+}
+.auth-box .auth-field input::placeholder { color: #484f58; }
+.auth-box .auth-btn {
+    width: 100%; padding: 11px; border: none; border-radius: 6px;
+    background: linear-gradient(135deg, #238636, #2ea043);
+    color: #fff; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
+}
+.auth-box .auth-btn:hover { background: linear-gradient(135deg, #2ea043, #3fb950); transform: translateY(-1px); }
+.auth-box .auth-btn:active { transform: translateY(0); }
+.auth-box .auth-error {
+    color: #f85149; font-size: 13px; margin-bottom: 12px; display: none;
+    background: rgba(248,81,73,0.1); padding: 8px 12px; border-radius: 6px;
+    border: 1px solid rgba(248,81,73,0.2);
+}
+.auth-box .auth-toggle {
+    text-align: center; margin-top: 18px; font-size: 13px; color: #8b949e;
+    padding-top: 16px; border-top: 1px solid #21262d;
+}
+.auth-box .auth-toggle span { color: #4ec9b0; cursor: pointer; font-weight: 500; }
+.auth-box .auth-toggle span:hover { text-decoration: underline; }
+/* ===== OAUTH ===== */
+.oauth-section { margin-top: 16px; }
+.oauth-divider { display: flex; align-items: center; gap: 12px; color: #555; font-size: 12px; margin-bottom: 12px; }
+.oauth-divider::before, .oauth-divider::after { content: ''; flex: 1; height: 1px; background: #21262d; }
+.oauth-buttons { display: flex; flex-direction: column; gap: 8px; }
+.oauth-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 10px; border: 1px solid #30363d; border-radius: 6px;
+    background: #0d1117; color: #e6edf3; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
+}
+.oauth-btn:hover { background: #21262d; border-color: #4ec9b0; }
+.oauth-btn:active { transform: translateY(-1px); }
+.oauth-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.pw-strength { display: none; margin-top: 8px; align-items: center; gap: 8px; }
+.pw-strength.show { display: flex; }
+.pw-bar { height: 4px; flex: 1; border-radius: 4px; background: #30363d; transition: all 0.2s; overflow: hidden; }
+.pw-bar-fill { height: 100%; border-radius: 4px; transition: all 0.25s; width: 0%; }
+.pw-label { font-size: 11px; color: #8b949e; min-width: 50px; text-align: left; white-space: nowrap; }
+/* ===== HEADER ===== */
+header {
+    background: #1e1e1e;
+    padding: 0 20px; height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid #4ec9b0;
+    position: relative;
+}
+header h1 {
+    font-size: 16px; font-weight: 600; color: #e6edf3;
+    display: flex; align-items: center; gap: 10px;
+}
+header h1 .logo {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, #4ec9b0, #238636);
+    border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 15px;
+}
+.header-left, .header-right { display: flex; align-items: center; gap: 12px; }
+.controls { display: flex; gap: 8px; align-items: center; }
+.btn {
+    padding: 8px 20px; border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.btn-run { background: linear-gradient(135deg, #4ec9b0, #3db89f); color: #1e1e1e; }
+.btn-run:hover { background: linear-gradient(135deg, #3db89f, #2ea890); box-shadow: 0 4px 12px rgba(78,201,176,0.3); transform: translateY(-1px); }
+.btn-run:disabled { background: #555; cursor: not-allowed; }
+.btn-clear { background: #555; color: #d4d4d4; }
+.btn-clear:hover { background: #666; }
+.btn-save { background: #0e639c; color: #fff; }
+.btn-save:hover { background: #1177bb; }
+.btn-sm { padding: 3px 10px; font-size: 11px; }
+/* ===== MAIN ===== */
+.main { display: flex; flex: 1; overflow: hidden; }
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 270px; min-width: 270px; background: #252526;
+    border-right: 1px solid #3c3c3c; display: flex; flex-direction: column;
+    font-size: 14px;
+}
+.sidebar-header {
+    padding: 11px 16px; font-size: 11px; text-transform: uppercase;
+    color: #888; letter-spacing: 0.8px;
+    border-bottom: 1px solid #2d2d2d; display: flex; justify-content: space-between; align-items: center;
+    background: #1e1e1e;
+}
+.sidebar-header .side-actions { display: flex; gap: 2px; }
+.sidebar-header .side-actions button {
+    background: none; border: none; color: #777; cursor: pointer;
+    font-size: 16px; padding: 2px 5px; border-radius: 4px; transition: all 0.15s;
+    width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center;
+}
+.sidebar-header .side-actions button:hover { background: #30363d; color: #4ec9b0; }
+.sidebar-content {
+    flex: 1; overflow-y: auto; padding: 6px 0;
+}
+.sidebar-content::-webkit-scrollbar { width: 5px; }
+.sidebar-content::-webkit-scrollbar-track { background: transparent; }
+.sidebar-content::-webkit-scrollbar-thumb { background: #424242; border-radius: 3px; }
+.sidebar-content::-webkit-scrollbar-thumb:hover { background: #555; }
+/* ===== EDITOR & OUTPUT ===== */
+.editor-panel { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.output-panel { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.panel-header {
+    background: #2d2d2d; padding: 8px 16px; font-size: 12px;
+    color: #aaa; border-bottom: 2px solid #3c3c3c;
+    display: flex; align-items: center; gap: 8px;
+    letter-spacing: 0.3px;
+}
+.CodeMirror { flex: 1; height: auto !important; font-family: 'Consolas', 'Courier New', monospace; font-size: 16px; line-height: 1.7; background: #1e1e1e; color: #d4d4d4; }
+.CodeMirror-gutters { background: #252526; border-right: 1px solid #3c3c3c; }
+.CodeMirror-linenumber { color: #555; padding: 0 8px 0 4px; }
+.CodeMirror-cursor { border-left: 2px solid #4ec9b0; }
+.CodeMirror-selected { background: #264f78; }
+.CodeMirror-focused .CodeMirror-selected { background: #264f78; }
+.CodeMirror-matchingbracket { background: rgba(78,201,176,0.2); border-bottom: 1px solid #4ec9b0; }
+.cm-keyword { color: #c586c0 !important; }
+.cm-builtin { color: #dcdcaa !important; }
+.cm-number { color: #b5cea8 !important; }
+.cm-string { color: #ce9178 !important; }
+.cm-string-2 { color: #ce9178 !important; }
+.cm-comment { color: #6a9955 !important; font-style: italic; }
+.cm-def { color: #dcdcaa !important; }
+.cm-operator { color: #d4d4d4 !important; }
+.cm-variable { color: #d4d4d4 !important; }
+.cm-variable-2 { color: #9cdcfe !important; }
+.cm-variable-3 { color: #4ec9b0 !important; }
+.cm-atom { color: #569cd6 !important; }
+.cm-meta { color: #9cdcfe !important; }
+.cm-tag { color: #569cd6 !important; }
+.cm-attribute { color: #9cdcfe !important; }
+.cm-bracket { color: #d4d4d4 !important; }
+.cm-error { color: #f44747 !important; }
+.CodeMirror-hints { background: #252526; border: 1px solid #3c3c3c; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; }
+.CodeMirror-hint { color: #d4d4d4; padding: 4px 10px; }
+.CodeMirror-hint-active { background: #4ec9b0; color: #1e1e1e; }
+#output {
+    flex: 1; background: #1a1a1a; color: #d4d4d4; padding: 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 15px; line-height: 1.6; overflow: auto; white-space: pre-wrap;
+}
+#output .error { color: #f44747; }
+#output .success { color: #4ec9b0; }
+#output .info { color: #888; }
+.status-bar {
+    background: #007acc; padding: 4px 16px; font-size: 12px;
+    color: #fff; display: flex; justify-content: space-between;
+}
+/* ===== MODAL ===== */
+#modalOverlay {
+    display: none; position: fixed; inset: 0; z-index: 950;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(3px);
+    align-items: center; justify-content: center;
+}
+#modalOverlay.show { display: flex; }
+.modal-box {
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+    padding: 32px 28px 24px; width: 410px; position: relative;
+    box-shadow: 0 20px 56px rgba(0,0,0,0.5);
+    animation: modalPop 0.25s ease;
+}
+@keyframes modalPop {
+    0% { opacity: 0; transform: scale(0.92) translateY(8px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-box h3 { font-size: 16px; color: #e6edf3; margin-bottom: 4px; font-weight: 600; }
+.modal-box .modal-sub { font-size: 12px; color: #8b949e; margin-bottom: 16px; }
+.modal-box input {
+    width: 100%; padding: 10px 12px; background: #0d1117; border: 1px solid #30363d;
+    border-radius: 6px; color: #e6edf3; font-size: 14px; outline: none;
+    transition: border-color 0.2s; margin-bottom: 12px;
+}
+.modal-box input:focus { border-color: #4ec9b0; box-shadow: 0 0 0 2px rgba(78,201,176,0.15); }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-actions button {
+    padding: 8px 18px; border: none; border-radius: 6px; font-size: 13px;
+    font-weight: 500; cursor: pointer; transition: all 0.15s;
+}
+.modal-actions .modal-cancel { background: #21262d; color: #e6edf3; }
+.modal-actions .modal-cancel:hover { background: #30363d; }
+.modal-actions .modal-confirm { background: #238636; color: #fff; }
+.modal-actions .modal-confirm:hover { background: #2ea043; }
+/* ===== FILE TREE ===== */
+.file-item {
+    padding: 6px 12px 6px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    color: #ccc; transition: all 0.1s; font-size: 14px;
+    border-left: 3px solid transparent;
+}
+.file-item:hover { background: #2a2d2e; }
+.file-item.active { background: #37373d; color: #fff; border-left-color: #4ec9b0; }
+.file-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.file-item .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-item .file-actions { display: none; gap: 2px; margin-left: auto; padding: 0 4px; }
+.file-item:hover .file-actions { display: flex; }
+.file-item .file-actions button {
+    background: none; border: none; color: #666; cursor: pointer;
+    font-size: 12px; padding: 2px 5px; border-radius: 4px;
+    transition: all 0.12s; line-height: 1;
+}
+.file-item .file-actions button:hover { color: #e6edf3; background: #3c3c3c; }
+.file-item .file-actions .del-btn:hover { color: #f85149; }
+.file-item.dir { color: #9cdcfe; font-weight: 500; }
+.file-item.target { background: #2a3a35; border-left-color: #4ec9b0; }
+.sidebar-path { cursor: pointer; user-select: none; }
+.sidebar-path:hover { color: #4ec9b0; }
+/* ===== LIGHT MODE ===== */
+body.light-mode { background: #fff; }
+body.light-mode header { background: #f5f5f5; border-bottom-color: #238636; }
+body.light-mode header h1 { color: #1e1e1e; }
+body.light-mode .sidebar { background: #f3f3f3; border-right-color: #ddd; }
+body.light-mode .sidebar-header { background: #e8e8e8; color: #555; border-bottom-color: #ddd; }
+body.light-mode .sidebar-header .side-actions button:hover { background: #d0d0d0; color: #238636; }
+body.light-mode .sidebar-content::-webkit-scrollbar-thumb { background: #bbb; }
+body.light-mode .sidebar-content::-webkit-scrollbar-thumb:hover { background: #999; }
+body.light-mode .file-item { color: #333; }
+body.light-mode .file-item:hover { background: #e8e8e8; }
+body.light-mode .file-item.active { background: #d4d4d4; color: #1e1e1e; border-left-color: #238636; }
+body.light-mode .file-item.target { background: #d8efe8; }
+body.light-mode .file-item.dir { color: #0563c1; }
+body.light-mode .file-item .file-actions button:hover { color: #333; background: #ccc; }
+body.light-mode .file-item .file-actions .del-btn:hover { color: #d32f2f; }
+body.light-mode .panel-header { background: #e8e8e8; color: #555; border-bottom-color: #ccc; }
+body.light-mode .CodeMirror { background: #fafafa; color: #333; }
+body.light-mode .CodeMirror-gutters { background: #f0f0f0; border-right-color: #ddd; }
+body.light-mode .CodeMirror-linenumber { color: #999; }
+body.light-mode .CodeMirror-cursor { border-left-color: #333; }
+body.light-mode .CodeMirror-selected { background: #add6ff; }
+body.light-mode .CodeMirror-focused .CodeMirror-selected { background: #add6ff; }
+body.light-mode .CodeMirror-matchingbracket { background: rgba(0,0,0,0.1); border-bottom-color: #666; }
+body.light-mode #output { background: #fafafa; color: #333; }
+body.light-mode .status-bar { background: #0e639c; }
+body.light-mode .modal-box { background: #f6f8fa; border-color: #d0d7de; }
+body.light-mode .modal-box h3 { color: #1e1e1e; }
+body.light-mode .modal-box .modal-sub { color: #656d76; }
+body.light-mode .modal-box input { background: #fff; border-color: #d0d7de; color: #1e1e1e; }
+body.light-mode .modal-box input:focus { border-color: #238636; }
+body.light-mode .modal-actions .modal-cancel { background: #f3f4f6; color: #1e1e1e; }
+body.light-mode .modal-actions .modal-cancel:hover { background: #e8e8e8; }
+body.light-mode .modal-actions .modal-confirm { background: #238636; }
+body.light-mode .dropbtn { background: #e8e8e8; border-color: #ccc; color: #333; }
+body.light-mode .dropbtn:hover { border-color: #238636; background: #d0d0d0; }
+body.light-mode .dropdown-content { background: #fff; border-color: #d0d7de; }
+body.light-mode .drop-item { color: #333; }
+body.light-mode .drop-item:hover { background: #f0f0f0; color: #1e1e1e; }
+body.light-mode .drop-divider { background: #d0d7de; }
+body.light-mode .drop-user { color: #238636; border-bottom-color: #d0d7de; }
+body.light-mode .btn-run { background: linear-gradient(135deg,#238636,#2ea043); color: #fff; }
+body.light-mode .btn-clear { background: #bbb; color: #333; }
+body.light-mode .btn-clear:hover { background: #aaa; }
+body.light-mode .btn-save { background: #0e639c; color: #fff; }
+body.light-mode .CodeMirror-hints { background: #fff; border-color: #d0d7de; }
+body.light-mode .CodeMirror-hint { color: #333; }
+body.light-mode .CodeMirror-hint-active { background: #238636; color: #fff; }
+body.light-mode #infoContent h3 { color: #1e1e1e; }
+body.light-mode #infoContent p { color: #555; }
+body.light-mode #infoContent kbd { background: #fff; border-color: #d0d7de; }
+body.light-mode #infoContent .shortcut-row { border-bottom-color: #f0f0f0; }
+body.light-mode #infoContent .shortcut-row span:first-child { color: #555; }
+body.light-mode .auth-box { background: #f6f8fa; border-color: #d0d7de; }
+body.light-mode .auth-box .auth-close { color: #555; }
+body.light-mode .auth-box .auth-close:hover { color: #1e1e1e; background: #e8e8e8; }
+body.light-mode .auth-box h2 { color: #1e1e1e; }
+body.light-mode .auth-box .auth-sub { color: #656d76; }
+body.light-mode .auth-box .auth-field label { color: #656d76; }
+body.light-mode .auth-box .auth-field input { background: #fff; border-color: #d0d7de; color: #1e1e1e; }
+body.light-mode .auth-box .auth-field input:focus { border-color: #238636; }
+body.light-mode .auth-box .auth-toggle { color: #656d76; border-top-color: #d0d7de; }
+body.light-mode .oauth-divider { color: #8b949e; }
+body.light-mode .oauth-divider::before, body.light-mode .oauth-divider::after { background: #d0d7de; }
+body.light-mode .oauth-btn { background: #fff; border-color: #d0d7de; color: #1e1e1e; }
+body.light-mode .oauth-btn:hover { background: #f0f0f0; border-color: #238636; }
+body.light-mode #splashScreen { background: #fff; }
+body.light-mode .cm-keyword { color: #a626a4 !important; }
+body.light-mode .cm-number { color: #4070a0 !important; }
+body.light-mode .cm-string { color: #50a14f !important; }
+body.light-mode .cm-comment { color: #a0a0a0 !important; }
+body.light-mode .cm-def { color: #4070a0 !important; }
+body.light-mode .cm-builtin { color: #c18401 !important; }
+body.light-mode .cm-variable { color: #333 !important; }
+/* ===== DROPDOWN ===== */
+.dropdown { position: relative; display: inline-block; }
+.dropbtn {
+    background: #2d2d2d; border: 1px solid #3c3c3c; color: #d4d4d4; font-size: 18px;
+    cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: all 0.15s;
+    line-height: 1; width: 36px; height: 32px; display: inline-flex;
+    align-items: center; justify-content: center;
+}
+.dropbtn:hover { border-color: #4ec9b0; background: #3c3c3c; }
+.dropdown-content {
+    display: none; position: absolute; right: 0; top: 100%; min-width: 220px;
+    background: #2d2d2d; border: 1px solid #3c3c3c; border-radius: 10px;
+    padding: 6px; z-index: 100; margin-top: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+.dropdown-content.show { display: block; }
+.drop-item {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    text-align: right; padding: 10px 14px;
+    background: none; border: none; color: #d4d4d4; font-size: 14px;
+    cursor: pointer; border-radius: 6px; transition: all 0.15s;
+    font-family: inherit; white-space: nowrap;
+}
+.drop-item:hover { background: #3c3c3c; color: #e6edf3; }
+.drop-item:last-child { border-bottom: none; }
+.drop-user {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 12px; color: #4ec9b0; font-size: 13px; font-weight: 500;
+    border-bottom: 1px solid #3c3c3c; margin-bottom: 4px;
+}
+.drop-divider { height: 1px; background: #3c3c3c; margin: 4px 0; }
+/* ===== INFO OVERLAY ===== */
+#infoOverlay {
+    display: none; position: fixed; inset: 0; z-index: 900;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+}
+#infoOverlay.show { display: flex; }
+#infoContent { text-align: center; line-height: 2.2; }
+#infoContent h3 { font-size: 18px; margin-bottom: 12px; color: #e6edf3; }
+#infoContent p { color: #8b949e; font-size: 14px; margin: 4px 0; }
+#infoContent kbd {
+    background: #0d1117; padding: 3px 10px; border-radius: 4px;
+    border: 1px solid #30363d; font-family: 'Consolas', monospace;
+    font-size: 13px; color: #4ec9b0; margin: 0 4px;
+}
+#infoContent .shortcut-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 16px; border-bottom: 1px solid #21262d; direction: ltr;
+}
+#infoContent .shortcut-row:last-child { border-bottom: none; }
+#infoContent .shortcut-row span:first-child { color: #8b949e; }
+/* ===== SPLASH ===== */
+#splashScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #1e1e1e;
+    display: flex; align-items: center; justify-content: center;
+    animation: splashFade 0.5s ease 1.5s forwards;
+}
+.splash-content { text-align: center; }
+.splash-logo { font-size: 72px; animation: splashPulse 0.8s ease-in-out infinite; }
+@keyframes splashPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+.splash-loader {
+    width: 140px; height: 3px; background: #2d2d2d; border-radius: 3px;
+    margin: 28px auto 0; overflow: hidden;
+}
+.splash-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #4ec9b0, #2ea043);
+    border-radius: 3px; animation: splashLoad 1s ease 0.3s forwards;
+}
+@keyframes splashLoad {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+@keyframes splashFade {
+    to { opacity: 0; visibility: hidden; }
+}
+/* ===== OAUTH SPINNER ===== */
+.oauth-spinner-overlay {
+    display: none; position: absolute; inset: 0; z-index: 10;
+    background: rgba(0,0,0,0.6); border-radius: 14px;
+    align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+}
+.oauth-spinner-overlay.show { display: flex; }
+.oauth-spinner-ring {
+    width: 36px; height: 36px; border: 3px solid #30363d;
+    border-top-color: #4ec9b0; border-radius: 50%;
+    animation: oauthSpin 0.8s linear infinite;
+}
+@keyframes oauthSpin { to { transform: rotate(360deg); } }
+.oauth-spinner-text { color: #d4d4d4; font-size: 13px; }
+body.light-mode .oauth-spinner-overlay { background: rgba(255,255,255,0.6); }
+body.light-mode .oauth-spinner-text { color: #333; }
+</style>
+</head>
+<body>
+
+<div id="splashScreen">
+    <div class="splash-content">
+        <div class="splash-logo">🐍</div>
+        <div class="splash-loader"><div class="splash-bar"></div></div>
+    </div>
+</div>
+
+<div id="authOverlay">
+    <div class="auth-box">
+        <button class="auth-close" id="authClose">✕</button>
+        <div class="auth-icon">🐍</div>
+        <h2 id="authTitle">Welcome Back</h2>
+        <div class="auth-sub" id="authSub">Log in to use the explorer</div>
+        <div class="auth-error" id="authError"></div>
+        <form id="authForm" onsubmit="return false">
+            <div class="auth-field">
+                <label>Username</label>
+                <input type="text" id="authUser" placeholder="Enter username" autocomplete="off">
+            </div>
+            <div class="auth-field">
+                <label>Password</label>
+                <input type="password" id="authPass" placeholder="Enter password">
+                <div class="pw-strength" id="pwStrength">
+                    <div class="pw-bar" id="pwBar"></div>
+                    <span class="pw-label" id="pwLabel"></span>
+                </div>
+            </div>
+            <button class="auth-btn" id="authBtn" type="submit">Log In</button>
+        </form>
+        <div class="oauth-section">
+            <div class="oauth-divider"><span>or</span></div>
+            <div class="oauth-buttons">
+                <button class="oauth-btn google-btn" onclick="handleOAuth('google')">
+                    <svg class="oauth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    Google
+                </button>
+                <button class="oauth-btn github-btn" onclick="handleOAuth('github')">
+                    <svg class="oauth-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" fill="#fff"/></svg>
+                    GitHub
+                </button>
+            </div>
+        </div>
+        <div class="auth-toggle" id="authToggle">
+            Don't have an account? <span id="authToggleLink">Create Account</span>
+        </div>
+        <div class="oauth-spinner-overlay" id="oauthSpinner">
+            <div class="oauth-spinner-ring"></div>
+            <div class="oauth-spinner-text">Signing in...</div>
+        </div>
+    </div>
+</div>
+
+<div id="infoOverlay">
+    <div class="auth-box" style="width:500px;max-height:80vh;overflow-y:auto">
+        <button class="auth-close" id="infoClose">✕</button>
+        <div id="infoContent"></div>
+    </div>
+</div>
+
+<div id="modalOverlay">
+    <div class="modal-box">
+        <h3 id="modalTitle">New File</h3>
+        <div class="modal-sub" id="modalSub">Enter filename</div>
+        <input type="text" id="modalInput" placeholder="main.py" autocomplete="off" spellcheck="false">
+        <div class="modal-actions">
+            <button class="modal-cancel" id="modalCancel">Cancel</button>
+            <button class="modal-confirm" id="modalConfirm">Create</button>
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="header-left">
+        <h1><span class="logo">🐍</span>Python</h1>
+        <div class="controls">
+            <button class="btn btn-run" id="runBtn">▶ Run</button>
+            <button class="btn btn-clear" id="clearBtn">Clear</button>
+            <button class="btn btn-save" id="saveBtn">💾 Save</button>
+        </div>
+    </div>
+    <div class="header-right">
+        <span id="openFileLabel" style="font-size:11px;color:#888;display:none"></span>
+        <div class="dropdown">
+            <button class="dropbtn" id="dropBtn">👤</button>
+            <div class="dropdown-content" id="dropdownContent">
+                <button class="drop-item" id="dropLogin">🔑 Log In</button>
+                <div class="drop-divider" id="loginDivider"></div>
+                <div class="drop-user" id="dropUser" style="display:none"></div>
+                <div class="drop-divider" id="userDivider" style="display:none"></div>
+                <button class="drop-item" id="dropDownload">📥 Download</button>
+                <button class="drop-item" id="dropSession">📋 Save Session</button>
+                <div class="drop-divider"></div>
+                <button class="drop-item" id="dropShortcuts">⌨️ Shortcuts</button>
+                <button class="drop-item" id="dropAbout">ℹ️ About</button>
+                <div class="drop-divider"></div>
+                <button class="drop-item" id="dropTheme">🌗 Theme</button>
+
+                <button class="drop-item" id="dropSettings">⚙️ Settings</button>
+                <div class="drop-divider" id="logoutDivider" style="display:none"></div>
+                <button class="drop-item" id="dropLogout" style="display:none">🚪 Log Out</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-path" id="sidebarPath" title="Root folder">Explorer</span>
+            <div class="side-actions">
+                <button id="newFileBtn" title="New File">+</button>
+                <button id="newFolderBtn" title="New Folder">📁</button>
+            </div>
+        </div>
+        <div class="sidebar-content" id="fileTree"></div>
+    </div>
+    <div class="editor-panel">
+        <div class="panel-header" id="editorTab">📄 main.py</div>
+        <textarea id="editor"></textarea>
+    </div>
+    <div class="output-panel">
+        <div class="panel-header" id="outputHeader">📟 Output</div>
+        <div id="output"><span class="info">// Ready</span></div>
+    </div>
+</div>
+
+<div class="status-bar">
+    <span id="statusText">Offline</span>
+    <span id="statusRight"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
+<script>
+// ===== ESSENTIAL UI =====
+let token = localStorage.getItem('token');
+let currentUser = localStorage.getItem('currentUser');
+let currentFilePath = 'main.py';
+let currentDir = '';
+let cm = null;
+
+const editorEl = document.getElementById('editor');
+try {
+    cm = CodeMirror.fromTextArea(editorEl, {
+    mode: 'python', theme: 'default', lineNumbers: true, indentUnit: 4,
+    tabSize: 4, indentWithTabs: false, smartIndent: true, lineWrapping: false,
+    extraKeys: {
+        "Tab": function(inst) { if (inst.somethingSelected()) inst.indentSelection("add"); else inst.replaceSelection("    ", "end"); },
+        "Ctrl-I": function(inst) { inst.showHint({ hint: CodeMirror.hint.python, completeSingle: false }); },
+        "Ctrl-Enter": function() { runBtn.click(); }
+    }
+});
+
+const PY_SUGGESTIONS = [
+    "False","None","True","and","as","assert","async","await","break","class","continue",
+    "def","del","elif","else","except","finally","for","from","global","if","import","in",
+    "is","lambda","nonlocal","not","or","pass","raise","return","try","while","with","yield",
+    "abs","all","any","ascii","bin","bool","bytearray","bytes","callable","chr","classmethod",
+    "compile","complex","delattr","dict","dir","divmod","enumerate","eval","exec","filter",
+    "float","format","frozenset","getattr","globals","hasattr","hash","hex","id","input",
+    "int","isinstance","issubclass","iter","len","list","locals","map","max","memoryview",
+    "min","next","object","oct","open","ord","pow","print","property","range","repr",
+    "reversed","round","set","setattr","slice","sorted","staticmethod","str","sum","super",
+    "tuple","type","vars","zip","__import__",
+    "os","os.path","sys","json","math","random","datetime","re","time","collections",
+    "pathlib","functools","itertools","typing","string","io","base64","hashlib","csv",
+    "sqlite3","uuid","decimal","fractions","statistics","copy","pprint","enum",
+    "dataclasses","argparse","logging","shutil","glob","subprocess","threading","asyncio",
+    "requests","flask","numpy","pandas","matplotlib","pydantic","click","tqdm","pytest",
+    "if __name__ == '__main__':","def __init__(self):","def __str__(self):",
+    "class ClassName:","def function_name():","for i in range():",
+    "for item in list:","for key, value in dict.items():","while condition:",
+    "if condition:","elif condition:","else:","try:","except Exception as e:",
+    "finally:","with open('file') as f:","import module","from module import",
+    "self.attribute = value","return value","lambda x: x",
+    "[x for x in ]","{k: v for k, v in }","@staticmethod","@classmethod","@property",
+    ": str",": int",": float",": bool",": list",": dict",": Optional[]",": List[]",
+    ": Dict[]",": Tuple[]","-> None","-> str","-> int","-> bool","-> list",
+    "self","cls","args","kwargs","app","request","response","data","value","values",
+    "key","keys","item","items","config","name","path","file","files","content",
+    "text","result","results","status","error","message","helper","utils","manager",
+    "Model","View","Controller","Serializer","Form",
+];
+
+CodeMirror.registerHelper("hint", "python", function(cm) {
+    const cursor = cm.getCursor();
+    const token = cm.getTokenAt(cursor);
+    const start = token.start;
+    const end = cursor.ch;
+    const line = cm.getLine(cursor.line);
+    const word = line.slice(start, end);
+    if (!word || word.length < 1) return null;
+    const list = PY_SUGGESTIONS.filter(item => item.toLowerCase().startsWith(word.toLowerCase())).slice(0, 20);
+    if (!list.length) return null;
+    return { list, from: { line: cursor.line, ch: start }, to: { line: cursor.line, ch: end } };
+});
+
+    cm.on("keyup", function(instance, event) {
+        const k = event.key;
+        if (k.length > 1 || event.ctrlKey || event.metaKey || event.altKey) return;
+        instance.showHint({ hint: CodeMirror.hint.python, completeSingle: false });
+    });
+
+    let saveTimer;
+    cm.on("change", function() {
+        if (token) { clearTimeout(saveTimer); saveTimer = setTimeout(saveCurrentFile, 1500); }
+        else { clearTimeout(saveTimer); saveTimer = setTimeout(() => localStorage.setItem('guestCode', cm.getValue()), 2000); }
+    });
+
+    const guestCode = localStorage.getItem('guestCode');
+    if (guestCode && !token) cm.setValue(guestCode);
+} catch (e) {
+    console.warn('CodeMirror error:', e.message);
+}
+
+// ===== DOM =====
+const output = document.getElementById('output');
+const runBtn = document.getElementById('runBtn');
+const clearBtn = document.getElementById('clearBtn');
+const saveBtn = document.getElementById('saveBtn');
+const authOverlay = document.getElementById('authOverlay');
+const authTitle = document.getElementById('authTitle');
+const authUser = document.getElementById('authUser');
+const authPass = document.getElementById('authPass');
+const authBtn = document.getElementById('authBtn');
+const authError = document.getElementById('authError');
+const authToggleLink = document.getElementById('authToggleLink');
+const fileTree = document.getElementById('fileTree');
+const newFileBtn = document.getElementById('newFileBtn');
+const newFolderBtn = document.getElementById('newFolderBtn');
+const editorTab = document.getElementById('editorTab');
+const statusText = document.getElementById('statusText');
+const statusRight = document.getElementById('statusRight');
+const openFileLabel = document.getElementById('openFileLabel');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalSub = document.getElementById('modalSub');
+const modalInput = document.getElementById('modalInput');
+const modalConfirm = document.getElementById('modalConfirm');
+const modalCancel = document.getElementById('modalCancel');
+const dropBtn = document.getElementById('dropBtn');
+const dropContent = document.getElementById('dropdownContent');
+const dropUser = document.getElementById('dropUser');
+const dropLogin = document.getElementById('dropLogin');
+const dropLogout = document.getElementById('dropLogout');
+const dropDownload = document.getElementById('dropDownload');
+const dropSession = document.getElementById('dropSession');
+const dropShortcuts = document.getElementById('dropShortcuts');
+const dropAbout = document.getElementById('dropAbout');
+const dropTheme = document.getElementById('dropTheme');
+const dropSettings = document.getElementById('dropSettings');
+
+dropBtn.addEventListener('click', (e) => { e.stopPropagation(); dropContent.classList.toggle('show'); });
+document.addEventListener('click', () => dropContent.classList.remove('show'));
+
+function updateDropdown() {
+    if (token) {
+        dropUser.textContent = '👤 ' + currentUser;
+        dropUser.style.display = 'flex';
+        document.getElementById('userDivider').style.display = 'block';
+        dropLogin.style.display = 'none';
+        document.getElementById('loginDivider').style.display = 'none';
+        dropLogout.style.display = 'flex';
+        document.getElementById('logoutDivider').style.display = 'block';
+        dropBtn.textContent = currentUser.charAt(0).toUpperCase();
+    } else {
+        dropUser.style.display = 'none';
+        document.getElementById('userDivider').style.display = 'none';
+        dropLogin.style.display = 'flex';
+        document.getElementById('loginDivider').style.display = 'block';
+        dropLogout.style.display = 'none';
+        document.getElementById('logoutDivider').style.display = 'none';
+        dropBtn.textContent = '👤';
+    }
+}
+updateDropdown();
+dropLogin.addEventListener('click', showAuth);
+dropLogout.addEventListener('click', () => {
+    token = null; currentUser = null;
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    statusText.textContent = 'Guest';
+    statusRight.textContent = '';
+    openFileLabel.style.display = 'none';
+    showGuestSidebar();
+    updateDropdown();
+});
+dropDownload.addEventListener('click', () => {
+    const code = cm.getValue();
+    if (!code) return;
+    const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (currentFilePath || 'code').split('/').pop();
+    a.click();
+    URL.revokeObjectURL(a.href);
+    dropContent.classList.remove('show');
+});
+dropSession.addEventListener('click', () => {
+    const key = 'workspace_' + currentUser;
+    const saved = localStorage.getItem(key);
+    if (saved) {
+        if (!confirm('Restore last saved session?\nCurrent files will be replaced.')) { dropContent.classList.remove('show'); return; }
+        const data = JSON.parse(saved);
+        saveFileIndex(data.files);
+        for (const [p, c] of Object.entries(data.contents || {})) setFC(p, c);
+        loadFileTree();
+        if (data.openFile) openFile(data.openFile);
+        output.innerHTML = '<span class="success">✔ Session restored</span>';
+    } else {
+        const files = getFileIndex();
+        const data = { files, contents: {}, timestamp: Date.now(), openFile: currentFilePath };
+        (function walk(arr) { for (const e of arr) { if (e.type === 'file') { const c = getFC(e.path); if (c) data.contents[e.path] = c; } if (e.children) walk(e.children); } })(files);
+        localStorage.setItem(key, JSON.stringify(data));
+        output.innerHTML = '<span class="success">✔ Session saved</span>';
+    }
+    dropContent.classList.remove('show');
+});
+dropShortcuts.addEventListener('click', () => {
+    showInfo(`
+        <h3>⌨️ Keyboard Shortcuts</h3>
+        <div class="shortcut-row"><kbd>Ctrl+Enter</kbd><span>Run code</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+I</kbd><span>Show suggestions</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+S</kbd><span>Save file</span></div>
+        <div class="shortcut-row"><kbd>Tab</kbd><span>Add 4 spaces</span></div>
+        <div class="shortcut-row"><kbd>Escape</kbd><span>Close dialog</span></div>
+    `);
+    dropContent.classList.remove('show');
+});
+dropAbout.addEventListener('click', () => {
+    showInfo(`
+        <h3>🐍 Python Editor</h3>
+        <p>Version 1.0.0</p>
+        <p style="margin-top:12px;font-size:12px;color:#888">unapi.platform@gmail.com</p>
+        <p style="font-size:12px;color:#555">2026</p>
+    `);
+    dropContent.classList.remove('show');
+});
+dropTheme.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const light = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme', light ? 'light' : 'dark');
+    dropTheme.textContent = light ? '☀️ Theme' : '🌗 Theme';
+    dropContent.classList.remove('show');
+});
+dropSettings.addEventListener('click', () => {
+    const th = document.body.classList.contains('light-mode') ? 'Light' : 'Dark';
+    showInfo(`
+        <h3>⚙️ Settings</h3>
+        <div class="shortcut-row"><span>Theme</span><span>${th}</span></div>
+        <div class="shortcut-row"><span>Language</span><span>English</span></div>
+        <div class="shortcut-row"><span>User</span><span>${currentUser || 'Guest'}</span></div>
+        <p style="margin-top:16px;font-size:12px;color:#888;text-align:center">unapi.platform@gmail.com</p>
+    `);
+    dropContent.classList.remove('show');
+});
+
+let isRegister = false;
+let authCallback = null;
+let modalCallback = null;
+
+function showModal(title, sub, placeholder, cb) {
+    modalTitle.textContent = title; modalSub.textContent = sub;
+    modalInput.placeholder = placeholder; modalInput.value = '';
+    modalCallback = cb; modalOverlay.classList.add('show');
+    setTimeout(() => modalInput.focus(), 100);
+}
+modalCancel.addEventListener('click', () => modalOverlay.classList.remove('show'));
+modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('show'); });
+modalInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') modalConfirm.click(); if (e.key === 'Escape') modalCancel.click(); });
+modalConfirm.addEventListener('click', () => {
+    const val = modalInput.value.trim();
+    if (!val) return; modalOverlay.classList.remove('show');
+    if (modalCallback) modalCallback(val);
+});
+
+function showGuestSidebar() {
+    document.getElementById('newFileBtn').style.display = 'none';
+    document.getElementById('newFolderBtn').style.display = 'none';
+    fileTree.innerHTML = '<div style="padding:30px 20px;text-align:center;color:#888;font-size:13px;line-height:1.8">🔒 Log in<br>to use the file explorer<br><br><button style="background:linear-gradient(135deg,#238636,#2ea043);border:none;color:#fff;padding:8px 24px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;margin-top:6px;transition:all 0.2s" onclick="showAuth()">Log in</button></div>';
+}
+
+// ===== INIT =====
+statusText.textContent = token ? currentUser : 'Guest';
+if (token) initApp();
+else showGuestSidebar();
+setTimeout(() => { if (cm) cm.refresh(); }, 500);
+setTimeout(() => { const el = document.getElementById('splashScreen'); if (el) el.remove(); }, 2000);
+
+if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); dropTheme.textContent = '☀️ Theme'; }
+
+// ===== OAUTH =====
+let oauthPopup = null;
+const oauthSpinner = document.getElementById('oauthSpinner');
+
+window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin) return;
+    if (event.data && event.data.type === 'oauth' && event.data.token) {
+        handleOAuthToken(event.data.token);
+    }
+});
+
+async function handleOAuthToken(supabaseToken) {
+    try {
+        const res = await fetch('/api/oauth-login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: supabaseToken })
+        });
+        const data = await res.json();
+        if (data.error) { oauthSpinner.classList.remove('show'); showAuthError(data.error); return; }
+        token = data.token;
+        currentUser = data.user;
+        localStorage.setItem('token', token);
+        localStorage.setItem('currentUser', currentUser);
+        authOverlay.classList.remove('show');
+        authUser.value = '';
+        authPass.value = '';
+        authError.style.display = 'none';
+        pwStrength.classList.remove('show');
+        oauthSpinner.classList.remove('show');
+        updateDropdown();
+        initApp();
+    } catch (e) { oauthSpinner.classList.remove('show'); showAuthError('OAuth login failed'); }
+}
+
+function handleOAuth(provider) {
+    const redirectTo = window.location.origin + '/auth/callback';
+    const url = 'https://oikzwjqyctureqkcigrx.supabase.co/auth/v1/authorize?provider=' + provider + '&redirect_to=' + encodeURIComponent(redirectTo);
+    const w = 600, h = 700;
+    const left = Math.max(0, (screen.width - w) / 2), top = Math.max(0, (screen.height - h) / 2);
+    authError.style.display = 'none';
+    oauthSpinner.classList.add('show');
+    oauthPopup = window.open(url, 'oauth', 'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top + ',menubar=no,toolbar=no,location=yes');
+    if (!oauthPopup || oauthPopup.closed) {
+        oauthSpinner.classList.remove('show');
+        showAuthError('Popup blocked. Please allow popups for this site.');
+    }
+    const checkClosed = setInterval(() => {
+        if (!oauthPopup || oauthPopup.closed) {
+            clearInterval(checkClosed);
+            oauthSpinner.classList.remove('show');
+        }
+    }, 500);
+}
+
+// ===== AUTH =====
+function showAuth(cb) {
+    isRegister = false;
+    authTitle.textContent = 'Welcome Back';
+    authSub.textContent = 'Log in to use the explorer';
+    authBtn.textContent = 'Log In';
+    authToggleLink.textContent = 'Create Account';
+    const parent = authToggleLink.parentElement;
+    const textBefore = parent.childNodes[0];
+    if (textBefore) textBefore.textContent = "Don't have an account? ";
+    authCallback = cb;
+    authOverlay.classList.add('show');
+}
+
+document.getElementById('authClose').addEventListener('click', () => { oauthSpinner.classList.remove('show'); authOverlay.classList.remove('show'); });
+
+authToggleLink.addEventListener('click', () => {
+    isRegister = !isRegister;
+    authTitle.textContent = isRegister ? 'Create Account' : 'Welcome Back';
+    authSub.textContent = isRegister ? 'Create an account to use the explorer' : 'Log in to use the explorer';
+    authBtn.textContent = isRegister ? 'Create Account' : 'Log In';
+    authToggleLink.textContent = isRegister ? 'Log In' : 'Create Account';
+    const parent = authToggleLink.parentElement;
+    const textBefore = parent.childNodes[0];
+    if (textBefore) textBefore.textContent = isRegister ? 'Already have an account? ' : "Don't have an account? ";
+    authError.style.display = 'none';
+    authPass.value = '';
+    pwStrength.classList.remove('show');
+});
+
+// ===== PASSWORD STRENGTH =====
+const pwStrength = document.getElementById('pwStrength');
+const pwBar = document.getElementById('pwBar');
+const pwLabel = document.getElementById('pwLabel');
+function calcStrength(pw) {
+    if (!pw) return { pct: 0, color: '#30363d', text: '' };
+    let s = 0;
+    if (pw.length >= 8) s++;
+    if (pw.length >= 12) s++;
+    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+    if (/\d/.test(pw)) s++;
+    if (/[^a-zA-Z0-9]/.test(pw)) s++;
+    const map = [
+        { pct: 20, color: '#f85149', text: 'Weak' },
+        { pct: 20, color: '#f85149', text: 'Weak' },
+        { pct: 40, color: '#d29922', text: 'Fair' },
+        { pct: 60, color: '#4ec9b0', text: 'Good' },
+        { pct: 80, color: '#3fb950', text: 'Strong' },
+        { pct: 100, color: '#3fb950', text: 'Strong' },
+    ];
+    return map[Math.min(s, 5)];
+}
+authPass.addEventListener('input', () => {
+    if (!isRegister) { pwStrength.classList.remove('show'); return; }
+    const r = calcStrength(authPass.value);
+    pwStrength.classList.add('show');
+    pwBar.innerHTML = '<div class="pw-bar-fill" style="width:' + r.pct + '%;background:' + r.color + '"></div>';
+    pwLabel.textContent = r.text;
+    pwLabel.style.color = r.color;
+});
+
+document.getElementById('authForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (authBtn.disabled) return;
+    const username = authUser.value.trim();
+    const password = authPass.value;
+    if (!username || !password) { showAuthError('Fill all fields'); return; }
+    if (isRegister && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
+
+    authBtn.disabled = true;
+    authBtn.textContent = '...';
+
+    const endpoint = isRegister ? '/api/register' : '/api/login';
+    try {
+        const res = await fetch(endpoint, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (data.error) { showAuthError(data.error); authBtn.disabled = false; authBtn.textContent = isRegister ? 'Create Account' : 'Log In'; return; }
+        token = data.token;
+        currentUser = data.user;
+        localStorage.setItem('token', token);
+        localStorage.setItem('currentUser', currentUser);
+        authOverlay.classList.remove('show');
+        authUser.value = '';
+        authPass.value = '';
+        authError.style.display = 'none';
+        authBtn.disabled = false;
+        authBtn.textContent = isRegister ? 'Create Account' : 'Log In';
+        updateDropdown();
+        initApp();
+    } catch (e) { showAuthError('Connection failed'); authBtn.disabled = false; authBtn.textContent = isRegister ? 'Create Account' : 'Log In'; }
+});
+
+function showAuthError(msg) {
+    authError.textContent = msg; authError.style.display = 'block';
+}
+
+function showInfo(html) {
+    document.getElementById('infoContent').innerHTML = html;
+    document.getElementById('infoOverlay').classList.add('show');
+}
+document.getElementById('infoClose').addEventListener('click', () => {
+    document.getElementById('infoOverlay').classList.remove('show');
+});
+document.getElementById('infoOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('infoOverlay')) {
+        document.getElementById('infoOverlay').classList.remove('show');
+    }
+});
+
+// ===== APP INIT =====
+function initApp() {
+    document.getElementById('newFileBtn').style.display = '';
+    document.getElementById('newFolderBtn').style.display = '';
+    statusText.textContent = '✅ ' + currentUser;
+    loadFileTree();
+}
+
+// ===== FILE TREE =====
+function getFileIndex() {
+    const key = 'fileIndex_' + currentUser;
+    const raw = localStorage.getItem(key);
+    if (raw) return JSON.parse(raw);
+    const def = [{ name: 'main.py', path: 'main.py', type: 'file' }];
+    localStorage.setItem(key, JSON.stringify(def));
+    return def;
+}
+function saveFileIndex(files) { localStorage.setItem('fileIndex_' + currentUser, JSON.stringify(files)); }
+function fcKey(path) { return 'file_' + currentUser + '_' + path; }
+function getFC(path) { return localStorage.getItem(fcKey(path)) || ''; }
+function setFC(path, c) { localStorage.setItem(fcKey(path), c); }
+function removeFC(path) { localStorage.removeItem(fcKey(path)); }
+
+function loadFileTree() {
+    if (!token) return;
+    renderTree(getFileIndex(), fileTree, '');
+    document.querySelectorAll('.file-item.target').forEach(el => el.classList.remove('target'));
+    if (currentDir) {
+        const el = fileTree.querySelector(`[data-path="${currentDir}"]`);
+        if (el) el.classList.add('target');
+    }
+}
+
+function updateSidebarPath() {
+    const el = document.getElementById('sidebarPath');
+    if (currentDir) {
+        const folderName = currentDir.split('/').pop();
+        el.innerHTML = '📁 <span style="color:#4ec9b0">' + folderName + '</span>';
+        el.title = 'Current: ' + currentDir + '\nClick to go back to root';
+    } else {
+        el.textContent = 'Explorer';
+        el.title = 'Root folder';
+    }
+}
+
+function fileIcon(name) {
+    if (name.endsWith('.py')) return '🐍';
+    if (name.endsWith('.js')) return '🟨';
+    if (name.endsWith('.html')) return '🌐';
+    if (name.endsWith('.css')) return '🎨';
+    if (name.endsWith('.json')) return '📋';
+    if (name.endsWith('.md')) return '📝';
+    if (name.endsWith('.txt')) return '📄';
+    if (name.endsWith('.yml') || name.endsWith('.yaml')) return '⚙️';
+    if (name.endsWith('.env')) return '🔒';
+    if (name.endsWith('.gitignore')) return '🚫';
+    return '📄';
+}
+
+function renderTree(entries, container, basePath) {
+    container.innerHTML = '';
+    const sorted = [...entries].sort((a, b) => {
+        if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
+        return a.name.localeCompare(b.name);
+    });
+    for (const entry of sorted) {
+        const div = document.createElement('div');
+        div.className = 'file-item' + (entry.type === 'dir' ? ' dir' : '');
+        div.dataset.path = entry.path;
+
+        const indent = document.createElement('span');
+        indent.className = 'indent';
+        indent.style.width = basePath.split('/').filter(Boolean).length * 14 + 'px';
+        div.appendChild(indent);
+
+        const icon = document.createElement('span');
+        icon.className = 'icon';
+        icon.textContent = entry.type === 'dir' ? '📁' : fileIcon(entry.name);
+        div.appendChild(icon);
+
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = entry.name;
+        div.appendChild(name);
+
+        const actions = document.createElement('span');
+        actions.className = 'file-actions';
+        const renameBtn = document.createElement('button');
+        renameBtn.textContent = '✎';
+        renameBtn.title = 'Rename';
+        renameBtn.addEventListener('click', (e) => { e.stopPropagation(); showRenameModal(entry.path); });
+        actions.appendChild(renameBtn);
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '✕';
+        delBtn.className = 'del-btn';
+        delBtn.title = 'Delete';
+        delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteItem(entry.path); });
+        actions.appendChild(delBtn);
+        div.appendChild(actions);
+
+        div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (entry.type === 'dir') {
+                currentDir = entry.path;
+                updateSidebarPath();
+                document.querySelectorAll('.file-item.target').forEach(el => el.classList.remove('target'));
+                div.classList.add('target');
+            } else {
+                openFile(entry.path);
+            }
+        });
+
+        container.appendChild(div);
+
+        if (entry.type === 'dir' && entry.children) {
+            const childContainer = document.createElement('div');
+            renderTree(entry.children, childContainer, entry.path);
+            childContainer.style.display = 'none';
+            container.appendChild(childContainer);
+
+            div.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = childContainer.style.display === 'none';
+                childContainer.style.display = isHidden ? '' : 'none';
+                icon.textContent = isHidden ? '📂' : '📁';
+            });
+        }
+    }
+    highlightActive();
+}
+
+function highlightActive() {
+    fileTree.querySelectorAll('.file-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.path === currentFilePath);
+    });
+}
+
+// ===== FILE OPERATIONS =====
+newFileBtn.addEventListener('click', () => {
+    const ctx = currentDir ? ' in "' + currentDir + '"' : '';
+    showModal('New File', 'Enter filename with extension' + ctx, 'main.py', (name) => {
+        createItem(name, 'file');
+    });
+});
+
+newFolderBtn.addEventListener('click', () => {
+    const ctx = currentDir ? ' in "' + currentDir + '"' : '';
+    showModal('New Folder', 'Enter folder name' + ctx, 'utils', (name) => {
+        createItem(name, 'dir');
+    });
+});
+
+document.getElementById('sidebarPath').addEventListener('click', () => {
+    if (!currentDir) return;
+    currentDir = '';
+    updateSidebarPath();
+    document.querySelectorAll('.file-item.target').forEach(el => el.classList.remove('target'));
+});
+
+let renameOldPath = '';
+function showRenameModal(path) {
+    const name = path.split('/').pop();
+    renameOldPath = path;
+    showModal('Rename', 'Enter new name', name, (newName) => {
+        renameItem(renameOldPath, newName);
+    });
+    modalInput.value = name;
+    setTimeout(() => modalInput.select(), 150);
+}
+
+function findEntry(files, path) {
+    for (let f of files) {
+        if (f.path === path) return { entry: f, list: files, idx: files.indexOf(f) };
+        if (f.children) { let r = findEntry(f.children, path); if (r) return r; }
+    }
+    return null;
+}
+
+function renameItem(oldPath, newName) {
+    if (!token) return;
+    const files = getFileIndex();
+    const found = findEntry(files, oldPath);
+    if (!found) return;
+    const parts = oldPath.split('/');
+    parts.pop();
+    parts.push(newName);
+    const newPath = parts.join('/');
+    found.entry.name = newName;
+    found.entry.path = newPath;
+    saveFileIndex(files);
+    if (getFC(oldPath)) { setFC(newPath, getFC(oldPath)); removeFC(oldPath); }
+    loadFileTree();
+    if (currentFilePath === oldPath) openFile(newPath);
+}
+
+function openFile(path) {
+    if (!token) return;
+    currentFilePath = path;
+    cm.setValue(getFC(path));
+    editorTab.textContent = '📄 ' + path.split('/').pop();
+    highlightActive();
+    openFileLabel.textContent = path;
+    openFileLabel.style.display = 'inline';
+}
+
+function saveCurrentFile() {
+    if (!token || !currentFilePath) return;
+    setFC(currentFilePath, cm.getValue());
+}
+
+function createItem(name, type) {
+    if (!token) return;
+    const files = getFileIndex();
+    const fullPath = currentDir ? currentDir + '/' + name : name;
+    const entry = { name, path: fullPath, type };
+    if (type === 'dir') entry.children = [];
+    if (currentDir) {
+        const found = findEntry(files, currentDir);
+        if (found && found.entry.children) {
+            found.entry.children.push(entry);
+        } else {
+            files.push(entry);
+        }
+    } else {
+        files.push(entry);
+    }
+    saveFileIndex(files);
+    loadFileTree();
+    if (type === 'file') openFile(fullPath);
+}
+
+function deleteItem(path) {
+    if (!token) return;
+    if (!confirm('Delete ' + path + '?')) return;
+    const files = getFileIndex();
+    const found = findEntry(files, path);
+    if (!found) return;
+    found.list.splice(found.idx, 1);
+    saveFileIndex(files);
+    removeFC(path);
+    loadFileTree();
+    if (path === currentFilePath) { currentFilePath = ''; editorTab.textContent = '📄 main.py'; cm.setValue(''); openFileLabel.style.display = 'none'; }
+}
+
+// ===== RUN =====
+runBtn.addEventListener('click', async () => {
+    const code = cm.getValue().trim();
+    if (!code) return;
+    output.innerHTML = '';
+    runBtn.disabled = true; runBtn.textContent = '⏳';
+
+    try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+        const res = await fetch('/api/run', { method: 'POST', headers, body: JSON.stringify({ code }) });
+        const data = await res.json();
+        if (data.output) output.innerHTML += data.output.replace(/\n/g, '<br>');
+        if (data.error) output.innerHTML += '<span class="error">' + data.error.replace(/\n/g, '<br>') + '</span>';
+        if (!data.output && !data.error) output.innerHTML = '<span class="success">✅ Done</span>';
+    } catch (e) { output.innerHTML = '<span class="error">❌ Connection error</span>'; }
+    finally { runBtn.disabled = false; runBtn.textContent = '▶ Run'; }
+});
+
+clearBtn.addEventListener('click', () => { output.innerHTML = ''; });
+
+saveBtn.addEventListener('click', () => {
+    if (token) saveCurrentFile();
+    else { localStorage.setItem('guestCode', cm.getValue()); output.innerHTML = '<span class="success">✅ Saved locally</span>'; }
+});
+
+function setStatusRight(text) { statusRight.textContent = text || ''; }
+</script>
+</body>
+</html>
