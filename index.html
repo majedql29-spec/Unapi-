@@ -751,9 +751,7 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
 
         <div class="settings-section">
             <div class="settings-section-title">File</div>
-            <button class="settings-item" id="setSave"><span class="si-icon">💾</span> Save File</button>
-            <button class="settings-item" id="setDownload"><span class="si-icon">⬇️</span> Download</button>
-            <button class="settings-item" id="setSession"><span class="si-icon">📦</span> Save Session</button>
+            <button class="settings-item" id="setDownload"><span class="si-icon">⬇️</span> Download Project</button>
         </div>
 
         <div class="settings-divider"></div>
@@ -774,6 +772,7 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
@@ -1037,41 +1036,28 @@ document.getElementById('setLogout').addEventListener('click', () => {
     showGuestSidebar();
     updateDropdown();
 });
-document.getElementById('setDownload').addEventListener('click', () => {
-    const code = cm.getValue();
-    if (!code) return;
-    const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+document.getElementById('setDownload').addEventListener('click', async () => {
+    const files = getFileIndex();
+    if (!files.length) { output.innerHTML = '<span class="error">No files to download</span>'; closeSettings(); return; }
+    const zip = new JSZip();
+    (function walk(arr, zipFolder) {
+        for (const e of arr) {
+            if (e.type === 'file') {
+                const c = getFC(e.path);
+                if (c !== null) zipFolder.file(e.name, c);
+            } else if (e.children) {
+                const sub = zipFolder.folder(e.name);
+                walk(e.children, sub);
+            }
+        }
+    })(files, zip);
+    const blob = await zip.generateAsync({ type: 'blob' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = (currentFilePath || 'code').split('/').pop();
+    a.download = (currentUser || 'project') + '.zip';
     a.click();
     URL.revokeObjectURL(a.href);
-    closeSettings();
-});
-document.getElementById('setSave').addEventListener('click', () => {
-    if (token) saveCurrentFile();
-    else localStorage.setItem('guestCode', cm.getValue());
-    output.innerHTML = '<span class="success">File saved</span>';
-    closeSettings();
-});
-document.getElementById('setSession').addEventListener('click', () => {
-    const key = 'workspace_' + currentUser;
-    const saved = localStorage.getItem(key);
-    if (saved) {
-        if (!confirm('Restore last saved session?\nCurrent files will be replaced.')) { closeSettings(); return; }
-        const data = JSON.parse(saved);
-        saveFileIndex(data.files);
-        for (const [p, c] of Object.entries(data.contents || {})) setFC(p, c);
-        loadFileTree();
-        if (data.openFile) openFile(data.openFile);
-        output.innerHTML = '<span class="success">✔ Session restored</span>';
-    } else {
-        const files = getFileIndex();
-        const data = { files, contents: {}, timestamp: Date.now(), openFile: currentFilePath };
-        (function walk(arr) { for (const e of arr) { if (e.type === 'file') { const c = getFC(e.path); if (c) data.contents[e.path] = c; } if (e.children) walk(e.children); } })(files);
-        localStorage.setItem(key, JSON.stringify(data));
-        output.innerHTML = '<span class="success">✔ Session saved</span>';
-    }
+    output.innerHTML = '<span class="success">✔ Project downloaded</span>';
     closeSettings();
 });
 document.getElementById('setShortcuts').addEventListener('click', () => {
@@ -1609,7 +1595,7 @@ function renderTree(entries, container, basePath) {
         if (entry.type === 'dir' && entry.children) {
             const childContainer = document.createElement('div');
             renderTree(entry.children, childContainer, entry.path);
-            childContainer.style.display = 'none';
+            childContainer.style.display = '';
             container.appendChild(childContainer);
 
             div.addEventListener('click', (e) => {
