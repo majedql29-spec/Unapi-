@@ -729,6 +729,7 @@ print(f"Golden ratio: {(1 + math.sqrt(5)) / 2}")
 print(f"Natural log of 1000: {math.log(1000):.4f}")
 `;
 let currentUser = localStorage.getItem('currentUser');
+let token = localStorage.getItem('token');
 let currentFilePath = 'main.py';
 let currentDir = '';
 let cm = null;
@@ -998,7 +999,7 @@ else showGuestSidebar();
 setTimeout(() => { if (cm) cm.refresh(); }, 500);
 setTimeout(() => { const el = document.getElementById('splashScreen'); if (el) el.remove(); }, 4000);
 
-if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); dropTheme.textContent = '☀️ Theme'; }
+if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); dropTheme.textContent = 'Dark Theme'; } else { dropTheme.textContent = 'Light Theme'; }
 
 // ===== OAUTH =====
 let oauthPopup = null;
@@ -1503,17 +1504,21 @@ function createItem(name, type) {
     if (type === 'file') openFile(fullPath);
 }
 
+function removeContentRecursive(entry) {
+    if (entry.type === 'file') removeFC(entry.path);
+    else if (entry.children) entry.children.forEach(removeContentRecursive);
+}
 function deleteItem(path) {
     if (!token) return;
     if (!confirm('Delete ' + path + '?')) return;
     const files = getFileIndex();
     const found = findEntry(files, path);
     if (!found) return;
+    removeContentRecursive(found.entry);
     found.list.splice(found.idx, 1);
     saveFileIndex(files);
-    removeFC(path);
     loadFileTree();
-    if (path === currentFilePath) { currentFilePath = ''; editorTab.textContent = '📄 main.py'; cm.setValue(''); openFileLabel.style.display = 'none'; }
+    if (path === currentFilePath) { currentFilePath = ''; editorTab.textContent = '📄 Editor'; cm.setValue(''); openFileLabel.style.display = 'none'; }
 }
 
 // ===== RUN =====
