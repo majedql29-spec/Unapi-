@@ -630,8 +630,89 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
 <script>
-// ===== ESSENTIAL UI =====
-let token = localStorage.getItem('token');
+const DEFAULT_CODE = `import math
+
+def solve_quadratic(a, b, c):
+    d = b**2 - 4*a*c
+    if d < 0:
+        return None
+    x1 = (-b + math.sqrt(d)) / (2*a)
+    x2 = (-b - math.sqrt(d)) / (2*a)
+    return x1, x2
+
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+def fibonacci(n):
+    a, b = 0, 1
+    seq = []
+    for _ in range(n):
+        seq.append(a)
+        a, b = b, a + b
+    return seq
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def approximate_pi(terms):
+    pi = 0
+    for k in range(terms):
+        pi += (-1)**k / (2*k + 1)
+    return pi * 4
+
+def analyze_stats(data):
+    n = len(data)
+    mean = sum(data) / n
+    variance = sum((x - mean)**2 for x in data) / n
+    std = math.sqrt(variance)
+    return mean, variance, std
+
+print("=== Quadratic Equation ===")
+x = solve_quadratic(1, -5, 6)
+print(f"x^2 - 5x + 6 = 0 => x = {x}")
+
+print("\\n=== Factorial ===")
+for n in [5, 8, 10]:
+    print(f"factorial({n}) = {factorial(n)}")
+
+print("\\n=== Fibonacci Sequence ===")
+fib = fibonacci(12)
+print(f"First 12 numbers: {fib}")
+
+print("\\n=== Prime Numbers ===")
+primes = [n for n in range(2, 101) if is_prime(n)]
+print(f"Primes up to 100 ({len(primes)} found):")
+print(primes)
+
+print("\\n=== Pi Approximation ===")
+my_pi = approximate_pi(1000000)
+print(f"Approximated pi: {my_pi}")
+print(f"Actual math.pi:  {math.pi}")
+print(f"Difference:      {abs(my_pi - math.pi):.10f}")
+
+print("\\n=== Statistical Analysis ===")
+scores = [65, 72, 78, 83, 85, 88, 90, 92, 95, 98,
+          70, 74, 79, 84, 86, 89, 91, 93, 96, 99,
+          68, 73, 77, 82, 87, 94, 97, 100, 71, 69]
+mean, var, std = analyze_stats(scores)
+print(f"Data points: {len(scores)}")
+print(f"Mean:   {mean:.2f}")
+print(f"Variance: {var:.2f}")
+print(f"Std:    {std:.2f}")
+
+print("\\n=== Math Constants ===")
+e = sum(1/factorial(n) for n in range(20))
+print(f"Euler's number (approx): {e}")
+print(f"Golden ratio: {(1 + math.sqrt(5)) / 2}")
+print(f"Natural log of 1000: {math.log(1000):.4f}")
+`;
 let currentUser = localStorage.getItem('currentUser');
 let currentFilePath = 'main.py';
 let currentDir = '';
@@ -707,6 +788,7 @@ CodeMirror.registerHelper("hint", "python", function(cm) {
 
     const guestCode = localStorage.getItem('guestCode');
     if (guestCode && !token) cm.setValue(guestCode);
+    else if (!token) cm.setValue(DEFAULT_CODE);
 } catch (e) {
     console.warn('CodeMirror error:', e.message);
 }
@@ -1076,6 +1158,7 @@ function initApp() {
     document.getElementById('newFolderBtn').style.display = '';
     statusText.textContent = '✅ ' + currentUser;
     loadFileTree();
+    setTimeout(() => openFile('main.py'), 100);
 }
 
 // ===== FILE TREE =====
@@ -1083,13 +1166,22 @@ function getFileIndex() {
     const key = 'fileIndex_' + currentUser;
     const raw = localStorage.getItem(key);
     if (raw) return JSON.parse(raw);
-    const def = [{ name: 'main.py', path: 'main.py', type: 'file' }];
+    const def = [
+        { name: 'main', path: 'main', type: 'file' },
+        { name: 'main.py', path: 'main.py', type: 'file' }
+    ];
     localStorage.setItem(key, JSON.stringify(def));
     return def;
 }
 function saveFileIndex(files) { localStorage.setItem('fileIndex_' + currentUser, JSON.stringify(files)); }
 function fcKey(path) { return 'file_' + currentUser + '_' + path; }
-function getFC(path) { return localStorage.getItem(fcKey(path)) || ''; }
+function getFC(path) {
+    const val = localStorage.getItem(fcKey(path));
+    if (val !== null) return val;
+    if (path === 'main') return 'Welcome to Unapi!\n=================\nA Python code editor in your browser.\n\nStart by selecting a file from the explorer\nor create a new one in the sidebar.\n\nShortcuts:\n- Ctrl+Enter: Run code\n- Ctrl+I: Show autocomplete suggestions\n- Tab: Indent (4 spaces)\n';
+    if (path === 'main.py') return DEFAULT_CODE;
+    return '';
+}
 function setFC(path, c) { localStorage.setItem(fcKey(path), c); }
 function removeFC(path) { localStorage.removeItem(fcKey(path)); }
 
