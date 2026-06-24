@@ -1178,41 +1178,103 @@ function fcKey(path) { return 'file_' + currentUser + '_' + path; }
 function getFC(path) {
     const val = localStorage.getItem(fcKey(path));
     if (val !== null) return val;
-    if (path === 'main') return `Welcome to Unapi
+    if (path === 'main') return `Welcome to Unapi!
 ===================
-Unapi is an online Python code editor that runs right in your browser.
 
-FEATURES
---------
-- Code editor with syntax highlighting (CodeMirror)
-- Python code execution (server-side)
-- Autocomplete suggestions (Ctrl+I)
-- File explorer with create/rename/delete
-- Project workspaces saved in your browser
-- Dark and Light themes
-- Google & GitHub login (optional)
-- Save/Restore sessions
-- Download your code
+Unapi is a complete Python coding environment that runs
+entirely in your browser. No setup, no installations,
+no dependencies — just open and start coding.
 
-SHORTCUTS
----------
-  Ctrl+Enter  :  Run code
-  Ctrl+I      :  Show autocomplete suggestions
-  Ctrl+S      :  Save current file
-  Tab         :  Add indent (4 spaces)
-  Escape      :  Close any dialog
+┌─────────────────────────────────────────────────────┐
+│                    FEATURES                          │
+├─────────────────────────────────────────────────────┤
+│ • Code editor with syntax highlighting (CodeMirror) │
+│ • Run Python code on the server (real execution)    │
+│ • Smart autocomplete suggestions (Ctrl+I)           │
+│ • File explorer with create, rename, and delete     │
+│ • Projects saved in your browser (localStorage)     │
+│ • Dark and Light themes (click the moon icon)       │
+│ • Google & GitHub login (optional, no account req)  │
+│ • Save and restore full sessions                    │
+│ • Download your code as .py files                   │
+│ • Fully responsive — works on mobile too            │
+└─────────────────────────────────────────────────────┘
 
-HOW TO USE
-----------
-1. Open main.py in the sidebar
-2. Click Run to execute the code
-3. See the output in the panel on the right
-4. Create new files with the + button in the sidebar
-5. Right-click (or hover) on files to rename or delete
-6. Click the user menu (top-right) for more options
+┌─────────────────────────────────────────────────────┐
+│                    SHORTCUTS                         │
+├─────────────────────────────────────────────────────┤
+│  Ctrl + Enter     Run your code                     │
+│  Ctrl + I         Show autocomplete suggestions     │
+│  Ctrl + S         Save the current file             │
+│  Tab              Indent (4 spaces)                 │
+│  Shift + Tab      Un-indent                         │
+│  Escape           Close any dialog or overlay       │
+│  Ctrl + Z         Undo                              │
+│  Ctrl + Y         Redo                              │
+│  Ctrl + F         Search in code (browser search)   │
+└─────────────────────────────────────────────────────┘
 
-TIP: Click the folder icon in the sidebar header
-to go back to the root directory.
+┌─────────────────────────────────────────────────────┐
+│                    HOW TO USE                        │
+├─────────────────────────────────────────────────────┤
+│                                                      │
+│  1. Open "main.py" from the sidebar (left panel)    │
+│                                                      │
+│  2. Click the "Run" button (▶) or press             │
+│     Ctrl+Enter to execute the code                  │
+│                                                      │
+│  3. The output will appear in the panel on the       │
+│     right side — stdout, stderr, and return codes   │
+│                                                      │
+│  4. Create new files using the + buttons in the      │
+│     sidebar header (file or folder)                 │
+│                                                      │
+│  5. Right-click or hover over files to Rename       │
+│     or Delete them                                  │
+│                                                      │
+│  6. Click the hamburger menu (☰) on mobile to       │
+│     show/hide the sidebar                           │
+│                                                      │
+│  7. Switch between files by clicking them in the    │
+│     sidebar — each file is saved automatically      │
+│                                                      │
+│  8. Use the menu in the top-right corner to log     │
+│     in with Google, GitHub, or username/password,   │
+│     or to switch themes and download your code      │
+└─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────┐
+│                    TIPS & NOTES                      │
+├─────────────────────────────────────────────────────┤
+│ • All your files are saved in your browser's         │
+│   localStorage — they never leave your machine      │
+│                                                      │
+│ • You must be logged in to use the file explorer    │
+│   (guests can still write and run code)             │
+│                                                      │
+│ • Login is free — register with any username and     │
+│   password (minimum 8 characters)                   │
+│                                                      │
+│ • The code runs on the server with a 10-second      │
+│   timeout, so avoid infinite loops                  │
+│                                                      │
+│ • To save your entire workspace (all files), use    │
+│   the "Save Session" option in the menu             │
+│                                                      │
+│ • You can restore a saved session by clicking       │
+│   "Save Session" again — it will prompt to restore  │
+│                                                      │
+│ • If the server is asleep (Render free tier), the    │
+│   first request takes about 30-60 seconds to wake   │
+│                                                      │
+│ • Click the folder icon (📁) in the sidebar header  │
+│   to navigate back to the root directory            │
+│                                                      │
+│ • You can organize files into folders using the     │
+│   "New Folder" button in the sidebar                │
+└─────────────────────────────────────────────────────┘
+
+Happy coding! 🐍
 `;
     if (path === 'main.py') return DEFAULT_CODE;
     return '';
