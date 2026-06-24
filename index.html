@@ -145,6 +145,14 @@ header h1 .logo {
 }
 header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
 .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
+.avatar-btn {
+    background: #2d2d2d; border: 1px solid #3c3c3c; color: #d4d4d4;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    padding: 0; border-radius: 8px; transition: all 0.15s;
+    width: 32px; height: 32px; display: inline-flex;
+    align-items: center; justify-content: center;
+}
+.avatar-btn:hover { border-color: #4ec9b0; background: #3c3c3c; }
 .btn {
     padding: 8px 20px; border: none; border-radius: 8px;
     font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap;
@@ -382,13 +390,20 @@ body.light-mode .modal-box input:focus { border-color: #238636; }
 body.light-mode .modal-actions .modal-cancel { background: #f3f4f6; color: #1e1e1e; }
 body.light-mode .modal-actions .modal-cancel:hover { background: #e8e8e8; }
 body.light-mode .modal-actions .modal-confirm { background: #238636; }
-body.light-mode .dropbtn { background: #e8e8e8; border-color: #ccc; color: #333; }
-body.light-mode .dropbtn:hover { border-color: #238636; background: #d0d0d0; }
-body.light-mode .dropdown-content { background: #fff; border-color: #d0d7de; }
-body.light-mode .drop-item { color: #333; }
-body.light-mode .drop-item:hover { background: #f0f0f0; color: #1e1e1e; }
-body.light-mode .drop-divider { background: #d0d7de; }
-body.light-mode .drop-user { color: #238636; border-bottom-color: #d0d7de; }
+body.light-mode .avatar-btn { background: #e8e8e8; color: #333; }
+body.light-mode .avatar-btn:hover { border-color: #238636; background: #d0d0d0; }
+body.light-mode .settings-panel { background: #f3f3f3; border-left-color: #ddd; }
+body.light-mode .settings-header { border-bottom-color: #ddd; }
+body.light-mode .settings-header .user-info { color: #1e1e1e; }
+body.light-mode .settings-close:hover { color: #1e1e1e; background: #d0d0d0; }
+body.light-mode .settings-item { color: #333; }
+body.light-mode .settings-item:hover { background: #e8e8e8; color: #1e1e1e; }
+body.light-mode .settings-item.danger:hover { color: #d32f2f; }
+body.light-mode .settings-section-title { color: #888; }
+body.light-mode .settings-user { border-bottom-color: #ddd; }
+body.light-mode .settings-user .su-name { color: #1e1e1e; }
+body.light-mode .settings-divider { background: #ddd; }
+body.light-mode .settings-item .si-right { color: #999; }
 body.light-mode .btn-run { background: linear-gradient(135deg,#238636,#2ea043); color: #fff; }
 body.light-mode .btn-clear { background: #bbb; color: #333; }
 body.light-mode .btn-clear:hover { background: #aaa; }
@@ -428,37 +443,68 @@ body.light-mode .cm-comment { color: #a0a0a0 !important; }
 body.light-mode .cm-def { color: #4070a0 !important; }
 body.light-mode .cm-builtin { color: #c18401 !important; }
 body.light-mode .cm-variable { color: #333 !important; }
-/* ===== DROPDOWN ===== */
-.dropdown { position: relative; display: inline-block; }
-.dropbtn {
-    background: #2d2d2d; border: 1px solid #3c3c3c; color: #d4d4d4; font-size: 18px;
-    cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: all 0.15s;
-    line-height: 1; width: 36px; height: 32px; display: inline-flex;
-    align-items: center; justify-content: center;
+/* ===== SETTINGS PANEL ===== */
+.settings-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0.4);
 }
-.dropbtn:hover { border-color: #4ec9b0; background: #3c3c3c; }
-.dropdown-content {
-    display: none; position: absolute; right: 0; top: 100%; min-width: 220px;
-    background: #2d2d2d; border: 1px solid #3c3c3c; border-radius: 10px;
-    padding: 6px; z-index: 100; margin-top: 8px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+.settings-overlay.show { display: block; }
+.settings-panel {
+    position: fixed; top: 0; right: -280px; bottom: 0; width: 260px; z-index: 301;
+    background: #252526; border-left: 1px solid #3c3c3c;
+    display: flex; flex-direction: column;
+    transition: right 0.25s ease;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.3);
 }
-.dropdown-content.show { display: block; }
-.drop-item {
+.settings-panel.open { right: 0; }
+.settings-header {
+    padding: 16px; border-bottom: 1px solid #2d2d2d;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.settings-header .user-info {
+    display: flex; align-items: center; gap: 10px;
+    color: #e6edf3; font-weight: 500; font-size: 14px;
+}
+.settings-header .user-avatar {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg,#4ec9b0,#2ea043);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 600; font-size: 14px;
+}
+.settings-close {
+    background: none; border: none; color: #777; font-size: 18px;
+    cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.15s;
+}
+.settings-close:hover { color: #e6edf3; background: #30363d; }
+.settings-body { flex: 1; overflow-y: auto; padding: 8px; }
+.settings-section { margin-bottom: 4px; }
+.settings-section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+    color: #555; padding: 12px 12px 6px; font-weight: 600;
+}
+.settings-item {
     display: flex; align-items: center; gap: 10px; width: 100%;
-    text-align: right; padding: 10px 14px;
-    background: none; border: none; color: #d4d4d4; font-size: 14px;
-    cursor: pointer; border-radius: 6px; transition: all 0.15s;
-    font-family: inherit; white-space: nowrap;
+    padding: 10px 12px; background: none; border: none; color: #ccc;
+    font-size: 13px; cursor: pointer; border-radius: 6px; transition: all 0.15s;
+    font-family: inherit; text-align: left;
 }
-.drop-item:hover { background: #3c3c3c; color: #e6edf3; }
-.drop-item:last-child { border-bottom: none; }
-.drop-user {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 12px; color: #4ec9b0; font-size: 13px; font-weight: 500;
-    border-bottom: 1px solid #3c3c3c; margin-bottom: 4px;
+.settings-item:hover { background: #2a2d2e; color: #e6edf3; }
+.settings-item .si-icon { width: 18px; text-align: center; font-size: 14px; flex-shrink: 0; }
+.settings-item.danger:hover { color: #f85149; }
+.settings-item .si-right { margin-left: auto; color: #555; font-size: 11px; }
+.settings-user {
+    padding: 12px; border-bottom: 1px solid #2d2d2d; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px;
 }
-.drop-divider { height: 1px; background: #3c3c3c; margin: 4px 0; }
+.settings-user .su-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg,#4ec9b0,#2ea043);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 600; font-size: 15px;
+}
+.settings-user .su-name { color: #e6edf3; font-size: 14px; font-weight: 500; }
+.settings-user .su-status { color: #888; font-size: 11px; }
+.settings-divider { height: 1px; background: #2d2d2d; margin: 4px 0; }
 /* ===== INFO OVERLAY ===== */
 #infoOverlay {
     display: none; position: fixed; inset: 0; z-index: 900;
@@ -647,26 +693,7 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
     <div class="header-right">
         <button id="mobileToggle" title="Toggle sidebar">&#9776;</button>
         <span id="openFileLabel" style="font-size:11px;color:#888;display:none"></span>
-        <div class="dropdown">
-            <button class="dropbtn" id="dropBtn">👤</button>
-            <div class="dropdown-content" id="dropdownContent">
-                <button class="drop-item" id="dropLogin">Log In</button>
-                <div class="drop-divider" id="loginDivider"></div>
-                <div class="drop-user" id="dropUser" style="display:none"></div>
-                <div class="drop-divider" id="userDivider" style="display:none"></div>
-                <button class="drop-item" id="dropSave">Save File</button>
-                <button class="drop-item" id="dropDownload">Download</button>
-                <button class="drop-item" id="dropSession">Save Session</button>
-                <div class="drop-divider"></div>
-                <button class="drop-item" id="dropShortcuts">Shortcuts</button>
-                <button class="drop-item" id="dropAbout">About</button>
-                <div class="drop-divider"></div>
-                <button class="drop-item" id="dropTheme">Theme</button>
-                <button class="drop-item" id="dropSettings">Settings</button>
-                <div class="drop-divider" id="logoutDivider" style="display:none"></div>
-                <button class="drop-item" id="dropLogout" style="display:none">Log Out</button>
-            </div>
-        </div>
+        <button class="avatar-btn" id="avatarBtn">?</button>
     </div>
 </header>
 
@@ -703,6 +730,57 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
 <div class="status-bar">
     <span id="statusText">Offline</span>
     <span id="statusRight"></span>
+</div>
+
+<div class="settings-overlay" id="settingsOverlay"></div>
+<div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+        <div class="user-info">
+            <div class="user-avatar" id="settingsAvatar">?</div>
+            <span id="settingsName">Guest</span>
+        </div>
+        <button class="settings-close" id="settingsClose">✕</button>
+    </div>
+    <div class="settings-body">
+        <div class="settings-user" id="settingsUser" style="display:none">
+            <div class="su-avatar" id="suAvatar">?</div>
+            <div>
+                <div class="su-name" id="suName">User</div>
+                <div class="su-status">Signed in</div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">Account</div>
+            <button class="settings-item" id="setLogin"><span class="si-icon">🔑</span> Log In</button>
+            <button class="settings-item danger" id="setLogout" style="display:none"><span class="si-icon">🚪</span> Log Out</button>
+        </div>
+
+        <div class="settings-divider"></div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">File</div>
+            <button class="settings-item" id="setSave"><span class="si-icon">💾</span> Save File</button>
+            <button class="settings-item" id="setDownload"><span class="si-icon">⬇️</span> Download</button>
+            <button class="settings-item" id="setSession"><span class="si-icon">📦</span> Save Session</button>
+        </div>
+
+        <div class="settings-divider"></div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">Preferences</div>
+            <button class="settings-item" id="setTheme"><span class="si-icon">🌙</span> Theme <span class="si-right" id="setThemeLabel">Dark</span></button>
+            <button class="settings-item" id="setShortcuts"><span class="si-icon">⌨️</span> Shortcuts</button>
+            <button class="settings-item" id="setSettings"><span class="si-icon">⚙️</span> Settings</button>
+        </div>
+
+        <div class="settings-divider"></div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">Info</div>
+            <button class="settings-item" id="setAbout"><span class="si-icon">ℹ️</span> About</button>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
@@ -897,40 +975,50 @@ const modalSub = document.getElementById('modalSub');
 const modalInput = document.getElementById('modalInput');
 const modalConfirm = document.getElementById('modalConfirm');
 const modalCancel = document.getElementById('modalCancel');
-const dropBtn = document.getElementById('dropBtn');
-const dropContent = document.getElementById('dropdownContent');
-const dropUser = document.getElementById('dropUser');
-const dropLogin = document.getElementById('dropLogin');
-const dropLogout = document.getElementById('dropLogout');
-const dropDownload = document.getElementById('dropDownload');
-const dropSave = document.getElementById('dropSave');
-const dropSession = document.getElementById('dropSession');
-const dropShortcuts = document.getElementById('dropShortcuts');
-const dropAbout = document.getElementById('dropAbout');
-const dropTheme = document.getElementById('dropTheme');
-const dropSettings = document.getElementById('dropSettings');
+const dropBtn = document.getElementById('avatarBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+const settingsOverlay = document.getElementById('settingsOverlay');
 
-dropBtn.addEventListener('click', (e) => { e.stopPropagation(); dropContent.classList.toggle('show'); });
-document.addEventListener('click', () => dropContent.classList.remove('show'));
+function closeSettings() {
+    settingsPanel.classList.remove('open');
+    settingsOverlay.classList.remove('show');
+}
+dropBtn.addEventListener('click', () => {
+    settingsPanel.classList.toggle('open');
+    settingsOverlay.classList.toggle('show');
+});
+settingsOverlay.addEventListener('click', closeSettings);
+document.getElementById('settingsClose').addEventListener('click', closeSettings);
 
 function updateDropdown() {
+    const avatar = document.getElementById('settingsAvatar');
+    const name = document.getElementById('settingsName');
+    const userBlock = document.getElementById('settingsUser');
+    const suAvatar = document.getElementById('suAvatar');
+    const suName = document.getElementById('suName');
+    const setLogin = document.getElementById('setLogin');
+    const setLogout = document.getElementById('setLogout');
     if (token) {
-        dropUser.textContent = 'User: ' + currentUser;
-        dropUser.style.display = 'flex';
-        document.getElementById('userDivider').style.display = 'block';
-        dropLogin.style.display = 'none';
-        document.getElementById('loginDivider').style.display = 'none';
-        dropLogout.style.display = 'flex';
-        document.getElementById('logoutDivider').style.display = 'block';
-        dropBtn.textContent = currentUser.charAt(0).toUpperCase();
+        const initial = currentUser.charAt(0).toUpperCase();
+        avatar.textContent = initial;
+        name.textContent = currentUser;
+        suAvatar.textContent = initial;
+        suName.textContent = currentUser;
+        userBlock.style.display = 'flex';
+        setLogin.style.display = 'none';
+        setLogout.style.display = 'flex';
+        dropBtn.textContent = initial;
+        dropBtn.style.background = 'linear-gradient(135deg,#4ec9b0,#2ea043)';
+        dropBtn.style.color = '#fff';
     } else {
-        dropUser.style.display = 'none';
-        document.getElementById('userDivider').style.display = 'none';
-        dropLogin.style.display = 'flex';
-        document.getElementById('loginDivider').style.display = 'block';
-        dropLogout.style.display = 'none';
-        document.getElementById('logoutDivider').style.display = 'none';
+        avatar.textContent = '?';
+        name.textContent = 'Guest';
+        userBlock.style.display = 'none';
+        setLogin.style.display = 'flex';
+        setLogout.style.display = 'none';
         dropBtn.textContent = '?';
+        dropBtn.style.background = '';
+        dropBtn.style.color = '';
     }
 }
 updateDropdown();
@@ -950,8 +1038,9 @@ document.getElementById('fileTree').addEventListener('click', () => {
         document.getElementById('sidebarBackdrop').classList.remove('show');
     }
 });
-dropLogin.addEventListener('click', showAuth);
-dropLogout.addEventListener('click', () => {
+document.getElementById('setLogin').addEventListener('click', () => { closeSettings(); showAuth(); });
+document.getElementById('setLogout').addEventListener('click', () => {
+    closeSettings();
     token = null; currentUser = null;
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
@@ -961,7 +1050,7 @@ dropLogout.addEventListener('click', () => {
     showGuestSidebar();
     updateDropdown();
 });
-dropDownload.addEventListener('click', () => {
+document.getElementById('setDownload').addEventListener('click', () => {
     const code = cm.getValue();
     if (!code) return;
     const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
@@ -970,19 +1059,19 @@ dropDownload.addEventListener('click', () => {
     a.download = (currentFilePath || 'code').split('/').pop();
     a.click();
     URL.revokeObjectURL(a.href);
-    dropContent.classList.remove('show');
+    closeSettings();
 });
-dropSave.addEventListener('click', () => {
+document.getElementById('setSave').addEventListener('click', () => {
     if (token) saveCurrentFile();
     else localStorage.setItem('guestCode', cm.getValue());
     output.innerHTML = '<span class="success">File saved</span>';
-    dropContent.classList.remove('show');
+    closeSettings();
 });
-dropSession.addEventListener('click', () => {
+document.getElementById('setSession').addEventListener('click', () => {
     const key = 'workspace_' + currentUser;
     const saved = localStorage.getItem(key);
     if (saved) {
-        if (!confirm('Restore last saved session?\nCurrent files will be replaced.')) { dropContent.classList.remove('show'); return; }
+        if (!confirm('Restore last saved session?\nCurrent files will be replaced.')) { closeSettings(); return; }
         const data = JSON.parse(saved);
         saveFileIndex(data.files);
         for (const [p, c] of Object.entries(data.contents || {})) setFC(p, c);
@@ -996,9 +1085,10 @@ dropSession.addEventListener('click', () => {
         localStorage.setItem(key, JSON.stringify(data));
         output.innerHTML = '<span class="success">✔ Session saved</span>';
     }
-    dropContent.classList.remove('show');
+    closeSettings();
 });
-dropShortcuts.addEventListener('click', () => {
+document.getElementById('setShortcuts').addEventListener('click', () => {
+    closeSettings();
     showInfo(`
         <h3>Keyboard Shortcuts</h3>
         <div class="shortcut-row"><kbd>Ctrl+Enter</kbd><span>Run code</span></div>
@@ -1007,25 +1097,25 @@ dropShortcuts.addEventListener('click', () => {
         <div class="shortcut-row"><kbd>Tab</kbd><span>Add 4 spaces</span></div>
         <div class="shortcut-row"><kbd>Escape</kbd><span>Close dialog</span></div>
     `);
-    dropContent.classList.remove('show');
+    closeSettings();
 });
-dropAbout.addEventListener('click', () => {
+document.getElementById('setAbout').addEventListener('click', () => {
+    closeSettings();
     showInfo(`
         <h3>Unapi</h3>
         <p>Version 1.0.0</p>
         <p style="margin-top:12px;font-size:12px;color:#888">unapi.platform@gmail.com</p>
         <p style="font-size:12px;color:#555">2026</p>
     `);
-    dropContent.classList.remove('show');
 });
-dropTheme.addEventListener('click', () => {
+document.getElementById('setTheme').addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     const light = document.body.classList.contains('light-mode');
     localStorage.setItem('theme', light ? 'light' : 'dark');
-    dropTheme.textContent = light ? 'Light Theme' : 'Dark Theme';
-    dropContent.classList.remove('show');
+    document.getElementById('setThemeLabel').textContent = light ? 'Light' : 'Dark';
 });
-dropSettings.addEventListener('click', () => {
+document.getElementById('setSettings').addEventListener('click', () => {
+    closeSettings();
     const th = document.body.classList.contains('light-mode') ? 'Light' : 'Dark';
     showInfo(`
         <h3>Settings</h3>
@@ -1034,7 +1124,6 @@ dropSettings.addEventListener('click', () => {
         <div class="shortcut-row"><span>User</span><span>${currentUser || 'Guest'}</span></div>
         <p style="margin-top:16px;font-size:12px;color:#888;text-align:center">unapi.platform@gmail.com</p>
     `);
-    dropContent.classList.remove('show');
 });
 
 // ===== RESIZE =====
@@ -1136,7 +1225,7 @@ else showGuestSidebar();
 setTimeout(() => { if (cm) cm.refresh(); }, 500);
 setTimeout(() => { const el = document.getElementById('splashScreen'); if (el) el.remove(); }, 4000);
 
-if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); dropTheme.textContent = 'Dark Theme'; } else { dropTheme.textContent = 'Light Theme'; }
+if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('setThemeLabel').textContent = 'Light'; } else { document.getElementById('setThemeLabel').textContent = 'Dark'; }
 
 // ===== OAUTH =====
 let oauthPopup = null;
