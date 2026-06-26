@@ -23,8 +23,9 @@ body{font-family:sans-serif;background:#1e1e1e;color:#d4d4d4;display:flex;align-
 @keyframes s{to{transform:rotate(360deg)}}
 </style></head><body><div style="text-align:center">
 <div class="loader"></div><div id="msg">Signing in...</div></div>
-<script>
-(function(){
+<script src="/callback.js"></script></body></html>'''
+
+CALLBACK_JS = '''(function(){
 try{
 var h=new URLSearchParams((location.hash||'').slice(1));
 var t=h.get('access_token')||new URLSearchParams(location.search.slice(1)).get('access_token');
@@ -41,8 +42,7 @@ document.getElementById('msg').textContent=e?'Token not found in URL':'No token 
 }catch(e){
 document.getElementById('msg').textContent='Error: '+e.message;
 }
-})()
-</script></body></html>'''
+})()'''
 
 def supabase(table):
     return SupabaseTable(table)
@@ -298,8 +298,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'")
             self.end_headers()
             self.wfile.write(CALLBACK_HTML.encode())
+            return
+
+        if path == '/callback.js':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/javascript; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(CALLBACK_JS.encode())
             return
 
         if path == '/': self.path = '/index.html'
