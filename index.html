@@ -295,6 +295,13 @@ body {
 
 @keyframes spinner { to { transform: rotate(360deg); } }
 .auth-social-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; }
+.terms-checkbox { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 12px; color: #8b949e; line-height: 1.5; }
+.terms-checkbox input[type="checkbox"] { margin-top: 2px; width: 15px; height: 15px; accent-color: #4ec9b0; cursor: pointer; flex-shrink: 0; }
+.terms-checkbox a { color: #4ec9b0; text-decoration: none; }
+.terms-checkbox a:hover { text-decoration: underline; }
+body.light-mode .terms-checkbox { color: #656d76; }
+body.light-mode .terms-checkbox a { color: #238636; }
+body.light-mode .terms-checkbox input[type="checkbox"] { accent-color: #238636; }
 .pw-strength { display: none; margin-top: 8px; align-items: center; gap: 8px; }
 .pw-strength.show { display: flex; }
 .pw-bar { height: 4px; flex: 1; border-radius: 4px; background: #30363d; overflow: hidden; }
@@ -817,6 +824,12 @@ body.light-mode #mobileToggle:hover { background: #d0d0d0; }
                     <div class="pw-bar" id="pwBar"></div>
                     <span class="pw-label" id="pwLabel"></span>
                 </div>
+            </div>
+            <div class="auth-field" id="fieldTerms" style="display:none">
+                <label class="terms-checkbox">
+                    <input type="checkbox" id="termsCheck">
+                    <span>I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and <a href="/terms.html#privacy" target="_blank">Privacy Policy</a></span>
+                </label>
             </div>
             <button class="auth-btn" id="authBtn" type="submit">Continue</button>
         </form>
@@ -1421,6 +1434,8 @@ function showAuth(cb) {
     document.getElementById('authToggleText').textContent = "Don't have an account?";
     authToggleLink.textContent = 'Sign up';
     document.getElementById('authToggle').style.display = '';
+    document.getElementById('fieldTerms').style.display = 'none';
+    authBtn.disabled = false;
     authError.style.display = 'none';
     authPass.value = '';
     pwStrength.classList.remove('show');
@@ -1438,6 +1453,9 @@ authToggleLink.addEventListener('click', () => {
     authBtn.textContent = isRegister ? 'Sign up' : 'Continue';
     authToggleLink.textContent = isRegister ? 'Log in' : 'Sign up';
     document.getElementById('authToggleText').textContent = isRegister ? 'Already have an account?' : "Don't have an account?";
+    document.getElementById('fieldTerms').style.display = isRegister ? '' : 'none';
+    document.getElementById('termsCheck').checked = false;
+    authBtn.disabled = isRegister;
     authError.style.display = 'none';
     authPass.value = '';
     pwStrength.classList.remove('show');
@@ -1465,6 +1483,10 @@ function calcStrength(pw) {
     ];
     return map[Math.min(s, 5)];
 }
+document.getElementById('termsCheck').addEventListener('change', function() {
+    if (isRegister) authBtn.disabled = !this.checked;
+});
+
 authPass.addEventListener('input', () => {
     if (!isRegister) { pwStrength.classList.remove('show'); return; }
     const r = calcStrength(authPass.value);
@@ -1482,6 +1504,7 @@ document.getElementById('authForm').addEventListener('submit', async (e) => {
     const password = authPass.value;
     if (!email || !password) { showAuthError('Fill all fields'); return; }
     if (isRegister && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
+    if (isRegister && !document.getElementById('termsCheck').checked) { showAuthError('You must agree to the Terms of Service'); return; }
 
     authBtn.disabled = true;
     authBtn.textContent = 'Working...';
