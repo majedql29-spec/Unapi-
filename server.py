@@ -70,26 +70,25 @@ class SupabaseTable:
         return self._query('GET', params={column: f'eq.{value}'})
 
     def patch(self, data, column, value):
-        headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': f'Bearer {SUPABASE_KEY}',
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-        }
         with httpx.Client() as client:
-            r = client.patch(f'{self.base}?{column}=eq.{value}', headers=headers, json=data)
+            r = client.patch(
+                self.base,
+                headers=self.headers,
+                json=data,
+                params={column: f'eq.{value}'}
+            )
             if r.status_code >= 400:
                 raise Exception(f'Supabase error: {r.text}')
-            return r.json()
+            return r.json() if r.text else None
 
     def _query(self, method, json=None, params=None):
         with httpx.Client() as client:
             if method == 'GET' and params and 'select' not in params:
-                pass
+                params['select'] = '*'
             r = client.request(method, self.base, headers=self.headers, json=json, params=params)
             if r.status_code >= 400:
                 raise Exception(f'Supabase error: {r.text}')
-            return r.json()
+            return r.json() if r.text else None
 
 DATA_DIR = 'data'
 os.makedirs(DATA_DIR, exist_ok=True)
