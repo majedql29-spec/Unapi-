@@ -1381,15 +1381,6 @@ if (currentUser) {
   updateDropdown();
 }
 
-// Handle OAuth redirect result
-if (auth) {
-  auth.getRedirectResult().catch(err => {
-    if (err.code && err.code !== 'auth/credential-already-in-use') {
-      console.warn('OAuth redirect error:', err.code);
-    }
-  });
-}
-
 // Firebase confirms or corrects the session
 if (auth) {
   auth.onAuthStateChanged(user => {
@@ -1525,7 +1516,20 @@ function handleOAuth(provider) {
             ? new firebase.auth.GoogleAuthProvider()
             : new firebase.auth.GithubAuthProvider();
         prov.setCustomParameters({ prompt: 'select_account' });
-        auth.signInWithRedirect(prov);
+        auth.signInWithPopup(prov).catch(err => {
+            if (err.code === 'auth/popup-blocked') {
+                showAuthError('Pop-up was blocked. Please allow pop-ups for this site, or use email/password below.');
+            } else if (err.code === 'auth/popup-closed-by-user') {
+                showAuthError('Sign-in popup was closed.');
+            } else if (err.code === 'auth/cancelled-popup-request') {
+                showAuthError('Sign-in cancelled.');
+            } else {
+                const msg = err.code === 'auth/operation-not-allowed' ? 'This sign-in method is not enabled in Firebase Console.'
+                    : err.code === 'auth/configuration-not-found' ? 'OAuth configuration missing in Firebase Console.'
+                    : err.message;
+                showAuthError(msg);
+            }
+        });
     } catch (err) {
         showAuthError(err.message);
     }
