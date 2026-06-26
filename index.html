@@ -941,30 +941,11 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
                 <span class="s-icon" style="background:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center"><svg viewBox="0 0 48 48" width="22" height="22"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></span> Continue with Google
             </button>
         </div>
-        <div class="auth-divider">or continue with email</div>
-        <form id="authForm" onsubmit="return false">
-            <div class="auth-field" id="fieldEmail">
-                <label>Email</label>
-                <input type="email" id="authEmail" placeholder="name@example.com" autocomplete="email">
-            </div>
-            <div class="auth-field" id="fieldPass">
-                <label>Password</label>
-                <input type="password" id="authPass" placeholder="Enter password" autocomplete="current-password">
-                <div class="pw-strength" id="pwStrength">
-                    <div class="pw-bar" id="pwBar"></div>
-                    <span class="pw-label" id="pwLabel"></span>
-                </div>
-            </div>
-            <div class="auth-field" id="fieldTerms" style="display:none">
-                <label class="terms-checkbox">
-                    <input type="checkbox" id="termsCheck">
-                    <span>I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and <a href="/terms.html#privacy" target="_blank">Privacy Policy</a></span>
-                </label>
-            </div>
-            <button class="auth-btn" id="authBtn" type="submit">Continue</button>
-        </form>
-        <div class="auth-toggle" id="authToggle">
-            <span id="authToggleText">Don't have an account?</span> <a id="authToggleLink">Sign up</a>
+        <div class="auth-field" id="fieldTerms">
+            <label class="terms-checkbox">
+                <input type="checkbox" id="termsCheck">
+                <span>I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and <a href="/terms.html#privacy" target="_blank">Privacy Policy</a></span>
+            </label>
         </div>
     </div>
 </div>
@@ -1264,11 +1245,7 @@ const runBtn = document.getElementById('runBtn');
 const clearBtn = document.getElementById('clearBtn');
 const authOverlay = document.getElementById('authOverlay');
 const authTitle = document.getElementById('authTitle');
-const authEmail = document.getElementById('authEmail');
-const authPass = document.getElementById('authPass');
-const authBtn = document.getElementById('authBtn');
 const authError = document.getElementById('authError');
-const authToggleLink = document.getElementById('authToggleLink');
 const authSub = document.getElementById('authSub');
 const fileTree = document.getElementById('fileTree');
 const newFileBtn = document.getElementById('newFileBtn');
@@ -1485,7 +1462,6 @@ window.addEventListener('resize', updateHandles);
 updateHandles();
 applyResizeSizes();
 
-let isRegister = false;
 let modalCallback = null;
 
 function showModal(title, sub, placeholder, cb) {
@@ -1565,22 +1541,11 @@ setTimeout(() => { const el = document.getElementById('splashScreen'); if (el) e
 if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('setThemeLabel').textContent = 'Light'; document.getElementById('setThemeIcon').textContent = '☀️'; } else { document.getElementById('setThemeLabel').textContent = 'Dark'; document.getElementById('setThemeIcon').textContent = '🌙'; }
 
 // ===== AUTH =====
-function showAuth(cb) {
-    isRegister = false;
-    authTitle.textContent = 'Welcome to Uscrovis';
-    authSub.textContent = 'Sign in to save your projects in the cloud';
-    authBtn.textContent = 'Continue';
-    document.getElementById('authToggleText').textContent = "Don't have an account?";
-    authToggleLink.textContent = 'Sign up';
-    document.getElementById('authToggle').style.display = '';
-    document.getElementById('fieldTerms').style.display = '';
+function showAuth() {
     document.getElementById('termsCheck').checked = false;
     document.getElementById('oauthGithub').disabled = true;
     document.getElementById('oauthGoogle').disabled = true;
-    authBtn.disabled = true;
     authError.style.display = 'none';
-    authPass.value = '';
-    pwStrength.classList.remove('show');
     authOverlay.classList.add('show');
 }
 
@@ -1588,100 +1553,9 @@ document.getElementById('authClose').addEventListener('click', () => { authOverl
 document.getElementById('oauthGithub').addEventListener('click', () => handleOAuth('github'));
 document.getElementById('oauthGoogle').addEventListener('click', () => handleOAuth('google'));
 
-authToggleLink.addEventListener('click', () => {
-    isRegister = !isRegister;
-    authTitle.textContent = isRegister ? 'Create your account' : 'Welcome to Uscrovis';
-    authSub.textContent = isRegister ? 'Start coding and save your projects' : 'Sign in to save your projects in the cloud';
-    authBtn.textContent = isRegister ? 'Sign up' : 'Continue';
-    authToggleLink.textContent = isRegister ? 'Log in' : 'Sign up';
-    document.getElementById('authToggleText').textContent = isRegister ? 'Already have an account?' : "Don't have an account?";
-    document.getElementById('fieldTerms').style.display = '';
-    document.getElementById('termsCheck').checked = false;
-    document.getElementById('oauthGithub').disabled = true;
-    document.getElementById('oauthGoogle').disabled = true;
-    authBtn.disabled = true;
-    authError.style.display = 'none';
-    authPass.value = '';
-    pwStrength.classList.remove('show');
-});
-
-// ===== PASSWORD STRENGTH =====
-const pwStrength = document.getElementById('pwStrength');
-const pwBar = document.getElementById('pwBar');
-const pwLabel = document.getElementById('pwLabel');
-function calcStrength(pw) {
-    if (!pw) return { pct: 0, color: '#30363d', text: '' };
-    let s = 0;
-    if (pw.length >= 8) s++;
-    if (pw.length >= 12) s++;
-    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
-    if (/\d/.test(pw)) s++;
-    if (/[^a-zA-Z0-9]/.test(pw)) s++;
-    const map = [
-        { pct: 20, color: '#f85149', text: 'Weak' },
-        { pct: 20, color: '#f85149', text: 'Weak' },
-        { pct: 40, color: '#d29922', text: 'Fair' },
-        { pct: 60, color: '#4ec9b0', text: 'Good' },
-        { pct: 80, color: '#3fb950', text: 'Strong' },
-        { pct: 100, color: '#3fb950', text: 'Strong' },
-    ];
-    return map[Math.min(s, 5)];
-}
 document.getElementById('termsCheck').addEventListener('change', function() {
-    authBtn.disabled = !this.checked;
     document.getElementById('oauthGithub').disabled = !this.checked;
     document.getElementById('oauthGoogle').disabled = !this.checked;
-});
-
-authPass.addEventListener('input', () => {
-    if (!isRegister) { pwStrength.classList.remove('show'); return; }
-    const r = calcStrength(authPass.value);
-    pwStrength.classList.add('show');
-    pwBar.innerHTML = '<div class="pw-bar-fill" style="width:' + r.pct + '%;background:' + r.color + '"></div>';
-    pwLabel.textContent = r.text;
-    pwLabel.style.color = r.color;
-});
-
-document.getElementById('authForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (authBtn.disabled) return;
-
-    const email = authEmail.value.trim();
-    const password = authPass.value;
-    if (!email || !password) { showAuthError('Fill all fields'); return; }
-    if (isRegister && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
-    if (!document.getElementById('termsCheck').checked) { showAuthError('You must agree to the Terms of Service'); return; }
-
-    authBtn.disabled = true;
-    authBtn.textContent = 'Working...';
-
-    try {
-        if (!auth) { showAuthError('Authentication service unavailable. Try again later.'); authBtn.disabled = false; authBtn.textContent = isRegister ? 'Sign up' : 'Continue'; return; }
-        if (isRegister) {
-            await auth.createUserWithEmailAndPassword(email, password);
-        } else {
-            await auth.signInWithEmailAndPassword(email, password);
-        }
-        authOverlay.classList.remove('show');
-        authEmail.value = '';
-        authPass.value = '';
-        authError.style.display = 'none';
-    } catch (err) {
-        const msg = err.code === 'auth/email-already-in-use' ? 'This email is already registered. Try logging in instead.'
-            : err.code === 'auth/user-not-found' ? 'No account with this email. Create one first.'
-            : err.code === 'auth/wrong-password' ? 'Incorrect password. Try again.'
-            : err.code === 'auth/invalid-credential' ? 'Invalid email or password. Check your details.'
-            : err.code === 'auth/too-many-requests' ? 'Too many attempts. Try again later.'
-            : err.code === 'auth/configuration-not-found' ? 'This sign-in method is not enabled. Contact the site owner.'
-            : err.code === 'auth/popup-closed-by-user' ? 'Sign-in popup was closed before completing.'
-            : err.code === 'auth/cancelled-popup-request' ? 'Sign-in cancelled.'
-            : err.code === 'auth/operation-not-allowed' ? 'This sign-in method is not enabled in Firebase Console.'
-            : err.message;
-        showAuthError(msg);
-    } finally {
-        authBtn.disabled = false;
-        authBtn.textContent = isRegister ? 'Sign up' : 'Continue';
-    }
 });
 
 function handleOAuth(provider) {
