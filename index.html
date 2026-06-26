@@ -375,26 +375,44 @@ header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
     font-size: 14px;
 }
 .sidebar-header {
-    padding: 12px 16px; font-size: 11px; text-transform: uppercase;
+    padding: 10px 12px; font-size: 11px; text-transform: uppercase;
     color: #8b949e; letter-spacing: 0.6px;
     border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center;
-    background: #0d1117;
+    background: #0d1117; min-height: 36px;
 }
-.sidebar-content { flex: 1; overflow-y: auto; padding: 4px 0; }
+.sidebar-header-label {
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 600; font-size: 11px;
+}
+.sidebar-header-actions {
+    display: flex; gap: 2px; align-items: center;
+}
+.sidebar-header-actions button {
+    background: none; border: none; color: #484f58; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.15s; font-size: 16px; line-height: 1;
+}
+.sidebar-header-actions button:hover { background: #21262d; color: #4ec9b0; }
+.sidebar-content {
+    flex: 1; overflow-y: auto; padding: 2px 0;
+    counter-reset: line;
+}
 .sidebar-footer {
-    display: none; border-top: 1px solid #21262d; padding: 8px;
-    gap: 6px; background: #0d1117;
+    display: none; padding: 6px 10px 8px;
+    gap: 4px; background: #0d1117;
+    border-top: 1px solid #21262d;
 }
 .sidebar-footer button {
-    flex: 1; background: #21262d; border: 1px solid #30363d; color: #8b949e; font-size: 12px;
-    padding: 8px 10px; border-radius: 8px; cursor: pointer; font-family: inherit;
+    flex: 1; background: transparent; border: 1px dashed #21262d; color: #484f58; font-size: 11px;
+    padding: 7px 8px; border-radius: 6px; cursor: pointer; font-family: inherit;
     transition: all 0.2s; font-weight: 500;
 }
-.sidebar-footer button:hover { background: #1c2333; border-color: #4ec9b0; color: #4ec9b0; }
+.sidebar-footer button:hover { border-color: #4ec9b0; color: #4ec9b0; background: rgba(78,201,176,0.05); }
 .sidebar-content::-webkit-scrollbar { width: 4px; }
 .sidebar-content::-webkit-scrollbar-track { background: transparent; }
-.sidebar-content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
-.sidebar-content::-webkit-scrollbar-thumb:hover { background: #484f58; }
+.sidebar-content::-webkit-scrollbar-thumb { background: #21262d; border-radius: 2px; }
+.sidebar-content::-webkit-scrollbar-thumb:hover { background: #30363d; }
 /* ===== EDITOR & OUTPUT ===== */
 .editor-panel { flex: 1 1 0%; display: flex; flex-direction: column; min-width: 200px; position: relative; z-index: 1; }
 .output-panel { flex: 0 0 auto; width: 400px; min-width: 200px; display: flex; flex-direction: column; border-left: 1px solid #21262d; }
@@ -502,27 +520,57 @@ header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
 .modal-actions .modal-confirm:hover { background: #2ea043; box-shadow: 0 2px 8px rgba(35,134,54,0.3); }
 /* ===== FILE TREE ===== */
 .file-item {
-    padding: 7px 12px 7px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;
-    color: #8b949e; transition: all 0.15s; font-size: 14px;
-    border-left: 3px solid transparent; position: relative;
+    padding: 5px 8px 5px 4px; cursor: pointer; display: flex; align-items: center; gap: 4px;
+    color: #8b949e; transition: all 0.15s ease; font-size: 13px;
+    position: relative; border-radius: 0 6px 6px 0; margin: 1px 6px 1px 0;
 }
 .file-item:hover { background: #161b22; color: #e6edf3; }
-.file-item.active { background: #1c2333; color: #e6edf3; border-left-color: #4ec9b0; }
-.file-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
-.file-item .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.file-item .file-actions { display: none; gap: 2px; margin-left: auto; }
-.file-item:hover .file-actions { display: flex; }
-.file-item .file-actions button {
-    background: none; border: none; color: #484f58; cursor: pointer;
-    font-size: 13px; padding: 2px 6px; border-radius: 4px;
-    transition: all 0.15s; line-height: 1;
+.file-item.active { background: #1c2333; color: #e6edf3; }
+.file-item.active::before {
+    content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+    width: 2.5px; background: #4ec9b0; border-radius: 0 3px 3px 0;
 }
-.file-item .file-actions button:hover { color: #e6edf3; background: #30363d; }
-.file-item .file-actions .del-btn:hover { color: #f85149; background: rgba(248,81,73,0.1); }
-.file-item.dir { color: #9cdcfe; }
-.file-item.dir-empty { color: #484f58; }
-.file-item.target { background: rgba(78,201,176,0.08); border-left-color: #4ec9b0; }
-.sidebar-path { cursor: pointer; user-select: none; transition: color 0.15s; }
+.file-item .item-indent { flex-shrink: 0; position: relative; }
+.file-item .item-indent::before {
+    content: ''; position: absolute; right: 50%; top: 0; bottom: 0;
+    width: 1px; background: #21262d;
+}
+.file-item .item-arrow {
+    width: 16px; height: 16px; flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 8px; color: #484f58; transition: transform 0.2s ease;
+    visibility: hidden; border-radius: 3px;
+}
+.file-item.has-children .item-arrow { visibility: visible; }
+.file-item.has-children.open .item-arrow { transform: rotate(90deg); }
+.file-item:hover .item-arrow { color: #8b949e; }
+.file-item .item-icon {
+    flex-shrink: 0; width: 18px; text-align: center;
+    font-size: 14px; line-height: 1; display: inline-flex; align-items: center; justify-content: center;
+}
+.file-item .item-name {
+    flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 13px; line-height: 1.4;
+}
+.file-item .item-actions {
+    display: none; gap: 1px; margin-left: auto; flex-shrink: 0;
+}
+.file-item:hover .item-actions { display: flex; }
+.file-item .item-actions button {
+    background: none; border: none; color: #484f58; cursor: pointer;
+    padding: 3px; border-radius: 4px;
+    transition: all 0.15s; line-height: 1;
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+.file-item .item-actions button:hover { background: #21262d; color: #e6edf3; }
+.file-item .item-actions .del-btn:hover { background: rgba(248,81,73,0.12); color: #f85149; }
+.file-item.dir { color: #9cdcfe; font-weight: 500; }
+.file-item.dir-empty .item-arrow { visibility: hidden; }
+.file-item.dir-empty { color: #484f58; font-weight: 400; }
+.file-item.target { background: rgba(78,201,176,0.06); }
+.file-item.target::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2.5px; background: #4ec9b0; border-radius: 0 3px 3px 0; }
+.sidebar-path { cursor: pointer; user-select: none; transition: color 0.15s; font-weight: 500; font-size: 12px; }
 .sidebar-path:hover { color: #4ec9b0; }
 /* ===== SETTINGS PANEL ===== */
 .settings-overlay {
@@ -648,20 +696,27 @@ body.light-mode header::after { background: linear-gradient(90deg, transparent, 
 body.light-mode header h1 { color: #1e1e1e; }
 body.light-mode .sidebar { background: #fff; border-right-color: #e0e0e0; }
 body.light-mode .sidebar-header { background: #fff; color: #888; border-bottom-color: #e0e0e0; }
-body.light-mode .sidebar-content::-webkit-scrollbar-thumb { background: #d0d0d0; }
-body.light-mode .sidebar-content::-webkit-scrollbar-thumb:hover { background: #bbb; }
+body.light-mode .sidebar-header-actions button { color: #aaa; }
+body.light-mode .sidebar-header-actions button:hover { background: #f0f0f0; color: #238636; }
+body.light-mode .sidebar-content::-webkit-scrollbar-thumb { background: #e0e0e0; }
+body.light-mode .sidebar-content::-webkit-scrollbar-thumb:hover { background: #d0d0d0; }
 body.light-mode .sidebar-footer { background: #fff; border-top-color: #e0e0e0; }
-body.light-mode .sidebar-footer button { background: #f0f0f0; border-color: #d0d0d0; color: #555; }
-body.light-mode .sidebar-footer button:hover { background: #e8e8e8; border-color: #238636; color: #238636; }
+body.light-mode .sidebar-footer button { background: transparent; border-color: #e0e0e0; color: #888; }
+body.light-mode .sidebar-footer button:hover { border-color: #238636; color: #238636; background: rgba(35,134,54,0.04); }
 body.light-mode .file-item { color: #555; }
-body.light-mode .file-item:hover { background: #f0f0f0; color: #1e1e1e; }
-body.light-mode .file-item.active { background: #e8f5f0; color: #1e1e1e; border-left-color: #238636; }
+body.light-mode .file-item:hover { background: #f5f5f5; color: #1e1e1e; }
+body.light-mode .file-item.active { background: #e8f5f0; color: #1e1e1e; }
+body.light-mode .file-item.active::before { background: #238636; }
 body.light-mode .file-item.target { background: #e8f5f0; }
+body.light-mode .file-item.target::before { background: #238636; }
 body.light-mode .file-item.dir { color: #0563c1; }
 body.light-mode .file-item.dir-empty { color: #aaa; }
-body.light-mode .file-item .file-actions button { color: #aaa; }
-body.light-mode .file-item .file-actions button:hover { color: #333; background: #d0d0d0; }
-body.light-mode .file-item .file-actions .del-btn:hover { color: #d32f2f; background: rgba(211,47,47,0.08); }
+body.light-mode .file-item .item-arrow { color: #bbb; }
+body.light-mode .file-item:hover .item-arrow { color: #888; }
+body.light-mode .file-item .item-actions button { color: #aaa; }
+body.light-mode .file-item .item-actions button:hover { color: #333; background: #e0e0e0; }
+body.light-mode .file-item .item-actions .del-btn:hover { color: #d32f2f; background: rgba(211,47,47,0.06); }
+body.light-mode .file-item .item-indent::before { background: #e0e0e0; }
 body.light-mode .resize-handle:hover, body.light-mode .resize-handle.active { background: #238636; }
 body.light-mode .panel-header { background: #fff; color: #888; border-bottom-color: #e0e0e0; }
 body.light-mode .output-panel { border-left-color: #e0e0e0; }
@@ -874,12 +929,21 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <span class="sidebar-path" id="sidebarPath" title="Root folder">Explorer</span>
+            <span class="sidebar-header-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span class="sidebar-path" id="sidebarPath" title="Root folder">Explorer</span>
+            </span>
+            <span class="sidebar-header-actions">
+                <button id="newFileBtn" title="New File">+</button>
+                <button id="newFolderBtn" title="New Folder">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                </button>
+            </span>
         </div>
         <div class="sidebar-content" id="fileTree"></div>
         <div class="sidebar-footer" id="sidebarFooter">
-            <button id="newFileBtn" title="New File">+ New File</button>
-            <button id="newFolderBtn" title="New Folder">+ Folder</button>
+            <button id="newFileBtnFooter" title="New File">+ New File</button>
+            <button id="newFolderBtnFooter" title="New Folder">+ Folder</button>
         </div>
     </div>
     <div class="resize-handle" id="resizeSidebar"></div>
@@ -1366,7 +1430,7 @@ modalConfirm.addEventListener('click', () => {
 
 function showGuestSidebar() {
     document.getElementById('sidebarFooter').style.display = 'none';
-    fileTree.innerHTML = '<div style="padding:30px 20px;text-align:center;color:#888;font-size:13px;line-height:1.8">Log in<br>to use the file explorer<br><br><button style="background:linear-gradient(135deg,#238636,#2ea043);border:none;color:#fff;padding:8px 24px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;margin-top:6px;transition:all 0.2s" onclick="showAuth()">Log in</button></div>';
+    fileTree.innerHTML = '<div style="padding:40px 20px;text-align:center;color:#484f58;font-size:13px;line-height:1.8">🔒<br><br>Log in to use<br>the file explorer<br><br><button style="background:linear-gradient(135deg,#238636,#2ea043);border:none;color:#fff;padding:10px 32px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;letter-spacing:0.3px;transition:all 0.2s" onclick="showAuth()">Log in</button></div>';
 }
 
 // ===== FIREBASE INIT =====
@@ -1694,7 +1758,7 @@ function updateSidebarPath() {
     const el = document.getElementById('sidebarPath');
     if (currentDir) {
         const folderName = currentDir.split('/').pop();
-        el.innerHTML = '📁 <span style="color:#4ec9b0">' + folderName + '</span>';
+        el.innerHTML = '<span style="color:#4ec9b0;font-weight:600">' + folderName + '</span>';
         el.title = 'Current: ' + currentDir + '\nClick to go back to root';
     } else {
         el.textContent = 'Explorer';
@@ -1725,33 +1789,42 @@ function renderTree(entries, container, basePath) {
         div.className = 'file-item' + (entry.type === 'dir' ? ' dir' : '');
         div.dataset.path = entry.path;
 
+        const indentW = basePath.split('/').filter(Boolean).length * 18;
         const indent = document.createElement('span');
-        indent.className = 'indent';
-        indent.style.width = basePath.split('/').filter(Boolean).length * 14 + 'px';
+        indent.className = 'item-indent';
+        indent.style.width = indentW + 'px';
+        indent.style.minWidth = indentW + 'px';
+        if (indentW > 0) indent.style.marginRight = '2px';
         div.appendChild(indent);
 
+        const arrow = document.createElement('span');
+        arrow.className = 'item-arrow';
+        arrow.textContent = '▶';
+        div.appendChild(arrow);
+
         const icon = document.createElement('span');
-        icon.className = 'icon';
+        icon.className = 'item-icon';
         const hasChildren = entry.type === 'dir' && entry.children && entry.children.length > 0;
         icon.textContent = entry.type === 'dir' ? (hasChildren ? '📂' : '📁') : fileIcon(entry.name);
+        if (entry.type === 'dir' && hasChildren) div.classList.add('has-children');
         if (entry.type === 'dir' && !hasChildren) div.classList.add('dir-empty');
         div.appendChild(icon);
 
         const name = document.createElement('span');
-        name.className = 'name';
+        name.className = 'item-name';
         name.textContent = entry.name;
         div.appendChild(name);
 
         const actions = document.createElement('span');
-        actions.className = 'file-actions';
+        actions.className = 'item-actions';
         const renameBtn = document.createElement('button');
-        renameBtn.textContent = '✎';
+        renameBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>';
         renameBtn.title = 'Rename';
         renameBtn.addEventListener('click', (e) => { e.stopPropagation(); showRenameModal(entry.path); });
         actions.appendChild(renameBtn);
         const delBtn = document.createElement('button');
-        delBtn.textContent = '✕';
         delBtn.className = 'del-btn';
+        delBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
         delBtn.title = 'Delete';
         delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteItem(entry.path); });
         actions.appendChild(delBtn);
@@ -1781,6 +1854,7 @@ function renderTree(entries, container, basePath) {
                 e.stopPropagation();
                 const isHidden = childContainer.style.display === 'none';
                 childContainer.style.display = isHidden ? '' : 'none';
+                div.classList.toggle('open', isHidden);
                 icon.textContent = isHidden ? '📂' : '📁';
             });
         }
@@ -1795,19 +1869,24 @@ function highlightActive() {
 }
 
 // ===== FILE OPERATIONS =====
-newFileBtn.addEventListener('click', () => {
+const newFileFooterBtn = document.getElementById('newFileBtnFooter');
+const newFolderFooterBtn = document.getElementById('newFolderBtnFooter');
+function clickNewFile() {
     const ctx = currentDir ? ' in "' + currentDir + '"' : '';
     showModal('New File', 'Enter filename with extension' + ctx, 'main.py', (name) => {
         createItem(name, 'file');
     });
-});
-
-newFolderBtn.addEventListener('click', () => {
+}
+function clickNewFolder() {
     const ctx = currentDir ? ' in "' + currentDir + '"' : '';
     showModal('New Folder', 'Enter folder name' + ctx, 'utils', (name) => {
         createItem(name, 'dir');
     });
-});
+}
+newFileBtn.addEventListener('click', clickNewFile);
+newFileFooterBtn.addEventListener('click', clickNewFile);
+newFolderBtn.addEventListener('click', clickNewFolder);
+newFolderFooterBtn.addEventListener('click', clickNewFolder);
 
 document.getElementById('sidebarPath').addEventListener('click', () => {
     if (!currentDir) return;
