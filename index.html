@@ -1434,8 +1434,11 @@ function showAuth(cb) {
     document.getElementById('authToggleText').textContent = "Don't have an account?";
     authToggleLink.textContent = 'Sign up';
     document.getElementById('authToggle').style.display = '';
-    document.getElementById('fieldTerms').style.display = 'none';
-    authBtn.disabled = false;
+    document.getElementById('fieldTerms').style.display = '';
+    document.getElementById('termsCheck').checked = false;
+    document.getElementById('oauthGithub').disabled = true;
+    document.getElementById('oauthGoogle').disabled = true;
+    authBtn.disabled = true;
     authError.style.display = 'none';
     authPass.value = '';
     pwStrength.classList.remove('show');
@@ -1453,9 +1456,11 @@ authToggleLink.addEventListener('click', () => {
     authBtn.textContent = isRegister ? 'Sign up' : 'Continue';
     authToggleLink.textContent = isRegister ? 'Log in' : 'Sign up';
     document.getElementById('authToggleText').textContent = isRegister ? 'Already have an account?' : "Don't have an account?";
-    document.getElementById('fieldTerms').style.display = isRegister ? '' : 'none';
+    document.getElementById('fieldTerms').style.display = '';
     document.getElementById('termsCheck').checked = false;
-    authBtn.disabled = isRegister;
+    document.getElementById('oauthGithub').disabled = true;
+    document.getElementById('oauthGoogle').disabled = true;
+    authBtn.disabled = true;
     authError.style.display = 'none';
     authPass.value = '';
     pwStrength.classList.remove('show');
@@ -1484,7 +1489,9 @@ function calcStrength(pw) {
     return map[Math.min(s, 5)];
 }
 document.getElementById('termsCheck').addEventListener('change', function() {
-    if (isRegister) authBtn.disabled = !this.checked;
+    authBtn.disabled = !this.checked;
+    document.getElementById('oauthGithub').disabled = !this.checked;
+    document.getElementById('oauthGoogle').disabled = !this.checked;
 });
 
 authPass.addEventListener('input', () => {
@@ -1504,7 +1511,7 @@ document.getElementById('authForm').addEventListener('submit', async (e) => {
     const password = authPass.value;
     if (!email || !password) { showAuthError('Fill all fields'); return; }
     if (isRegister && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
-    if (isRegister && !document.getElementById('termsCheck').checked) { showAuthError('You must agree to the Terms of Service'); return; }
+    if (!document.getElementById('termsCheck').checked) { showAuthError('You must agree to the Terms of Service'); return; }
 
     authBtn.disabled = true;
     authBtn.textContent = 'Working...';
@@ -1540,6 +1547,7 @@ document.getElementById('authForm').addEventListener('submit', async (e) => {
 
 function handleOAuth(provider) {
     if (!auth || !firebase) { showAuthError('Authentication service unavailable.'); return; }
+    if (!document.getElementById('termsCheck').checked) { showAuthError('You must agree to the Terms of Service'); return; }
     const btn = document.getElementById(provider === 'google' ? 'oauthGoogle' : 'oauthGithub');
     const txt = btn.textContent;
     btn.disabled = true;
