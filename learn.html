@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)">
 <link rel="icon" href="/logo.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/logo.png" type="image/png" sizes="96x96">
@@ -34,40 +34,40 @@
 }
 </script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: #0d1117; color: #c9d1d9; display: flex; flex-direction: column; height: 100vh;
   overflow: hidden;
 }
-body.light-mode { background: #fff; color: #333; }
-a { text-decoration: none; }
+body.light-mode { background: #f5f5f5; color: #333; }
+a { text-decoration: none; color: inherit; }
 
 /* ===== HEADER ===== */
 header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 24px; background: #161b22; border-bottom: 1px solid #21262d; flex-shrink: 0;
+  padding: 0 24px; height: 56px; background: #161b22; border-bottom: 1px solid #21262d; flex-shrink: 0;
+  position: relative; z-index: 10;
 }
 body.light-mode header { background: #f6f8fa; border-bottom-color: #e0e0e0; }
-.header-left { display: flex; align-items: center; gap: 16px; }
-.header-left h1 { font-size: 18px; color: #e6edf3; font-weight: 700; display: flex; align-items: center; gap: 8px; letter-spacing: -0.3px; }
-.header-left h1 img { width: 28px; height: 28px; border-radius: 6px; vertical-align: middle; }
-body.light-mode .header-left h1 { color: #1e1e1e; }
-.header-right { display: flex; align-items: center; gap: 10px; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left .logo-link { display: flex; align-items: center; gap: 10px; color: inherit; }
+.header-left .logo-link img { width: 26px; height: 26px; border-radius: 6px; }
+.header-left .logo-link span { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; color: #e6edf3; }
+body.light-mode .header-left .logo-link span { color: #1e1e1e; }
+.header-right { display: flex; align-items: center; gap: 8px; }
 
-/* ===== BACK BUTTON ===== */
 .btn-back {
   background: transparent; color: #8b949e; border: 1px solid #30363d; font-weight: 500;
-  padding: 7px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s;
+  padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s;
   display: inline-flex; align-items: center; gap: 5px; font-family: inherit;
 }
 .btn-back:hover { border-color: #4ec9b0; color: #4ec9b0; background: rgba(78,201,176,0.05); }
 body.light-mode .btn-back { color: #656d76; border-color: #d0d7de; }
 body.light-mode .btn-back:hover { border-color: #238636; color: #238636; }
 
-/* ===== THEME TOGGLE ===== */
 #themeToggle {
-  background: transparent; border: 1px solid #30363d; border-radius: 20px; padding: 7px 12px;
+  background: transparent; border: 1px solid #30363d; border-radius: 20px; padding: 6px 12px;
   cursor: pointer; font-size: 14px; color: #8b949e; transition: all 0.2s;
 }
 #themeToggle:hover { border-color: #e6edf3; color: #e6edf3; }
@@ -76,57 +76,180 @@ body.light-mode #themeToggle:hover { border-color: #1e1e1e; color: #1e1e1e; }
 
 /* ===== LEARN PANEL ===== */
 .learn-panel { display: flex; flex: 1; overflow: hidden; }
+
+/* ===== SIDEBAR ===== */
 .learn-sidebar {
-  width: 280px; flex: 0 0 auto; background: #0d1117; border-right: 1px solid #21262d;
-  overflow-y: auto; padding: 20px 0;
+  width: 290px; flex: 0 0 auto; background: #0d1117; border-right: 1px solid #21262d;
+  overflow-y: auto; padding: 16px 0 24px; display: flex; flex-direction: column;
 }
 body.light-mode .learn-sidebar { background: #f6f8fa; border-right-color: #e0e0e0; }
-.learn-sidebar h3 {
-  font-size: 11px; color: #484f58; text-transform: uppercase; letter-spacing: 1px; padding: 0 20px 12px;
+
+.sidebar-header { padding: 0 20px 16px; border-bottom: 1px solid #21262d; margin-bottom: 8px; }
+body.light-mode .sidebar-header { border-bottom-color: #e0e0e0; }
+.sidebar-header h3 { font-size: 13px; color: #e6edf3; font-weight: 600; margin-bottom: 10px; }
+body.light-mode .sidebar-header h3 { color: #1e1e1e; }
+
+.progress-bar-wrap { height: 4px; background: #21262d; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+body.light-mode .progress-bar-wrap { background: #e0e0e0; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #4ec9b0, #2ea043); border-radius: 4px; transition: width 0.5s ease; }
+.progress-text { font-size: 11px; color: #484f58; display: flex; justify-content: space-between; }
+body.light-mode .progress-text { color: #888; }
+.progress-text span:last-child { color: #4ec9b0; font-weight: 500; }
+body.light-mode .progress-text span:last-child { color: #238636; }
+
+.sidebar-section { margin-top: 4px; }
+.sidebar-section-title {
+  font-size: 10px; color: #484f58; text-transform: uppercase; letter-spacing: 1.2px;
+  padding: 10px 20px 6px; font-weight: 600;
 }
-body.light-mode .learn-sidebar h3 { color: #888; }
+body.light-mode .sidebar-section-title { color: #888; }
+
 .learn-lesson {
-  padding: 10px 20px; cursor: pointer; color: #8b949e; font-size: 13px;
-  transition: all 0.15s; border-left: 3px solid transparent;
-  display: flex; align-items: center; gap: 10px;
+  padding: 9px 20px 9px 20px; cursor: pointer; color: #8b949e; font-size: 13px;
+  transition: all 0.18s ease; border-left: 3px solid transparent;
+  display: flex; align-items: center; gap: 10px; position: relative;
 }
 .learn-lesson:hover { background: #161b22; color: #e6edf3; }
-.learn-lesson.active { background: #161b22; border-left-color: #4ec9b0; color: #e6edf3; font-weight: 500; }
-.learn-lesson .num { color: #484f58; font-size: 11px; width: 20px; flex-shrink: 0; }
+.learn-lesson.active {
+  background: #161b22; border-left-color: #4ec9b0; color: #e6edf3; font-weight: 500;
+}
 body.light-mode .learn-lesson { color: #656d76; }
 body.light-mode .learn-lesson:hover { background: #f0f2f5; color: #1e1e1e; }
 body.light-mode .learn-lesson.active { background: #f0f2f5; border-left-color: #238636; color: #1e1e1e; }
-body.light-mode .learn-lesson .num { color: #aaa; }
+
+.lesson-status { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.lesson-status .dot { width: 8px; height: 8px; border-radius: 50%; background: #30363d; transition: all 0.3s; }
+body.light-mode .lesson-status .dot { background: #d0d7de; }
+.learn-lesson.active .lesson-status .dot { background: #4ec9b0; box-shadow: 0 0 8px rgba(78,201,176,0.4); }
+body.light-mode .learn-lesson.active .lesson-status .dot { background: #238636; }
+.learn-lesson.completed .lesson-status .dot { background: #2ea043; }
+.learn-lesson.completed .lesson-status .dot::after { content: '\2713'; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.lesson-label { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lesson-badge {
+  font-size: 9px; padding: 2px 7px; border-radius: 10px; font-weight: 500;
+  background: rgba(78,201,176,0.1); color: #4ec9b0; flex-shrink: 0;
+}
+body.light-mode .lesson-badge { background: rgba(35,134,54,0.08); color: #238636; }
+.lesson-badge.int { background: rgba(88,166,255,0.1); color: #58a6ff; }
+body.light-mode .lesson-badge.int { background: rgba(9,105,218,0.08); color: #0969da; }
+.lesson-badge.adv { background: rgba(210,153,34,0.1); color: #d29922; }
+body.light-mode .lesson-badge.adv { background: rgba(219,156,17,0.08); color: #db9c11; }
+
+/* ===== CONTENT ===== */
 .learn-content {
-  flex: 1; overflow-y: auto; padding: 32px 40px; background: #161b22;
+  flex: 1; overflow-y: auto; background: #161b22; position: relative;
 }
 body.light-mode .learn-content { background: #fff; }
-.learn-content h2 { color: #e6edf3; font-size: 22px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
-body.light-mode .learn-content h2 { color: #1e1e1e; }
-.learn-content .meta { color: #8b949e; font-size: 13px; margin-bottom: 24px; }
-body.light-mode .learn-content .meta { color: #888; }
-.learn-content p { color: #c9d1d9; font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
-body.light-mode .learn-content p { color: #333; }
-.learn-content .code-block {
-  background: #0d1117; border: 1px solid #21262d; border-radius: 12px; padding: 20px;
-  font-family: 'Consolas','Courier New',monospace; font-size: 14px; line-height: 1.6;
-  color: #e6edf3; margin-bottom: 20px; white-space: pre-wrap; overflow-x: auto;
+
+.reading-progress {
+  position: sticky; top: 0; height: 3px; background: #21262d; z-index: 5;
 }
-body.light-mode .learn-content .code-block { background: #f6f8fa; border-color: #e0e0e0; color: #1e1e1e; }
-.learn-content .tip {
-  background: rgba(78,201,176,0.06); border: 1px solid rgba(78,201,176,0.15);
-  border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; font-size: 14px; color: #c9d1d9; line-height: 1.6;
+body.light-mode .reading-progress { background: #e0e0e0; }
+.reading-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4ec9b0, #2ea043); transition: width 0.1s linear; }
+body.light-mode .reading-progress-fill { background: linear-gradient(90deg, #238636, #2ea043); }
+
+.learn-body {
+  padding: 40px 56px 48px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.3s ease;
 }
-.learn-content .tip strong { color: #4ec9b0; }
-body.light-mode .learn-content .tip { background: rgba(35,134,54,0.04); border-color: rgba(35,134,54,0.12); color: #333; }
-body.light-mode .learn-content .tip strong { color: #238636; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.lesson-header { margin-bottom: 28px; }
+.lesson-number { font-size: 12px; color: #484f58; font-weight: 500; margin-bottom: 4px; }
+body.light-mode .lesson-number { color: #888; }
+.lesson-title { font-size: 26px; font-weight: 700; color: #e6edf3; letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 12px; }
+body.light-mode .lesson-title { color: #1e1e1e; }
+.lesson-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lesson-meta .badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.lesson-meta .badge.beginner { background: rgba(78,201,176,0.1); color: #4ec9b0; }
+body.light-mode .lesson-meta .badge.beginner { background: rgba(35,134,54,0.08); color: #238636; }
+.lesson-meta .badge.intermediate { background: rgba(88,166,255,0.1); color: #58a6ff; }
+body.light-mode .lesson-meta .badge.intermediate { background: rgba(9,105,218,0.08); color: #0969da; }
+.lesson-meta .badge.advanced { background: rgba(210,153,34,0.1); color: #d29922; }
+body.light-mode .lesson-meta .badge.advanced { background: rgba(219,156,17,0.08); color: #db9c11; }
+.lesson-meta .time { font-size: 12px; color: #8b949e; }
+body.light-mode .lesson-meta .time { color: #888; }
+
+.lesson-body { font-size: 15px; line-height: 1.85; color: #c9d1d9; }
+body.light-mode .lesson-body { color: #333; }
+.lesson-body p { margin-bottom: 18px; }
+.lesson-body strong { color: #e6edf3; }
+body.light-mode .lesson-body strong { color: #1e1e1e; }
+.lesson-body code {
+  background: rgba(78,201,176,0.08); padding: 2px 6px; border-radius: 4px;
+  font-family: 'Consolas','Courier New',monospace; font-size: 13px; color: #4ec9b0;
+}
+body.light-mode .lesson-body code { background: rgba(35,134,54,0.06); color: #238636; }
+
+.lesson-body .tip {
+  background: rgba(78,201,176,0.05); border: 1px solid rgba(78,201,176,0.12);
+  border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; font-size: 14px; line-height: 1.7;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.lesson-body .tip::before { content: '\1F4A1'; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.lesson-body .tip strong { color: #4ec9b0; }
+body.light-mode .lesson-body .tip { background: rgba(35,134,54,0.03); border-color: rgba(35,134,54,0.1); }
+body.light-mode .lesson-body .tip strong { color: #238636; }
+
+/* ===== CODE BLOCK ===== */
+.code-wrap {
+  margin: 24px 0; border-radius: 12px; overflow: hidden;
+  border: 1px solid #21262d; background: #0d1117;
+}
+body.light-mode .code-wrap { border-color: #e0e0e0; background: #f6f8fa; }
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; background: #161b22; border-bottom: 1px solid #21262d;
+}
+body.light-mode .code-header { background: #f0f2f5; border-bottom-color: #e0e0e0; }
+.code-lang { font-size: 11px; color: #484f58; font-weight: 500; }
+body.light-mode .code-lang { color: #888; }
+.btn-copy {
+  background: transparent; border: 1px solid #30363d; color: #8b949e; font-size: 11px;
+  padding: 3px 10px; border-radius: 6px; cursor: pointer; font-family: inherit;
+  transition: all 0.2s; position: relative;
+}
+.btn-copy:hover { border-color: #4ec9b0; color: #4ec9b0; background: rgba(78,201,176,0.05); }
+body.light-mode .btn-copy { border-color: #d0d7de; color: #656d76; }
+body.light-mode .btn-copy:hover { border-color: #238636; color: #238636; }
+.btn-copy.copied { border-color: #2ea043; color: #2ea043; background: rgba(46,160,67,0.1); }
+.code-block {
+  padding: 20px; font-family: 'Consolas','Courier New',monospace; font-size: 14px; line-height: 1.65;
+  color: #e6edf3; overflow-x: auto; white-space: pre;
+}
+body.light-mode .code-block { color: #1e1e1e; }
+
 .btn-run {
   background: linear-gradient(135deg, #238636, #2ea043); color: #fff; border: none;
-  padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 24px; border-radius: 24px; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all 0.25s; font-family: inherit; display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 8px;
 }
-.btn-run:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(35,134,54,0.4); }
+.btn-run:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(35,134,54,0.35); }
+.btn-run:active { transform: translateY(0); }
 .btn-run:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ===== NAVIGATION ===== */
+.lesson-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 40px; padding-top: 24px; border-top: 1px solid #21262d; gap: 12px;
+}
+body.light-mode .lesson-nav { border-top-color: #e0e0e0; }
+.lesson-nav .nav-btn {
+  background: transparent; border: 1px solid #30363d; color: #8b949e;
+  padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer;
+  font-family: inherit; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+}
+.lesson-nav .nav-btn:hover { border-color: #4ec9b0; color: #4ec9b0; background: rgba(78,201,176,0.05); }
+.lesson-nav .nav-btn:disabled { opacity: 0.3; cursor: default; }
+.lesson-nav .nav-btn:disabled:hover { border-color: #30363d; color: #8b949e; background: transparent; }
+body.light-mode .lesson-nav .nav-btn { border-color: #d0d7de; color: #656d76; }
+body.light-mode .lesson-nav .nav-btn:hover { border-color: #238636; color: #238636; }
+body.light-mode .lesson-nav .nav-btn:disabled:hover { border-color: #d0d7de; color: #656d76; background: transparent; }
+.nav-center { font-size: 11px; color: #484f58; }
+body.light-mode .nav-center { color: #888; }
 
 /* ===== AD SECTION ===== */
 .ad-section {
@@ -139,23 +262,43 @@ body.light-mode .ad-section { border-top-color: #e0e0e0; }
   margin-bottom: 16px;
 }
 body.light-mode .ad-label { color: #bbb; }
-.ad-inner {
-  max-width: 468px; margin: 0 auto;
-}
+.ad-inner { max-width: 468px; margin: 0 auto; }
 .ad-inner iframe { border: 0; padding: 0; width: 100%; height: auto; overflow: hidden; display: block; margin: auto; }
+
+/* ===== KBD HINT ===== */
+.kbd-hint {
+  position: fixed; bottom: 20px; right: 20px; z-index: 100;
+  background: #161b22; border: 1px solid #21262d; border-radius: 10px;
+  padding: 10px 14px; font-size: 11px; color: #484f58; display: flex; align-items: center; gap: 12px;
+  opacity: 0; transition: opacity 0.5s; pointer-events: none;
+}
+.kbd-hint.show { opacity: 1; }
+body.light-mode .kbd-hint { background: #f6f8fa; border-color: #e0e0e0; color: #888; }
+.kbd-hint kbd {
+  background: #21262d; border: 1px solid #30363d; border-radius: 4px; padding: 2px 6px;
+  font-size: 10px; color: #8b949e; font-family: inherit;
+}
+body.light-mode .kbd-hint kbd { background: #e8eaed; border-color: #d0d7de; color: #656d76; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .learn-panel { flex-direction: column; }
-  .learn-sidebar { width: 100%; max-height: 200px; border-right: none; border-bottom: 1px solid #21262d; padding: 12px 0; }
+  .learn-sidebar { width: 100%; max-height: 45vh; border-right: none; border-bottom: 1px solid #21262d; padding: 12px 0; }
   body.light-mode .learn-sidebar { border-bottom-color: #e0e0e0; }
-  .learn-content { padding: 20px; }
-  .learn-content h2 { font-size: 18px; }
-  .learn-content p { font-size: 14px; }
-  header { padding: 10px 16px; }
-  .header-left h1 { font-size: 15px; }
-  .header-left h1 img { width: 24px; height: 24px; }
-  .btn-back { font-size: 11px; padding: 5px 10px; }
+  .learn-body { padding: 24px 20px 32px; }
+  .lesson-title { font-size: 20px; }
+  .lesson-body { font-size: 14px; }
+  header { padding: 0 16px; height: 48px; }
+  .header-left .logo-link span { font-size: 15px; }
+  .header-left .logo-link img { width: 22px; height: 22px; }
+  .btn-back { font-size: 11px; padding: 4px 10px; }
+  .lesson-nav { flex-wrap: wrap; justify-content: center; }
+  .kbd-hint { display: none; }
+}
+@media (max-width: 480px) {
+  .learn-sidebar { max-height: 35vh; }
+  .learn-body { padding: 16px; }
+  .code-block { font-size: 12px; padding: 14px; }
 }
 </style>
 </head>
@@ -163,142 +306,371 @@ body.light-mode .ad-label { color: #bbb; }
 
 <header>
   <div class="header-left">
-    <h1><a href="/" style="display:flex;align-items:center;gap:8px;color:inherit"><img src="logo.png" alt="Uscrovis Python IDE">Uscrovis</a></h1>
+    <a href="/" class="logo-link">
+      <img src="logo.png" alt="Uscrovis Python IDE"><span>Uscrovis</span>
+    </a>
   </div>
   <div class="header-right">
     <a href="/" class="btn-back">&#8592; Back to Editor</a>
-    <button id="themeToggle">&#9790;</button>
+    <button id="themeToggle" title="Toggle theme">&#9790;</button>
   </div>
 </header>
 
 <div class="learn-panel">
   <div class="learn-sidebar" id="learnSidebar"></div>
   <div class="learn-content" id="learnContent">
-    <div id="learnBody"></div>
+    <div class="reading-progress"><div class="reading-progress-fill" id="readingProgress"></div></div>
+    <div class="learn-body" id="learnBody"></div>
   </div>
 </div>
+
+<div class="kbd-hint" id="kbdHint"><span>Navigate lessons:</span> <kbd>&larr;</kbd> <kbd>&rarr;</kbd></div>
 
 <script>
 // ===== LESSONS DATA =====
 const LESSONS = [
-  { title: "Hello, World!", meta: "Beginner \u2022 5 min", code: `print("Hello, World!")`, content: `
-    <h2>Hello, World!</h2>
-    <div class="meta">${"Beginner \u2022 5 min"}</div>
-    <p>Welcome to Python! The first thing every programmer writes is a program that prints "Hello, World!". Python makes this incredibly simple.</p>
-    <p>Type the code below and press <strong>Run</strong> to see the output.</p>
-    <div class="tip"><strong>Tip:</strong> Click "Open in Editor" to load this code into the editor and run it.</div>
-  `},
-  { title: "Variables & Data Types", meta: "Beginner \u2022 8 min", code: `name = "Uscrovis"\nage = 2\npi = 3.14\nis_fun = True\nprint(f"Welcome to {name}, age {age}, pi = {pi}, is it fun? {is_fun}")`, content: `
-    <h2>Variables & Data Types</h2>
-    <div class="meta">${"Beginner \u2022 8 min"}</div>
-    <p>Python has several built-in data types. The most common are <strong>strings</strong> (text), <strong>integers</strong> (whole numbers), <strong>floats</strong> (decimals), and <strong>booleans</strong> (True/False).</p>
-    <p>You don't need to declare the type — Python infers it automatically.</p>
-    <div class="tip"><strong>Note:</strong> Use <code>type()</code> to check a variable's type.</div>
-  `},
-  { title: "Strings & Formatting", meta: "Beginner \u2022 7 min", code: `name = "Uscrovis"\nlang = "Python"\n# f-strings (Python 3.6+)\nprint(f"{name} is a free online {lang} IDE")\n# Methods\nprint(lang.upper())\nprint(lang.lower())\nprint(len(lang))`, content: `
-    <h2>Strings & Formatting</h2>
-    <div class="meta">${"Beginner \u2022 7 min"}</div>
-    <p>Strings are sequences of characters. Python offers powerful ways to format and manipulate them.</p>
-    <p><strong>f-strings</strong> (Python 3.6+) let you embed variables directly in strings using <code>{variable}</code>.</p>
-  `},
-  { title: "Lists & Loops", meta: "Beginner \u2022 10 min", code: `fruits = ["apple", "banana", "cherry"]\nfor fruit in fruits:\n    print(fruit)\nprint()\n# Range loop\nfor i in range(5):\n    print(i, end=" ")`, content: `
-    <h2>Lists & Loops</h2>
-    <div class="meta">${"Beginner \u2022 10 min"}</div>
-    <p>Lists store multiple items in one variable. Use a <strong>for loop</strong> to iterate over them.</p>
-    <p><code>range(n)</code> generates numbers from 0 to n-1.</p>
-  `},
-  { title: "Conditions & If/Else", meta: "Beginner \u2022 8 min", code: `age = 18\nif age >= 18:\n    print("You can vote!")\nelif age >= 16:\n    print("Almost there!")\nelse:\n    print("Too young")\n\n# Ternary\nstatus = "Adult" if age >= 18 else "Minor"\nprint(status)`, content: `
-    <h2>Conditions & If/Else</h2>
-    <div class="meta">${"Beginner \u2022 8 min"}</div>
-    <p>Use <strong>if</strong>, <strong>elif</strong>, and <strong>else</strong> to make decisions in your code.</p>
-    <p>Python also supports the <strong>ternary operator</strong>: <code>x if condition else y</code>.</p>
-  `},
-  { title: "Functions", meta: "Beginner \u2022 10 min", code: `def greet(name):\n    return f"Hello, {name}!"\n\ndef add(a, b):\n    return a + b\n\nprint(greet("Uscrovis"))\nprint(add(5, 3))`, content: `
-    <h2>Functions</h2>
-    <div class="meta">${"Beginner \u2022 10 min"}</div>
-    <p>Functions are reusable blocks of code. Define them with <strong>def</strong>.</p>
-    <p>A function can take parameters and <strong>return</strong> a value.</p>
-  `},
-  { title: "Dictionaries", meta: "Intermediate \u2022 8 min", code: `user = {\n    "name": "Uscrovis",\n    "age": 2,\n    "language": "Python"\n}\nprint(user["name"])\nuser["version"] = "1.0"\nfor key, val in user.items():\n    print(f"{key}: {val}")`, content: `
-    <h2>Dictionaries</h2>
-    <div class="meta">${"Intermediate \u2022 8 min"}</div>
-    <p>Dictionaries store key-value pairs. They are fast and flexible.</p>
-    <p>Use <code>.items()</code> to loop through both keys and values.</p>
-  `},
-  { title: "Lists & List Comph.", meta: "Intermediate \u2022 10 min", code: `nums = [1, 2, 3, 4, 5]\nsquares = [n**2 for n in nums]\nevens = [n for n in nums if n % 2 == 0]\nprint("Squares:", squares)\nprint("Evens:", evens)`, content: `
-    <h2>List Comprehension</h2>
-    <div class="meta">${"Intermediate \u2022 10 min"}</div>
-    <p>List comprehension is a concise way to create lists.</p>
-    <p>Syntax: <code>[expression for item in iterable if condition]</code></p>
-  `},
-  { title: "Error Handling", meta: "Intermediate \u2022 7 min", code: `try:\n    n = int(input("Enter a number: "))\n    print(10 / n)\nexcept ValueError:\n    print("That's not a number!")\nexcept ZeroDivisionError:\n    print("Can't divide by zero!")\nelse:\n    print("No errors!")\nfinally:\n    print("Done")`, content: `
-    <h2>Error Handling</h2>
-    <div class="meta">${"Intermediate \u2022 7 min"}</div>
-    <p>Use <strong>try/except</strong> to handle errors gracefully.</p>
-    <p><strong>else</strong> runs if no error, <strong>finally</strong> always runs.</p>
-  `},
-  { title: "File Handling", meta: "Intermediate \u2022 8 min", code: `with open("example.txt", "w") as f:\n    f.write("Hello from Uscrovis!")\nwith open("example.txt", "r") as f:\n    content = f.read()\nprint(content)`, content: `
-    <h2>File Handling</h2>
-    <div class="meta">${"Intermediate \u2022 8 min"}</div>
-    <p>Use <strong>with open()</strong> to read and write files safely. The file automatically closes when done.</p>
-    <p>Modes: <code>"r"</code> (read), <code>"w"</code> (write), <code>"a"</code> (append).</p>
-  `},
-  { title: "Classes & OOP", meta: "Advanced \u2022 12 min", code: `class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return f"{self.name} says woof!"\n\nmy_dog = Dog("Rex")\nprint(my_dog.bark())`, content: `
-    <h2>Classes & OOP</h2>
-    <div class="meta">${"Advanced \u2022 12 min"}</div>
-    <p><strong>Object-Oriented Programming</strong> organizes code into classes.</p>
-    <p><code>__init__</code> is the constructor that runs when creating an object.</p>
-  `},
-  { title: "Modules & Imports", meta: "Advanced \u2022 8 min", code: `import math\nfrom random import randint\n\nprint(f"Pi: {math.pi}")\nprint(f"Random 1-10: {randint(1, 10)}")`, content: `
-    <h2>Modules & Imports</h2>
-    <div class="meta">${"Advanced \u2022 8 min"}</div>
-    <p>Python's standard library has thousands of modules. Use <strong>import</strong> to load them.</p>
-    <p><code>from module import function</code> imports only what you need.</p>
-  `}
+  {
+    title: "Hello, World!", level: "beginner", mins: 5,
+    code: `print("Hello, World!")`,
+    content: `
+      <p>Welcome to Python! The first thing every programmer writes is a program that prints "Hello, World!". Python makes this incredibly simple.</p>
+      <p>Type the code below and press <strong>Run</strong> to see the output.</p>
+      <div class="tip"><strong>Tip:</strong> Click "Open in Editor" to load this code into the editor and run it.</div>
+    `
+  },
+  {
+    title: "Variables & Data Types", level: "beginner", mins: 8,
+    code: `name = "Uscrovis"
+age = 2
+pi = 3.14
+is_fun = True
+print(f"Welcome to {name}, age {age}, pi = {pi}, is it fun? {is_fun}")`,
+    content: `
+      <p>Python has several built-in data types. The most common are <strong>strings</strong> (text), <strong>integers</strong> (whole numbers), <strong>floats</strong> (decimals), and <strong>booleans</strong> (True/False).</p>
+      <p>You don't need to declare the type — Python infers it automatically.</p>
+      <div class="tip"><strong>Note:</strong> Use <code>type()</code> to check a variable's type.</div>
+    `
+  },
+  {
+    title: "Strings & Formatting", level: "beginner", mins: 7,
+    code: `name = "Uscrovis"
+lang = "Python"
+# f-strings (Python 3.6+)
+print(f"{name} is a free online {lang} IDE")
+# Methods
+print(lang.upper())
+print(lang.lower())
+print(len(lang))`,
+    content: `
+      <p>Strings are sequences of characters. Python offers powerful ways to format and manipulate them.</p>
+      <p><strong>f-strings</strong> (Python 3.6+) let you embed variables directly in strings using <code>{variable}</code>.</p>
+    `
+  },
+  {
+    title: "Lists & Loops", level: "beginner", mins: 10,
+    code: `fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)
+print()
+# Range loop
+for i in range(5):
+    print(i, end=" ")`,
+    content: `
+      <p>Lists store multiple items in one variable. Use a <strong>for loop</strong> to iterate over them.</p>
+      <p><code>range(n)</code> generates numbers from 0 to n-1.</p>
+    `
+  },
+  {
+    title: "Conditions & If/Else", level: "beginner", mins: 8,
+    code: `age = 18
+if age >= 18:
+    print("You can vote!")
+elif age >= 16:
+    print("Almost there!")
+else:
+    print("Too young")
+
+# Ternary
+status = "Adult" if age >= 18 else "Minor"
+print(status)`,
+    content: `
+      <p>Use <strong>if</strong>, <strong>elif</strong>, and <strong>else</strong> to make decisions in your code.</p>
+      <p>Python also supports the <strong>ternary operator</strong>: <code>x if condition else y</code>.</p>
+    `
+  },
+  {
+    title: "Functions", level: "beginner", mins: 10,
+    code: `def greet(name):
+    return f"Hello, {name}!"
+
+def add(a, b):
+    return a + b
+
+print(greet("Uscrovis"))
+print(add(5, 3))`,
+    content: `
+      <p>Functions are reusable blocks of code. Define them with <strong>def</strong>.</p>
+      <p>A function can take parameters and <strong>return</strong> a value.</p>
+    `
+  },
+  {
+    title: "Dictionaries", level: "intermediate", mins: 8,
+    code: `user = {
+    "name": "Uscrovis",
+    "age": 2,
+    "language": "Python"
+}
+print(user["name"])
+user["version"] = "1.0"
+for key, val in user.items():
+    print(f"{key}: {val}")`,
+    content: `
+      <p>Dictionaries store key-value pairs. They are fast and flexible.</p>
+      <p>Use <code>.items()</code> to loop through both keys and values.</p>
+    `
+  },
+  {
+    title: "List Comprehensions", level: "intermediate", mins: 10,
+    code: `nums = [1, 2, 3, 4, 5]
+squares = [n**2 for n in nums]
+evens = [n for n in nums if n % 2 == 0]
+print("Squares:", squares)
+print("Evens:", evens)`,
+    content: `
+      <p>List comprehension is a concise way to create lists.</p>
+      <p>Syntax: <code>[expression for item in iterable if condition]</code></p>
+    `
+  },
+  {
+    title: "Error Handling", level: "intermediate", mins: 7,
+    code: `try:
+    n = int(input("Enter a number: "))
+    print(10 / n)
+except ValueError:
+    print("That's not a number!")
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+else:
+    print("No errors!")
+finally:
+    print("Done")`,
+    content: `
+      <p>Use <strong>try/except</strong> to handle errors gracefully.</p>
+      <p><strong>else</strong> runs if no error, <strong>finally</strong> always runs.</p>
+    `
+  },
+  {
+    title: "File Handling", level: "intermediate", mins: 8,
+    code: `with open("example.txt", "w") as f:
+    f.write("Hello from Uscrovis!")
+with open("example.txt", "r") as f:
+    content = f.read()
+print(content)`,
+    content: `
+      <p>Use <strong>with open()</strong> to read and write files safely. The file automatically closes when done.</p>
+      <p>Modes: <code>"r"</code> (read), <code>"w"</code> (write), <code>"a"</code> (append).</p>
+    `
+  },
+  {
+    title: "Classes & OOP", level: "advanced", mins: 12,
+    code: `class Dog:
+    def __init__(self, name):
+        self.name = name
+    def bark(self):
+        return f"{self.name} says woof!"
+
+my_dog = Dog("Rex")
+print(my_dog.bark())`,
+    content: `
+      <p><strong>Object-Oriented Programming</strong> organizes code into classes.</p>
+      <p><code>__init__</code> is the constructor that runs when creating an object.</p>
+    `
+  },
+  {
+    title: "Modules & Imports", level: "advanced", mins: 8,
+    code: `import math
+from random import randint
+
+print(f"Pi: {math.pi}")
+print(f"Random 1-10: {randint(1, 10)}")`,
+    content: `
+      <p>Python's standard library has thousands of modules. Use <strong>import</strong> to load them.</p>
+      <p><code>from module import function</code> imports only what you need.</p>
+    `
+  }
 ];
 
+// ===== STATE =====
 let currentLesson = 0;
+const LEVEL_ORDER = ['beginner', 'intermediate', 'advanced'];
+const LEVEL_LABELS = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
+const LEVEL_BADGE_CLASS = { beginner: 'beginner', intermediate: 'int', advanced: 'adv' };
+const LEVEL_META_CLASS = { beginner: 'beginner', intermediate: 'intermediate', advanced: 'advanced' };
 
-function renderLessons() {
+function getLevelIndex(l) { return LEVEL_ORDER.indexOf(l); }
+
+// ===== SIDEBAR =====
+function renderSidebar() {
   const sidebar = document.getElementById('learnSidebar');
-  sidebar.innerHTML = '<h3>Python Course</h3>' + LESSONS.map((l, i) =>
-    '<div class="learn-lesson' + (i === currentLesson ? ' active' : '') + '" data-i="' + i + '">' +
-    '<span class="num">' + (i+1) + '</span>' + l.title +
-    '</div>'
-  ).join('');
+  const total = LESSONS.length;
+  const completed = LESSONS.filter((_, i) => localStorage.getItem('lesson_done_' + i) === '1').length;
+  const pct = Math.round((completed / total) * 100);
+
+  let sectionHtml = '';
+  let currentLevel = '';
+  LESSONS.forEach((l, i) => {
+    const lvl = l.level;
+    if (lvl !== currentLevel) {
+      currentLevel = lvl;
+      sectionHtml += '<div class="sidebar-section-title">' + LEVEL_LABELS[lvl] + '</div>';
+    }
+    const isActive = i === currentLesson;
+    const isDone = localStorage.getItem('lesson_done_' + i) === '1';
+    const cls = 'learn-lesson' + (isActive ? ' active' : '') + (isDone ? ' completed' : '');
+    const badge = '<span class="lesson-badge ' + LEVEL_BADGE_CLASS[lvl] + '">' + l.mins + 'm</span>';
+    sectionHtml += '<div class="' + cls + '" data-i="' + i + '">' +
+      '<div class="lesson-status"><div class="dot"></div></div>' +
+      '<span class="lesson-label">' + l.title + '</span>' +
+      badge +
+      '</div>';
+  });
+
+  sidebar.innerHTML =
+    '<div class="sidebar-header">' +
+      '<h3>Python Course</h3>' +
+      '<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="progress-text"><span>' + completed + ' of ' + total + ' completed</span><span>' + pct + '%</span></div>' +
+    '</div>' +
+    '<div class="sidebar-section">' + sectionHtml + '</div>';
+
   sidebar.querySelectorAll('.learn-lesson').forEach(el => {
     el.addEventListener('click', () => {
-      currentLesson = parseInt(el.dataset.i);
-      renderLessons();
+      const i = parseInt(el.dataset.i);
+      if (i !== currentLesson) {
+        currentLesson = i;
+        renderSidebar();
+        showLesson(currentLesson);
+        localStorage.setItem('last_lesson', i);
+        scrollSidebarToActive();
+      }
     });
   });
-  showLesson(currentLesson);
+  scrollSidebarToActive();
 }
 
+function scrollSidebarToActive() {
+  setTimeout(() => {
+    const active = document.querySelector('.learn-lesson.active');
+    if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, 50);
+}
+
+// ===== LESSON CONTENT =====
 function showLesson(i) {
-  const lesson = LESSONS[i];
+  const l = LESSONS[i];
   const body = document.getElementById('learnBody');
-  body.innerHTML = lesson.content +
-    '<div class="code-block">' + lesson.code + '</div>' +
-    '<button class="btn btn-run" onclick="openInEditor(' + i + ')" style="margin-top:12px">Open in Editor & Run</button>' +
+  const num = (i + 1).toString().padStart(2, '0');
+  const levelLabel = LEVEL_LABELS[l.level];
+  const metaCls = LEVEL_META_CLASS[l.level];
+
+  const prevDisabled = i === 0;
+  const nextDisabled = i === LESSONS.length - 1;
+
+  body.innerHTML =
+    '<div class="lesson-header">' +
+      '<div class="lesson-number">Lesson ' + num + '</div>' +
+      '<h1 class="lesson-title">' + l.title + '</h1>' +
+      '<div class="lesson-meta">' +
+        '<span class="badge ' + metaCls + '">' + levelLabel + '</span>' +
+        '<span class="time">&#9201; ' + l.mins + ' min</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="lesson-body">' + l.content + '</div>' +
+    '<div class="code-wrap">' +
+      '<div class="code-header">' +
+        '<span class="code-lang">Python</span>' +
+        '<button class="btn-copy" id="copyBtn" onclick="copyCode(' + i + ')">Copy</button>' +
+      '</div>' +
+      '<div class="code-block" id="codeBlock">' + l.code + '</div>' +
+    '</div>' +
+    '<button class="btn btn-run" onclick="openInEditor(' + i + ')">&#9654; Open in Editor & Run</button>' +
+    '<div class="lesson-nav">' +
+      '<button class="nav-btn" onclick="goLesson(' + (i - 1) + ')"' + (prevDisabled ? ' disabled' : '') + '>&larr; Previous</button>' +
+      '<span class="nav-center">' + (i + 1) + ' / ' + LESSONS.length + '</span>' +
+      '<button class="nav-btn" onclick="goLesson(' + (i + 1) + ')"' + (nextDisabled ? ' disabled' : '') + '>Next &rarr;</button>' +
+    '</div>' +
     '<div class="ad-section"><div class="ad-label">\u2014 Ad \u2014</div><div class="ad-inner"><iframe data-aa="2445989" src="//acceptable.a-ads.com/2445989/?size=Adaptive" style="border:0;padding:0;width:100%;height:auto;overflow:hidden;display:block;margin:auto"></iframe></div></div>';
+
+  // Reset reading progress
+  document.getElementById('readingProgress').style.width = '0%';
+}
+
+function goLesson(i) {
+  if (i < 0 || i >= LESSONS.length) return;
+  currentLesson = i;
+  localStorage.setItem('last_lesson', i);
+  renderSidebar();
+  showLesson(currentLesson);
+  // Scroll content to top
+  document.getElementById('learnContent').scrollTop = 0;
 }
 
 function openInEditor(i) {
   window.location.href = '/?code=' + i;
 }
 
-// Theme toggle
-const storedTheme = localStorage.getItem('theme');
-if (storedTheme === 'light') { document.body.classList.add('light-mode'); }
+function copyCode(i) {
+  const code = LESSONS[i].code;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+}
 
-document.getElementById('themeToggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const isLight = document.body.classList.contains('light-mode');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+// ===== KEYBOARD NAV =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') { goLesson(currentLesson - 1); }
+  if (e.key === 'ArrowRight') { goLesson(currentLesson + 1); }
 });
 
-renderLessons();
+// ===== READING PROGRESS =====
+const contentEl = document.getElementById('learnContent');
+contentEl.addEventListener('scroll', () => {
+  const scrollTop = contentEl.scrollTop;
+  const scrollHeight = contentEl.scrollHeight - contentEl.clientHeight;
+  if (scrollHeight > 0) {
+    const pct = Math.min((scrollTop / scrollHeight) * 100, 100);
+    document.getElementById('readingProgress').style.width = pct + '%';
+  }
+});
+
+// ===== KBD HINT (hide after first interaction) =====
+setTimeout(() => {
+  const hint = document.getElementById('kbdHint');
+  hint.classList.add('show');
+  setTimeout(() => hint.classList.remove('show'), 5000);
+}, 2000);
+document.addEventListener('keydown', () => {
+  document.getElementById('kbdHint').classList.remove('show');
+}, { once: true });
+
+// ===== THEME TOGGLE =====
+const storedTheme = localStorage.getItem('theme');
+if (storedTheme === 'light') { document.body.classList.add('light-mode'); }
+document.getElementById('themeToggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+});
+
+// ===== INIT =====
+currentLesson = parseInt(localStorage.getItem('last_lesson')) || 0;
+renderSidebar();
+showLesson(currentLesson);
+scrollSidebarToActive();
 </script>
 </body>
 </html>
