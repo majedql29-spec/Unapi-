@@ -116,9 +116,11 @@
   "name": "Master Python Programming — Interactive Course",
   "description": "Interactive Python lessons with runnable code examples — master Python at your own pace",
   "educationalLevel": ["Beginner", "Intermediate", "Advanced"],
-  "timeRequired": "PT5H",
+  "timeRequired": "PT8H",
   "typicalAgeRange": "14-99",
-  "inLanguage": "en-US"
+  "inLanguage": "en-US",
+  "datePublished": "2026-06-15",
+  "dateModified": "2026-06-29"
 }
 ]
 </script>
@@ -438,11 +440,13 @@ const LESSONS = [
     title: "Hello, World!", level: "beginner", mins: 5,
     code: `print("Hello, World!")`,
     content: `
-      <p>Welcome to Python! The first program every programmer writes prints "Hello, World!" to the screen. Python makes this incredibly simple — just one line of code.</p>
-      <p>The <code>print()</code> function is built into Python. It outputs whatever you put between the parentheses to the console. You can print text strings, numbers, variables, or the result of an expression.</p>
-      <p>Strings can use single quotes <code>'...'</code> or double quotes <code>"..."</code> — Python treats them identically. Just be consistent within a single project.</p>
-      <p>Throughout this course, you will write and run real Python code directly in your browser. No installations, no configuration, no cost.</p>
-      <div class="tip"><strong>Tip:</strong> Click "Open in Editor & Run" below to load this code into the full editor. Modify it and run it instantly to see how changes affect the output.</div>
+      <p>Welcome to Python! The first program every programmer writes prints <code>"Hello, World!"</code> to the screen. Python makes this incredibly simple — just one line of code.</p>
+      <p>The <code>print()</code> function is built into Python and is one of the most frequently used functions you will ever use. It outputs whatever you put between the parentheses to the console. You can print text strings, numbers stored in variables, or the result of an expression. For example, <code>print(2 + 3)</code> will display <code>5</code>.</p>
+      <p>Strings can use single quotes <code>'...'</code> or double quotes <code>"..."</code> — Python treats them identically. The important rule is to pick one style and stay consistent within a single project. You can also use triple quotes <code>'''...'''</code> or <code>"""..."""</code> for multi-line strings that span several lines of text.</p>
+      <p>Notice that Python does not use semicolons at the end of lines, and it does not use curly braces to mark blocks of code. Instead, Python relies on indentation (spaces or tabs) to define structure. This makes Python code exceptionally clean and readable compared to many other languages.</p>
+      <p>Throughout this course, you will write and run real Python code directly in your browser. No installations, no configuration, no cost — everything runs safely on our servers and the results appear instantly. You can experiment freely without worrying about breaking anything.</p>
+      <p><strong>A quick look at the editor:</strong> On the left side is the code editor where you type Python code. Above it, you will find buttons to run your code and open it in the full Uscrovis IDE. Below the code area is the lesson explanation. The output of your code appears after you click run.</p>
+      <div class="tip"><strong>Try it:</strong> Change the message from "Hello, World!" to something personal like "Hello from [your name]!" and run it. Then try printing a number: <code>print(2024)</code> or an expression: <code>print(10 * 5)</code>. Experiment freely!</div>
     `
   },
   {
@@ -453,16 +457,18 @@ pi = 3.14
 is_fun = True
 print(f"Welcome to {name}, age {age}, pi = {pi}, is it fun? {is_fun}")`,
     content: `
-      <p>Variables are named containers that store data. You create a variable by assigning a value with <code>=</code> — no type declaration is needed. Python infers the type automatically from the value you assign.</p>
-      <p>Python's fundamental data types include:</p>
+      <p>Variables are named containers that store data in your program's memory. Think of them as labeled boxes — you put a value inside, give it a descriptive name, and later retrieve that value by using the name. In Python, you create a variable simply by assigning a value with the <code>=</code> sign. No type declaration is needed — Python infers the type automatically from the value you assign.</p>
+      <p>Python's fundamental data types form the building blocks of every program:</p>
       <ul>
-        <li><strong>int</strong> — whole numbers: <code>42</code>, <code>-7</code>, <code>0</code></li>
-        <li><strong>float</strong> — decimal numbers: <code>3.14</code>, <code>-0.5</code></li>
-        <li><strong>str</strong> — text strings: <code>"hello"</code>, <code>'Python'</code></li>
-        <li><strong>bool</strong> — logical values: <code>True</code> or <code>False</code></li>
+        <li><strong>int</strong> — whole numbers: <code>42</code>, <code>-7</code>, <code>0</code>, <code>1_000_000</code> (underscores can separate digits for readability)</li>
+        <li><strong>float</strong> — decimal numbers: <code>3.14</code>, <code>-0.5</code>, <code>2.0</code>, <code>1.5e10</code> (scientific notation)</li>
+        <li><strong>str</strong> — text strings: <code>"hello"</code>, <code>'Python'</code>, <code>"42"</code> (even digits inside quotes become text)</li>
+        <li><strong>bool</strong> — logical values: <code>True</code> or <code>False</code> (note the capital letters — Python is case-sensitive)</li>
       </ul>
-      <p>Python is <strong>dynamically typed</strong>, meaning a variable can change type during execution. A variable that holds an integer can later hold a string. Use the <code>type()</code> function to check what type a value is at any point.</p>
-      <div class="tip"><strong>Naming rules:</strong> Variable names must start with a letter or underscore, contain only letters, digits, and underscores, and are case-sensitive (<code>score</code> and <code>Score</code> are different).</div>
+      <p>Python is <strong>dynamically typed</strong>, which means a variable can change type during execution. A variable that starts as an integer can later hold a string without any special syntax. This flexibility makes Python fast to write, but it also means you need to be mindful of what type a variable holds at any given moment. Use the built-in <code>type()</code> function to inspect the type: <code>type(42)</code> returns <code>&lt;class 'int'&gt;</code>.</p>
+      <p>You can also assign the same value to multiple variables in one line: <code>x = y = z = 0</code>. Or swap two variables without a temporary variable: <code>a, b = b, a</code> — Python handles this gracefully using tuple unpacking.</p>
+      <p><strong>Common mistake to avoid:</strong> Confusing <code>=</code> (assignment) with <code>==</code> (comparison). Writing <code>if x = 5</code> will cause a syntax error. Always use double equals when checking equality.</p>
+      <div class="tip"><strong>Naming rules:</strong> Variable names must start with a letter or underscore, contain only letters, digits, and underscores, and are case-sensitive (<code>score</code> and <code>Score</code> are different). Descriptive names like <code>user_age</code> or <code>total_price</code> make your code much easier to read than short names like <code>x</code> or <code>y</code>.</div>
     `
   },
   {
@@ -476,11 +482,20 @@ print(lang.upper())
 print(lang.lower())
 print(len(lang))`,
     content: `
-      <p>Strings are sequences of characters — letters, digits, spaces, symbols. They are one of the most common data types in Python.</p>
-      <p>The best way to embed values inside strings is with <strong>f-strings</strong> (Python 3.6+). Prefix the string with <code>f</code> and insert variables using curly braces: <code>f"Hello, {name}!"</code></p>
-      <p>Without f-strings, you would use concatenation with <code>+</code> or the <code>.format()</code> method. F-strings are cleaner, faster, and easier to read — they are the recommended approach in modern Python.</p>
-      <p>Strings also have many useful built-in <strong>methods</strong>: <code>.upper()</code> converts to uppercase, <code>.lower()</code> to lowercase, and <code>.strip()</code> removes surrounding whitespace. The <code>len()</code> function returns the number of characters.</p>
-      <div class="tip"><strong>Try it:</strong> Modify the string in the code below and run it to see how the output changes. Experiment with different methods.</div>
+      <p>Strings are sequences of characters — letters, digits, spaces, symbols, and even emojis. They are one of the most common data types in Python, used everywhere from user interfaces to data processing. You can create a string by wrapping characters in matching quotes: single, double, or triple for multi-line strings.</p>
+      <p>The best way to embed values inside strings is with <strong>f-strings</strong> (available since Python 3.6). Prefix the string with <code>f</code> and insert variables directly using curly braces: <code>f"Hello, {name}! You are {age} years old."</code>. You can even put expressions inside the braces: <code>f"Next year you will be {age + 1}"</code> or call methods: <code>f"Uppercase: {name.upper()}"</code>. F-strings are the modern, recommended approach — they are faster, cleaner, and more readable than older alternatives.</p>
+      <p>Before f-strings, developers used <strong>concatenation</strong> with the <code>+</code> operator (<code>"Hello " + name</code>) or the <code>.format()</code> method (<code>"Hello {}".format(name)</code>). Both work, but f-strings are superior in every way and are the standard in modern Python code.</p>
+      <p>Strings also offer a rich collection of built-in <strong>methods</strong> for text manipulation:</p>
+      <ul>
+        <li><code>.upper()</code> — converts the entire string to uppercase</li>
+        <li><code>.lower()</code> — converts the entire string to lowercase</li>
+        <li><code>.strip()</code> — removes leading and trailing whitespace (spaces, tabs, newlines)</li>
+        <li><code>.startswith()</code> and <code>.endswith()</code> — check how the string begins or ends</li>
+        <li><code>.count()</code> — counts how many times a substring appears</li>
+      </ul>
+      <p>The built-in <code>len()</code> function returns the number of characters in a string, including spaces and punctuation. Remember that strings are <strong>immutable</strong> — methods like <code>.upper()</code> do not modify the original string; they return a new one. You must assign the result back to a variable if you want to keep the change.</p>
+      <p><strong>Common mistake:</strong> Trying to modify a character directly with <code>text[0] = "H"</code> will raise a <code>TypeError</code>. Strings do not support item assignment. Instead, create a new string using slicing or <code>.replace()</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>.strip()</code> before <code>.upper()</code> in the code to see method chaining in action: <code>text.strip().upper()</code>. Then try <code>text.count("o")</code> to count letter occurrences.</div>
     `
   },
   {
@@ -493,12 +508,23 @@ print()
 for i in range(5):
     print(i, end=" ")`,
     content: `
-      <p>A <strong>list</strong> is an ordered collection of items. Lists can hold any data type and are created with square brackets: <code>fruits = ["apple", "banana", "cherry"]</code>.</p>
-      <p>Access individual items by their <strong>index</strong>. Python uses zero-based indexing: <code>fruits[0]</code> is <code>"apple"</code>, <code>fruits[1]</code> is <code>"banana"</code>. Negative indices count from the end: <code>fruits[-1]</code> is the last item.</p>
-      <p>To iterate over a list, use a <strong>for loop</strong>. The loop variable takes each value in sequence automatically:</p>
+      <p>A <strong>list</strong> is an ordered collection of items that can hold any data type — numbers, strings, booleans, or even other lists. You create a list with square brackets: <code>fruits = ["apple", "banana", "cherry"]</code>. Lists are one of the most versatile and frequently used data structures in Python.</p>
+      <p>Access individual items by their <strong>index</strong>. Python uses zero-based indexing, meaning the first item is at position <code>0</code>, not <code>1</code>: <code>fruits[0]</code> returns <code>"apple"</code>, <code>fruits[1]</code> returns <code>"banana"</code>. Negative indices count from the end of the list: <code>fruits[-1]</code> is the last item (<code>"cherry"</code>), <code>fruits[-2]</code> is the second-to-last. You can also use <strong>slicing</strong> to get a sublist: <code>fruits[1:3]</code> returns items at positions 1 and 2 (the end index is exclusive).</p>
+      <p>To iterate over a list, use a <strong>for loop</strong>. Python's for loop is a "for-each" style — the loop variable takes each value in the collection automatically, one at a time:</p>
       <p><code>for fruit in fruits:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(fruit)</code></p>
-      <p>The built-in <code>range(n)</code> function generates numbers from 0 to n-1. Combined with a for loop, it is perfect for repeating an action a specific number of times.</p>
-      <div class="tip"><strong>Note:</strong> Lists are <strong>mutable</strong> — you can change items, add new ones with <code>.append()</code>, insert with <code>.insert()</code>, or remove with <code>.remove()</code>.</div>
+      <p>This is more intuitive and less error-prone than traditional index-based loops found in languages like C or Java. If you need the index as you iterate, use <code>enumerate()</code>: <code>for i, fruit in enumerate(fruits):</code>.</p>
+      <p>The built-in <code>range(n)</code> function generates a sequence of numbers from 0 to n-1. You will often see it in combination with for loops: <code>for i in range(5): print(i)</code> prints 0 through 4. You can also specify a start and step: <code>range(2, 10, 2)</code> generates 2, 4, 6, 8.</p>
+      <p><strong>Key list operations:</strong></p>
+      <ul>
+        <li><code>.append(item)</code> — adds an item to the end</li>
+        <li><code>.insert(index, item)</code> — inserts at a specific position</li>
+        <li><code>.remove(item)</code> — removes the first occurrence of a value</li>
+        <li><code>.pop(index)</code> — removes and returns an item at a given index</li>
+        <li><code>.sort()</code> — sorts the list in place</li>
+        <li><code>len(list)</code> — returns the number of elements</li>
+      </ul>
+      <p>Lists are <strong>mutable</strong>, which means you can change, add, and remove elements after creation. This is different from tuples, which are fixed once created. Understanding when to use lists versus tuples is an important skill in Python programming.</p>
+      <div class="tip"><strong>Try it:</strong> After the loop, add <code>fruits.append("date")</code> and then loop again to see how lists grow dynamically. Then try <code>print(len(fruits))</code> to see the updated count.</div>
     `
   },
   {
@@ -515,11 +541,19 @@ else:
 status = "Adult" if age >= 18 else "Minor"
 print(status)`,
     content: `
-      <p>Conditional statements let your program make decisions and execute different code based on certain conditions.</p>
-      <p>Use <strong>if</strong> to check a condition, <strong>elif</strong> (short for "else if") to check additional conditions, and <strong>else</strong> as a fallback when no condition is met. The condition must evaluate to a boolean — <code>True</code> or <code>False</code>.</p>
-      <p>Python uses <strong>indentation</strong> (typically 4 spaces) to define which code belongs to each condition. This is not optional — it is part of Python's syntax.</p>
-      <p>Python also offers a concise <strong>ternary operator</strong> for simple if/else expressions: <code>value_if_true if condition else value_if_false</code>. This is useful for quick conditional assignments.</p>
-      <div class="tip"><strong>Remember:</strong> Use <code>==</code> to compare values, <code>=</code> to assign. A common mistake is using one equals sign inside an if condition.</div>
+      <p>Conditional statements let your program make decisions and execute different code paths based on certain conditions. They are the foundation of all logic in programming — without them, every program would run the same sequence of instructions every time, regardless of input or state.</p>
+      <p>Use <strong><code>if</code></strong> to check a primary condition, <strong><code>elif</code></strong> (short for "else if") to check additional conditions when the previous ones were false, and <strong><code>else</code></strong> as a catch-all fallback when no condition is met. The condition must evaluate to a boolean value — either <code>True</code> or <code>False</code>. Python treats certain values as "falsy": <code>0</code>, <code>None</code>, empty strings, empty lists — all evaluate to <code>False</code> in a boolean context.</p>
+      <p>Python uses <strong>indentation</strong> (typically 4 spaces) to define which statements belong to each branch. This is not a style suggestion — it is a required part of Python's syntax. Unlike C, Java, or JavaScript which use curly braces, Python's indentation-based structure makes code visually consistent and readable. Every line indented under an <code>if</code> runs when the condition is true. When the indentation returns to the previous level, the conditional block ends.</p>
+      <p>You can chain multiple conditions using <strong>logical operators</strong>:</p>
+      <ul>
+        <li><code>and</code> — both conditions must be true: <code>if age >= 18 and has_id:</code></li>
+        <li><code>or</code> — at least one condition must be true: <code>if is_admin or is_owner:</code></li>
+        <li><code>not</code> — inverts a condition: <code>if not logged_in:</code></li>
+      </ul>
+      <p>Python also offers a concise <strong>ternary operator</strong> (also called a conditional expression) for simple if/else assignments in a single line: <code>status = "Adult" if age >= 18 else "Minor"</code>. This is useful for quick conditional assignments but should be avoided for complex logic where readability would suffer.</p>
+      <p><strong>Common mistake to avoid:</strong> Using a single <code>=</code> (assignment) instead of <code>==</code> (equality comparison) inside a condition. Writing <code>if x = 5</code> will cause a <code>SyntaxError</code>. Always use <code>==</code> to compare values.</p>
+      <p><strong>Best practice:</strong> For checking if a value is <code>None</code>, use <code>is None</code> instead of <code>== None</code>. The <code>is</code> operator checks identity, which is the correct way to compare to <code>None</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Change <code>age</code> to 16 and see how the output changes because the <code>elif</code> branch runs instead. Then try setting <code>age = 10</code> to trigger the <code>else</code> branch. Add a new <code>elif</code> condition of your own.</div>
     `
   },
   {
@@ -533,12 +567,26 @@ def add(a, b):
 print(greet("Uscrovis"))
 print(add(5, 3))`,
     content: `
-      <p>Functions are reusable blocks of code that perform a specific task. They help you organize your code, avoid repetition, and make programs easier to read and maintain.</p>
-      <p>Define a function with the <strong>def</strong> keyword, followed by the function name, parentheses for parameters, and a colon. The function body is indented:</p>
-      <p><code>def greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f"Hello, {name}!"</code></p>
-      <p>Functions can take <strong>parameters</strong> (inputs) and <strong>return</strong> a value using the <code>return</code> keyword. If a function does not have a return statement, it returns <code>None</code> by default.</p>
-      <p>Once defined, you <strong>call</strong> a function by using its name followed by parentheses with any required arguments: <code>greet("Uscrovis")</code>.</p>
-      <div class="tip"><strong>Best practice:</strong> Give functions descriptive names that explain what they do, like <code>calculate_average()</code> or <code>get_user_name()</code>.</div>
+      <p>Functions are reusable blocks of code that perform a specific task. They are the primary mechanism for organizing code, avoiding repetition (following the DRY principle — Don't Repeat Yourself), and making programs easier to read, test, and maintain. Think of a function as a mini-program within your program: it takes inputs, does work, and optionally produces an output.</p>
+      <p>Define a function with the <strong><code>def</code></strong> keyword, followed by the function name, parentheses that may contain parameters, and a colon. The function body is indented by one level (typically 4 spaces):</p>
+      <p><code>def greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;"""Return a personalized greeting."""<br>&nbsp;&nbsp;&nbsp;&nbsp;return f"Hello, {name}!"</code></p>
+      <p>Functions can accept <strong>parameters</strong> (also called arguments) that serve as inputs. They can <strong>return</strong> a value using the <code>return</code> keyword. The <code>return</code> statement immediately exits the function and sends the specified value back to the caller. If a function does not have a <code>return</code> statement, it implicitly returns <code>None</code> (Python's null value).</p>
+      <p>Once defined, you <strong>call</strong> a function by its name followed by parentheses containing any required arguments: <code>message = greet("Uscrovis")</code>. The returned value can be stored in a variable, printed, or used in an expression.</p>
+      <p><strong>Parameter features to know:</strong></p>
+      <ul>
+        <li><strong>Default parameters:</strong> You can assign default values: <code>def greet(name, greeting="Hello"):</code> — if the caller omits <code>greeting</code>, it defaults to <code>"Hello"</code></li>
+        <li><strong>Keyword arguments:</strong> Call functions by naming arguments: <code>greet(name="Uscrovis", greeting="Hi")</code> — order doesn't matter with keyword arguments</li>
+        <li><strong>Variable-length arguments:</strong> Use <code>*args</code> for any number of positional arguments and <code>**kwargs</code> for any number of keyword arguments</li>
+      </ul>
+      <p><strong>Best practices for writing good functions:</strong></p>
+      <ul>
+        <li>Give functions descriptive names that explain what they do — <code>calculate_average()</code> is better than <code>calc()</code></li>
+        <li>Each function should do exactly one thing and do it well (Single Responsibility Principle)</li>
+        <li>Keep functions short — if a function exceeds 20-30 lines, consider breaking it into smaller functions</li>
+        <li>Add a <strong>docstring</strong> (triple-quoted string) right after the definition to document what the function does</li>
+      </ul>
+      <p><strong>Common mistake:</strong> Forgetting to call the function (missing parentheses). Writing <code>greet</code> without parentheses returns the function object itself, not the result. Always use <code>greet("name")</code> with parentheses to actually execute the function.</p>
+      <div class="tip"><strong>Try it:</strong> Add a third function that takes three parameters and returns the average. Then call it and print the result. Experiment with default parameter values.</div>
     `
   },
   {
@@ -555,21 +603,36 @@ print("Power:", a ** b)
 print("Is a > b?", a > b)
 print("Is a == b?", a == b)`,
     content: `
-      <p>Python supports all standard mathematical operators for working with numbers.</p>
+      <p>Python supports a full set of mathematical and logical operators for working with numbers, making it an excellent language for everything from simple arithmetic to complex scientific computing. Python follows the standard order of operations (PEMDAS: Parentheses, Exponents, Multiplication/Division, Addition/Subtraction).</p>
       <p><strong>Arithmetic operators:</strong></p>
       <ul>
-        <li><code>+</code> addition, <code>-</code> subtraction, <code>*</code> multiplication</li>
-        <li><code>/</code> division (always returns a float), <code>//</code> floor division (rounds down)</li>
-        <li><code>%</code> modulus (remainder of division), <code>**</code> power/exponent</li>
+        <li><code>+</code> addition and string concatenation</li>
+        <li><code>-</code> subtraction</li>
+        <li><code>*</code> multiplication and string repetition (<code>"Hi" * 3</code> gives <code>"HiHiHi"</code>)</li>
+        <li><code>/</code> division — always returns a <code>float</code>, even when dividing two integers (<code>6 / 3</code> returns <code>2.0</code>)</li>
+        <li><code>//</code> floor division — divides and rounds down to the nearest integer</li>
+        <li><code>%</code> modulus — returns the remainder of division, useful for checking even/odd numbers or cycling through ranges</li>
+        <li><code>**</code> exponentiation — raises a number to a power (<code>2 ** 3</code> returns <code>8</code>)</li>
       </ul>
-      <p><strong>Comparison operators</strong> compare two values and return a boolean:</p>
+      <p><strong>Comparison operators</strong> compare two values and return a boolean result:</p>
       <ul>
-        <li><code>==</code> equal to, <code>!=</code> not equal to</li>
-        <li><code>&gt;</code> greater than, <code>&lt;</code> less than</li>
-        <li><code>&gt;=</code> greater than or equal, <code>&lt;=</code> less than or equal</li>
+        <li><code>==</code> — equal to. Note the double equals — a single <code>=</code> is for assignment</li>
+        <li><code>!=</code> — not equal to</li>
+        <li><code>&gt;</code> — greater than</li>
+        <li><code>&lt;</code> — less than</li>
+        <li><code>&gt;=</code> — greater than or equal</li>
+        <li><code>&lt;=</code> — less than or equal</li>
       </ul>
-      <p>You can combine comparisons with <strong>logical operators</strong>: <code>and</code>, <code>or</code>, and <code>not</code>.</p>
-      <div class="tip"><strong>Note:</strong> The <code>//</code> operator divides and rounds down to the nearest integer. For positive numbers this is the same as integer division, but for negative numbers it rounds away from zero.</div>
+      <p><strong>Logical operators</strong> combine multiple boolean expressions:</p>
+      <ul>
+        <li><code>and</code> — true only if both sides are true</li>
+        <li><code>or</code> — true if at least one side is true</li>
+        <li><code>not</code> — inverts the boolean value</li>
+      </ul>
+      <p>Python also supports <strong>augmented assignment operators</strong> that combine an operation with assignment: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, etc. For example, <code>x += 5</code> is shorthand for <code>x = x + 5</code>. These operators are common in loops and accumulators.</p>
+      <p><strong>Important detail about <code>//</code>:</strong> Floor division always rounds down to the nearest integer. For positive numbers (<code>10 // 3 = 3</code>) this matches integer division. But for negative numbers, it rounds away from zero: <code>-10 // 3</code> gives <code>-4</code>, not <code>-3</code>. The <code>%</code> operator follows the same sign convention, so <code>-10 % 3</code> gives <code>2</code>. This behavior is mathematically consistent but can surprise newcomers.</p>
+      <p><strong>Quick tip:</strong> Use <code>% 2 == 0</code> to check if a number is even, and <code>% 2 == 1</code> for odd. The modulus operator is also useful for constraining values to a range, like wrapping around a circular buffer or creating repeating patterns.</p>
+      <div class="tip"><strong>Try it:</strong> Add a line using <code>%</code> to check if <code>a</code> is even: <code>print("a is even?", a % 2 == 0)</code>. Then experiment with <code>+=</code> by adding <code>a += 5</code> and printing <code>a</code> again.</div>
     `
   },
   {
@@ -584,13 +647,20 @@ words = text.strip().split(" ")
 print("words:", words)
 print("joined:", "-".join(words))`,
     content: `
-      <p>Python strings come with a rich set of built-in methods that make text manipulation easy and readable.</p>
-      <p><strong>Cleaning methods:</strong> <code>.strip()</code> removes whitespace from both ends, <code>.lstrip()</code> and <code>.rstrip()</code> remove from left or right only.</p>
-      <p><strong>Case methods:</strong> <code>.lower()</code> converts to lowercase, <code>.upper()</code> to uppercase, <code>.title()</code> capitalizes each word, and <code>.capitalize()</code> capitalizes only the first letter.</p>
-      <p><strong>Splitting and joining:</strong> <code>.split()</code> breaks a string into a list of words (by default on whitespace). <code>.join()</code> does the reverse — it combines a list of strings into one string with a separator.</p>
-      <p><strong>Searching and replacing:</strong> <code>.find()</code> returns the index of a substring, <code>.replace()</code> replaces occurrences of a substring with another.</p>
-      <p>Since strings are immutable, these methods do not modify the original string — they return a new one.</p>
-      <div class="tip"><strong>Tip:</strong> Methods can be chained: <code>"  Hello  ".strip().lower()</code> returns <code>"hello"</code>.</div>
+      <p>Python strings come with a rich set of built-in methods that make text manipulation easy, readable, and efficient. Mastering these methods will save you countless lines of code and make your text processing significantly more elegant.</p>
+      <p><strong>Cleaning and trimming methods:</strong> <code>.strip()</code> removes whitespace (spaces, tabs, newlines) from both ends of a string. Use <code>.lstrip()</code> to remove only from the left side and <code>.rstrip()</code> to remove only from the right. These are essential when processing user input or reading data from files, where extra whitespace is common.</p>
+      <p><strong>Case conversion methods:</strong> <code>.lower()</code> converts the entire string to lowercase — extremely useful for case-insensitive comparisons. <code>.upper()</code> converts to uppercase. <code>.title()</code> capitalizes the first letter of every word. <code>.capitalize()</code> capitalizes only the very first character and lowercases everything else. And <code>.swapcase()</code> swaps uppercase to lowercase and vice versa.</p>
+      <p><strong>Splitting and joining — two of the most useful string operations:</strong></p>
+      <ul>
+        <li><code>.split()</code> breaks a string into a list of substrings. By default, it splits on any whitespace and discards empty strings. You can specify a separator: <code>"a,b,c".split(",")</code> returns <code>["a", "b", "c"]</code>. There is also <code>.rsplit()</code> which splits from the right.</li>
+        <li><code>.join()</code> is the inverse — it takes a list of strings and joins them into a single string with the separator. This is called on the separator string: <code>", ".join(["apple", "banana", "cherry"])</code> produces <code>"apple, banana, cherry"</code>. Notice that <code>.join()</code> is called on the separator, not on the list — this is a common point of confusion for beginners.</li>
+      </ul>
+      <p><strong>Searching and validation methods:</strong> <code>.find(substring)</code> returns the index of the first occurrence of a substring, or <code>-1</code> if not found. <code>.index()</code> is similar but raises a <code>ValueError</code> if not found. <code>.startswith(prefix)</code> and <code>.endswith(suffix)</code> return booleans and are very useful for conditional checks. <code>.count(substring)</code> returns the number of non-overlapping occurrences.</p>
+      <p><strong>Replacing and translating:</strong> <code>.replace(old, new)</code> replaces all occurrences of a substring with another. You can also pass an optional third argument to limit the number of replacements: <code>.replace("a", "o", 2)</code> replaces only the first two occurrences.</p>
+      <p>It is critical to remember that strings are <strong>immutable</strong>. None of these methods modify the original string — they all return a brand new string. If you want to keep the result, you must assign it to a variable: <code>cleaned = text.strip().lower()</code>.</p>
+      <p><strong>Method chaining:</strong> Because each method returns a new string, you can chain them together: <code>"  Hello World  ".strip().upper().replace("WORLD", "Python")</code> produces <code>"HELLO PYTHON"</code>. This is a powerful technique that lets you perform multiple transformations in a single line.</p>
+      <p><strong>Common mistake:</strong> Forgetting that strings are immutable. Writing <code>text.strip()</code> without assigning the result does nothing visible — the original string remains unchanged. Always capture the return value.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>text.startswith("hello")</code> and <code>text.find("world")</code> to the code. Then try chaining three or more methods together and observe the result.</div>
     `
   },
   {
@@ -611,16 +681,19 @@ print(num_float + 0.5)
 age = 25
 print("I am " + str(age) + " years old")`,
     content: `
-      <p>Type conversion is the process of changing a value from one data type to another. Python supports both <strong>implicit</strong> and <strong>explicit</strong> conversion.</p>
-      <p><strong>Implicit conversion</strong> happens automatically when Python knows it is safe. For example, when you add an <code>int</code> and a <code>float</code>, Python automatically converts the <code>int</code> to a <code>float</code> to avoid data loss.</p>
-      <p><strong>Explicit conversion</strong> (or <strong>casting</strong>) is when you manually convert using functions like:</p>
+      <p>Type conversion is the process of changing a value from one data type to another. Python supports both <strong>implicit</strong> (automatic) and <strong>explicit</strong> (manual) conversion. Understanding how and when conversion happens is essential for writing correct and predictable code.</p>
+      <p><strong>Implicit conversion</strong> happens automatically when Python knows the conversion is safe and will not lose data. For example, when you add an <code>int</code> and a <code>float</code>, Python automatically converts the <code>int</code> to a <code>float</code> before performing the addition. This is because floats can represent all integer values, but integers cannot represent fractional values — converting in the direction of greater precision avoids data loss. The same applies when dividing integers with <code>/</code>: the result is always a <code>float</code>.</p>
+      <p><strong>Explicit conversion</strong> (also called <strong>casting</strong>) is when you manually convert a value using built-in functions. This is necessary when Python cannot infer the correct type or when you need to enforce a specific type:</p>
       <ul>
-        <li><code>int()</code> — converts to integer (e.g., <code>int("42")</code> gives <code>42</code>)</li>
-        <li><code>float()</code> — converts to float (e.g., <code>float("3.14")</code> gives <code>3.14</code>)</li>
-        <li><code>str()</code> — converts to string (e.g., <code>str(100)</code> gives <code>"100"</code>)</li>
-        <li><code>bool()</code> — converts to boolean (<code>bool(0)</code> is <code>False</code>, <code>bool(1)</code> is <code>True</code>)</li>
+        <li><code>int(value)</code> — converts to an integer. Works with floats (truncates the decimal part) and numeric strings. For floats, it truncates toward zero: <code>int(3.9)</code> gives <code>3</code>, <code>int(-2.7)</code> gives <code>-2</code>.</li>
+        <li><code>float(value)</code> — converts to a float. Works with integers and numeric strings: <code>float("3.14")</code> gives <code>3.14</code>.</li>
+        <li><code>str(value)</code> — converts any value to its string representation. Essential for concatenating non-string values with strings.</li>
+        <li><code>bool(value)</code> — converts any value to a boolean. Values that convert to <code>False</code>: <code>0</code>, <code>0.0</code>, <code>""</code> (empty string), <code>[]</code> (empty list), <code>{}</code> (empty dict), <code>None</code>. Everything else is <code>True</code>.</li>
+        <li><code>list()</code>, <code>tuple()</code>, <code>set()</code> — convert between collection types: <code>list("hello")</code> gives <code>["h", "e", "l", "l", "o"]</code>.</li>
       </ul>
-      <div class="tip"><strong>Warning:</strong> Converting a non-numeric string like <code>"abc"</code> to an integer will raise a <code>ValueError</code>. Always validate your data before converting.</div>
+      <p><strong>Practical example:</strong> When you use <code>input()</code> in Python, the result is always a <strong>string</strong>. If you ask for a number and then try to do math, you must explicitly convert: <code>age = int(input("Enter your age: "))</code>. Forgetting to convert is one of the most common beginner mistakes. Always convert user input to the appropriate type before using it in calculations.</p>
+      <p><strong>Common mistake:</strong> Trying to convert a non-numeric string like <code>int("abc")</code> will raise a <code>ValueError</code>. Always validate your data before converting, or wrap the conversion in a try/except block to handle invalid input gracefully.</p>
+      <div class="tip"><strong>Try it:</strong> What happens when you convert <code>int(7.999)</code>? It gives <code>7</code>. Try converting a boolean: <code>int(True)</code> gives <code>1</code>, <code>int(False)</code> gives <code>0</code>. Then try <code>bool(0)</code> and <code>bool(42)</code> to see which values are truthy.</div>
     `
   },
   {
@@ -640,16 +713,20 @@ print("Union:", a | b)
 print("Intersection:", a & b)
 print("Difference:", a - b)`,
     content: `
-      <p>Beyond lists, Python offers two more important collection types: <strong>tuples</strong> and <strong>sets</strong>.</p>
-      <p><strong>Tuples</strong> are ordered sequences like lists, but they are <strong>immutable</strong> — once created, they cannot be changed. This makes them useful for data that should not be modified, such as coordinates or configuration values. Tuples use parentheses: <code>point = (3, 4)</code>. You can access elements by index just like lists.</p>
-      <p><strong>Sets</strong> are unordered collections of <strong>unique</strong> elements. Duplicates are automatically removed. Sets are created with curly braces: <code>fruits = {"apple", "banana", "cherry"}</code>. Because they are unordered, you cannot access elements by index.</p>
-      <p>Sets support powerful mathematical operations:</p>
+      <p>Beyond lists, Python offers two more essential collection types: <strong>tuples</strong> and <strong>sets</strong>. Each has specific use cases that make them invaluable in different situations. Choosing the right collection type is a key skill in writing idiomatic Python.</p>
+      <p><strong>Tuples</strong> are ordered sequences just like lists, but with one critical difference — they are <strong>immutable</strong>. Once created, a tuple cannot be changed: you cannot add, remove, or replace elements. This immutability makes tuples useful for data that should remain constant throughout your program, such as geographic coordinates <code>(latitude, longitude)</code>, RGB color values <code>(255, 128, 0)</code>, or configuration settings that must not be accidentally modified. Tuples are created with parentheses: <code>point = (3, 4)</code>. You access elements by index just like lists: <code>point[0]</code> gives <code>3</code>. You can also <strong>unpack</strong> a tuple into individual variables: <code>x, y = point</code> assigns <code>3</code> to <code>x</code> and <code>4</code> to <code>y</code>. This unpacking feature is used extensively in Python for clean, readable code.</p>
+      <p>Tuples are also <strong>hashable</strong> (if all their elements are hashable), which means they can be used as dictionary keys — something lists cannot do. For example, you can use a tuple as a key in a dictionary to store values by coordinates: <code>locations[(lat, lon)] = "Home"</code>.</p>
+      <p><strong>Sets</strong> are unordered collections of <strong>unique</strong> elements. The most important feature of a set is that duplicates are automatically removed. Sets are created with curly braces: <code>fruits = {"apple", "banana", "cherry", "apple"}</code> — the second <code>"apple"</code> is silently ignored. Because sets are unordered, you cannot access elements by index. However, this lack of ordering gives sets super-fast membership testing: checking if an element is in a set (<code>"apple" in fruits</code>) is much faster than checking a list, especially for large collections.</p>
+      <p><strong>Set operations — mathematically powerful:</strong></p>
       <ul>
-        <li><strong>Union</strong> (<code>|</code>) — combines elements from both sets</li>
-        <li><strong>Intersection</strong> (<code>&amp;</code>) — elements present in both sets</li>
-        <li><strong>Difference</strong> (<code>-</code>) — elements in first but not in second</li>
+        <li><strong>Union</strong> (<code>|</code>) — combines elements from both sets, removing duplicates: <code>{1, 2} | {2, 3}</code> gives <code>{1, 2, 3}</code></li>
+        <li><strong>Intersection</strong> (<code>&amp;</code>) — elements present in both sets: <code>{1, 2, 3} & {2, 3, 4}</code> gives <code>{2, 3}</code></li>
+        <li><strong>Difference</strong> (<code>-</code>) — elements in the first set but not in the second: <code>{1, 2, 3} - {2, 3}</code> gives <code>{1}</code></li>
+        <li><strong>Symmetric difference</strong> (<code>^</code>) — elements in either set but not both: <code>{1, 2} ^ {2, 3}</code> gives <code>{1, 3}</code></li>
       </ul>
-      <div class="tip"><strong>When to use:</strong> Use tuples for fixed data, sets when you need uniqueness or set operations, and lists when order and mutability matter.</div>
+      <p><strong>Practical analogy:</strong> Think of a tuple as a sealed envelope (you can see what's inside but cannot change it), a set as a bag of unique marbles (no duplicates, fast to search), and a list as a shelf of books (ordered, you can rearrange and add more).</p>
+      <p><strong>Common mistake:</strong> Creating an empty set with <code>{}</code> actually creates an empty dictionary. To create an empty set, use <code>set()</code>. And remember that tuples with a single element need a trailing comma: <code>(1,)</code>, not just <code>(1)</code> which is just a number in parentheses.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>"apple" in fruits</code> to check membership, and print the result. Then try the symmetric difference operator <code>^</code> between sets <code>a</code> and <code>b</code>. Finally, try using a tuple as a dictionary key: <code>coords = {(0, 0): "origin", (1, 0): "right"}</code> and access <code>coords[(0, 0)]</code>.</div>
     `
   },
   {
@@ -664,11 +741,26 @@ user["version"] = "1.0"
 for key, val in user.items():
     print(f"{key}: {val}")`,
     content: `
-      <p>Dictionaries store data as <strong>key-value pairs</strong>. Each key is unique and maps to a value. Think of it like a real dictionary — you look up a word (key) and get its definition (value).</p>
-      <p>Create a dictionary with curly braces: <code>user = {"name": "Alice", "age": 30}</code>. Keys are typically strings, but they can be any immutable type (strings, numbers, tuples). Values can be any type at all — including lists, other dictionaries, or even functions.</p>
-      <p>Access values by key: <code>user["name"]</code> returns <code>"Alice"</code>. Add or update entries: <code>user["email"] = "alice@example.com"</code>. If the key exists, it updates; if not, it creates a new entry.</p>
-      <p>Loop through a dictionary using <code>.items()</code>, which returns key-value pairs: <code>for key, val in user.items():</code>. You can also use <code>.keys()</code> to get all keys and <code>.values()</code> to get all values.</p>
-      <div class="tip"><strong>Note:</strong> As of Python 3.7, dictionaries maintain insertion order. Before that, they were unordered.</div>
+      <p>Dictionaries store data as <strong>key-value pairs</strong>, making them one of Python's most versatile data structures. Each key is unique and maps to a value. Think of a real dictionary — you look up a word (key) and instantly get its definition (value). In code: <code>user = {"name": "Alice", "age": 30}</code>. Keys must be immutable types (strings, numbers, tuples), while values can be any type — lists, other dictionaries, functions, or even <code>None</code>.</p>
+      <p><strong>Essential dict methods:</strong></p>
+      <ul>
+        <li><code>.get(key, default)</code> — safely access a key without raising <code>KeyError</code>. Returns <code>default</code> (or <code>None</code>) if the key is missing: <code>user.get("email", "no email")</code>. This is the idiomatic way to handle optional keys.</li>
+        <li><code>.keys()</code> — returns a view of all keys. Useful for iteration or membership checks: <code>"name" in user.keys()</code>.</li>
+        <li><code>.values()</code> — returns a view of all values. Great for aggregation: <code>sum(scores.values())</code>.</li>
+        <li><code>.items()</code> — returns key-value pairs for unpacking in loops: <code>for k, v in user.items():</code>.</li>
+        <li><code>.setdefault(key, default)</code> — returns the value if the key exists, otherwise inserts the default and returns it. Perfect for building nested structures.</li>
+        <li><code>.update(other_dict)</code> — merges another dictionary into this one, overwriting existing keys.</li>
+        <li><code>.pop(key, default)</code> — removes a key and returns its value (or default if missing).</li>
+      </ul>
+      <p><strong>Nested dictionaries</strong> are dictionaries inside dictionaries — a common pattern for representing structured data like JSON API responses:</p>
+      <p><code>users = {<br>&nbsp;&nbsp;"alice": {"age": 30, "city": "NYC"},<br>&nbsp;&nbsp;"bob": {"age": 25, "city": "London"}<br>}<br>print(users["alice"]["city"])  # NYC</code></p>
+      <p>Access nested values safely by chaining <code>.get()</code>: <code>users.get("alice", {}).get("city")</code>. For deeply nested data, consider using <code>collections.defaultdict</code> or the <code>dict</code> approach with <code>setdefault</code>.</p>
+      <p><strong>Dict comprehensions</strong> offer a concise way to build dictionaries: <code>squares = {x: x**2 for x in range(5)}</code> produces <code>{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}</code>. Add conditions: <code>{x: x**2 for x in range(10) if x % 2 == 0}</code>. You can also transform keys and values: <code>{k.lower(): v for k, v in data.items()}</code>.</p>
+      <p><strong>When to use dict vs list:</strong> Use dictionaries when you need to look up values by a meaningful key (like a name or ID). Use lists when the order of items matters or when you need to store a simple sequence. Dictionaries excel at membership testing (<code>key in dict</code> is O(1) on average) and representing structured records. Lists excel at ordered iteration and sequential access.</p>
+      <p><strong>Common mistakes:</strong> Using <code>dict[key]</code> without checking if the key exists (raises <code>KeyError</code>). Always prefer <code>.get()</code> for optional keys. Another mistake is modifying a dictionary while iterating over it — create a copy with <code>.copy()</code> or iterate over <code>list(dict.keys())</code> instead. Also beware that <code>{}</code> creates an empty dict, not an empty set (use <code>set()</code> for that).</p>
+      <p><strong>Best practices:</strong> Use descriptive key names (strings or meaningful constants). Prefer <code>.get()</code> over direct indexing for optional keys. Use <code>.items()</code> for iteration to avoid looking up values by key. For counting or grouping, use <code>collections.Counter</code> or <code>defaultdict</code> instead of manual dict logic. Since Python 3.7, dictionaries preserve insertion order — rely on this for predictable iteration.</p>
+      <p><strong>Real-world use case:</strong> Dictionaries are the backbone of JSON data processing. When you call a REST API, the response is almost always parsed into nested dictionaries. Configuration files, user profiles, cached data, and database records are all naturally modeled as dictionaries. They are also used internally by Python for namespaces, class attributes, and instance data.</p>
+      <div class="tip"><strong>Try it:</strong> Add a nested dictionary with <code>user["address"] = {"city": "Paris", "zip": "75001"}</code> then print <code>user["address"]["city"]</code>. Then try a dict comprehension: <code>{k: v.upper() if isinstance(v, str) else v for k, v in user.items()}</code>. Finally, use <code>.get()</code> with a default to safely access a missing key.</div>
     `
   },
   {
@@ -679,12 +771,20 @@ evens = [n for n in nums if n % 2 == 0]
 print("Squares:", squares)
 print("Evens:", evens)`,
     content: `
-      <p>List comprehensions provide a concise way to create lists based on existing iterables. They are a hallmark of Pythonic code — expressive, readable, and often faster than traditional for loops.</p>
-      <p>The basic syntax is: <code>[expression for item in iterable]</code>. This applies the expression to each item and collects the results in a new list.</p>
-      <p>For example, <code>[x**2 for x in range(5)]</code> produces <code>[0, 1, 4, 9, 16]</code>.</p>
-      <p>You can also add an <strong>optional condition</strong> to filter items: <code>[expression for item in iterable if condition]</code>. Only items where the condition is <code>True</code> are included.</p>
-      <p>List comprehensions can replace many for loop patterns in a single line. They are considered more <strong>Pythonic</strong> than using <code>map()</code> and <code>filter()</code>.</p>
-      <div class="tip"><strong>Tip:</strong> While powerful, avoid nesting comprehensions too deeply — if it becomes hard to read, use a regular for loop instead.</div>
+      <p>List comprehensions provide a concise, expressive way to create lists based on existing iterables. They are a hallmark of Pythonic code — more readable, often faster, and less error-prone than traditional for loops. The basic syntax: <code>[expression for item in iterable]</code>. For example, <code>[x**2 for x in range(5)]</code> produces <code>[0, 1, 4, 9, 16]</code>.</p>
+      <p>Add an <strong>optional condition</strong> to filter items: <code>[expression for item in iterable if condition]</code>. Only items where the condition is <code>True</code> are included: <code>[n for n in range(20) if n % 3 == 0]</code> gives <code>[0, 3, 6, 9, 12, 15, 18]</code>. You can also use <code>if-else</code> expressions in the value part (before the <code>for</code>): <code>["even" if n % 2 == 0 else "odd" for n in range(5)]</code>.</p>
+      <p><strong>Nested comprehensions</strong> (comprehensions within comprehensions) handle multi-level data. To flatten a 2D list: <code>[item for row in matrix for item in row]</code> — this reads left-to-right as nested for loops, with the outer loop first. You can also create a 2D grid: <code>[[i * j for j in range(4)] for i in range(3)]</code>. Be careful: deeply nested comprehensions quickly become hard to read. A good rule is to avoid going more than two levels deep — beyond that, use regular nested for loops.</p>
+      <p><strong>Dict comprehensions</strong> and <strong>set comprehensions</strong> follow the same pattern but produce different collection types:</p>
+      <ul>
+        <li>Dict: <code>{key: value for item in iterable}</code> — e.g., <code>{x: chr(65 + x) for x in range(5)}</code> produces <code>{0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E'}</code></li>
+        <li>Set: <code>{expression for item in iterable}</code> — e.g., <code>{len(word) for word in ["hello", "world", "hi"]}</code> produces <code>{2, 5}</code></li>
+        <li>Generator (parentheses): <code>(expression for item in iterable)</code> — lazy evaluation, memory efficient (more on this in the Generators lesson)</li>
+      </ul>
+      <p><strong>Performance benefits:</strong> List comprehensions are typically 15-30% faster than equivalent for loops because they avoid the overhead of repeatedly calling <code>.append()</code> and use Python's optimized internal iteration. For simple transformations, they are also faster than <code>map()</code> with a lambda. However, for extremely large datasets, generator expressions are more memory-efficient since they produce items on demand.</p>
+      <p><strong>Readability guidelines:</strong> Use comprehensions when the logic is simple enough to fit on one or two lines. If you need to break it across multiple lines or include complex logic, a regular for loop is clearer. Avoid side effects inside comprehensions (like <code>print()</code> calls) — they are meant for building collections, not for executing statements. The Zen of Python says "Flat is better than nested" — prefer simple comprehensions over deeply nested ones.</p>
+      <p><strong>Real-world use cases:</strong> Transforming API response data (<code>[item["name"] for item in api_data]</code>), filtering logs (<code>[line for line in log_lines if "ERROR" in line]</code>), converting between data formats (<code>{user["id"]: user["name"] for user in users}</code>), and data cleaning (<code>[float(x) for x in raw_values if x.strip()]</code>).</p>
+      <p><strong>Common mistakes:</strong> Forgetting that the condition goes after the <code>for</code>, not before. Confusing nested comprehension order (the outer loop comes first — think "for row in matrix, for item in row"). Using comprehensions for their side effects instead of their result. Creating a list comprehension when a generator expression would use less memory.</p>
+      <div class="tip"><strong>Try it:</strong> Write a dict comprehension that maps each word in a list to its length: <code>{word: len(word) for word in ["apple", "banana", "cherry"]}</code>. Then write a nested comprehension to flatten <code>[[1,2], [3,4], [5,6]]</code>. Finally, use a set comprehension to find all unique vowels in a sentence.</div>
     `
   },
   {
@@ -701,11 +801,22 @@ else:
 finally:
     print("Done")`,
     content: `
-      <p>Errors happen — users enter invalid input, files are missing, networks fail. Instead of letting your program crash, you can <strong>handle exceptions</strong> gracefully using try/except blocks.</p>
-      <p>The <strong>try</strong> block contains code that might raise an exception. If an error occurs, the rest of the try block is skipped and the matching <strong>except</strong> block runs. You can catch specific exception types like <code>ValueError</code>, <code>ZeroDivisionError</code>, or <code>FileNotFoundError</code>.</p>
-      <p>You can have multiple except blocks to handle different error types differently. The <strong>else</strong> block runs only if no exception occurred — useful for code that should execute on success. The <strong>finally</strong> block always runs, whether an exception happened or not — ideal for cleanup actions like closing files.</p>
-      <p>It is good practice to catch <strong>specific exceptions</strong> rather than using a bare <code>except:</code> which catches everything and can hide bugs.</p>
-      <div class="tip"><strong>Best practice:</strong> Only catch exceptions you can actually handle. Let unexpected exceptions propagate so they are not silently ignored.</div>
+      <p>Errors happen — users enter invalid input, files are missing, networks fail, data is corrupted. Instead of letting your program crash with an ugly traceback, you can <strong>handle exceptions</strong> gracefully using try/except blocks. Python's exception handling is both powerful and flexible, allowing you to respond to errors in fine-grained ways.</p>
+      <p><strong>The complete try/except/else/finally pattern:</strong></p>
+      <ul>
+        <li><strong>try</strong> — wrap code that might raise an exception here. If an error occurs, the rest of the try block is skipped immediately.</li>
+        <li><strong>except SomeError</strong> — catches a specific exception type. You can have multiple except blocks for different error types. Use <code>except Exception as e:</code> to capture the exception object and inspect its message (<code>str(e)</code>). A bare <code>except:</code> catches everything, including <code>SystemExit</code> and <code>KeyboardInterrupt</code> — avoid it or use <code>except Exception:</code> instead.</li>
+        <li><strong>else</strong> — runs only if no exception occurred in the try block. This is where you put "success path" code. It's better than putting it in the try block because it won't accidentally catch exceptions from unrelated code.</li>
+        <li><strong>finally</strong> — always runs, whether an exception happened or not. Ideal for cleanup: closing files, releasing locks, closing network connections, restoring state.</li>
+      </ul>
+      <p><strong>Exception hierarchy:</strong> Python exceptions are organized in a class hierarchy. <code>BaseException</code> is the root (don't catch this). <code>Exception</code> is the base for all built-in, non-system exceptions. Common subclasses include <code>ValueError</code> (wrong value), <code>TypeError</code> (wrong type), <code>IndexError</code> (list index out of range), <code>KeyError</code> (missing dict key), <code>FileNotFoundError</code> (missing file), <code>ZeroDivisionError</code> (division by zero), <code>AttributeError</code> (missing attribute), and <code>ImportError</code> (missing module). You can catch a parent type to handle a family of related exceptions: <code>except (ValueError, TypeError):</code>.</p>
+      <p><strong>Raising exceptions</strong> — sometimes you need to signal an error yourself: <code>raise ValueError("Invalid input")</code>. You can also re-raise the current exception inside an except block with bare <code>raise</code> (preserving the original traceback). Create <strong>custom exceptions</strong> by inheriting from <code>Exception</code>:</p>
+      <p><code>class InsufficientFundsError(Exception):<br>&nbsp;&nbsp;&nbsp;&nbsp;"""Raised when account balance is too low."""<br>&nbsp;&nbsp;&nbsp;&nbsp;pass</code></p>
+      <p>Then raise and catch it like any built-in exception. Custom exceptions make your code's error handling more expressive and domain-specific.</p>
+      <p><strong>Common mistakes:</strong> Catching too broadly (<code>except:</code> or <code>except Exception:</code> when you only expect one type) — this can hide bugs. Not ordering except blocks from most-specific to least-specific (Python checks them in order, so a generic handler before a specific one will catch everything). Using exceptions for normal control flow — they should be for exceptional situations, not regular program logic. Swallowing exceptions silently with <code>except: pass</code> — at minimum log the error.</p>
+      <p><strong>Best practices:</strong> Catch only exceptions you can actually handle. Let unexpected exceptions propagate to the top level where they can be logged or shown to the user. Be as specific as possible about which exceptions you catch. Use <code>else</code> for success-path code to separate it from error-prone code in the try block. Use <code>finally</code> for cleanup that must happen regardless of success or failure. When raising exceptions, provide informative messages that help with debugging.</p>
+      <p><strong>Real-world use case:</strong> When processing user uploaded files, you might wrap the entire process: <code>try: data = parse_file(path)</code> — catching <code>FileNotFoundError</code> (file missing), <code>PermissionError</code> (no access), <code>json.JSONDecodeError</code> (malformed content), and <code>UnicodeDecodeError</code> (wrong encoding) — each with a different user-friendly error message, plus a <code>finally</code> block to clean up temporary files.</p>
+      <div class="tip"><strong>Try it:</strong> Add an <code>else</code> block to the code that prints a success confirmation. Add a <code>finally</code> that prints "Operation complete". Then create a custom exception class and raise it conditionally. Finally, try catching multiple exception types with a tuple: <code>except (ValueError, ZeroDivisionError) as e:</code>.</div>
     `
   },
   {
@@ -716,17 +827,29 @@ with open("example.txt", "r") as f:
     content = f.read()
 print(content)`,
     content: `
-      <p>Working with files is a common task in programming. Python's <code>open()</code> function, combined with the <strong>with</strong> statement, makes file handling safe and simple.</p>
-      <p>The <strong>with</strong> statement creates a <strong>context manager</strong> that automatically closes the file when the block ends — even if an error occurs. This is much safer than manually calling <code>.close()</code>.</p>
-      <p>File modes determine how you interact with a file:</p>
+      <p>Working with files is a fundamental task in programming. Python's <code>open()</code> function, combined with the <code>with</code> statement, makes file handling safe, simple, and reliable. The <code>with</code> statement creates a <strong>context manager</strong> that automatically closes the file when the block ends — even if an exception occurs. This is much safer than manually calling <code>.close()</code>, which can be skipped if an error happens before it.</p>
+      <p><strong>File modes determine how you interact with a file:</strong></p>
       <ul>
-        <li><code>"r"</code> — read (default). The file must exist.</li>
-        <li><code>"w"</code> — write. Creates a new file or overwrites an existing one.</li>
-        <li><code>"a"</code> — append. Adds content to the end of an existing file.</li>
-        <li><code>"r+"</code> — read and write (without truncating).</li>
+        <li><code>"r"</code> — read (default). The file must exist. Raises <code>FileNotFoundError</code> if missing.</li>
+        <li><code>"w"</code> — write. Creates a new file or overwrites an existing one (truncates to zero length).</li>
+        <li><code>"a"</code> — append. Adds content to the end of the file. Creates the file if it doesn't exist. Perfect for logs.</li>
+        <li><code>"x"</code> — exclusive creation. Creates a new file but raises <code>FileExistsError</code> if it already exists. Safe for preventing accidental overwrites.</li>
+        <li><code>"r+"</code> — read and write. Opens without truncating. The file must exist.</li>
       </ul>
-      <p>Adding <code>b</code> to the mode (e.g., <code>"rb"</code>) opens the file in binary mode for non-text files like images.</p>
-      <div class="tip"><strong>Remember:</strong> Always use the <code>with</code> statement when working with files. It ensures proper cleanup even if an exception occurs.</div>
+      <p>Adding <code>b</code> to any mode (e.g., <code>"rb"</code>, <code>"wb"</code>) opens the file in <strong>binary mode</strong> for non-text files like images, audio files, or compiled data. In binary mode, data is read and written as <code>bytes</code> objects rather than strings. Adding <code>t</code> (e.g., <code>"rt"</code>) explicitly opens in text mode (the default).</p>
+      <p><strong>Reading from files:</strong> Beyond <code>.read()</code> which returns the entire content as one string, you can:</p>
+      <ul>
+        <li><code>.readline()</code> — reads one line at a time (including the trailing newline). Memory-efficient for large files.</li>
+        <li><code>.readlines()</code> — returns a list of all lines. Convenient but loads everything into memory.</li>
+        <li>Iterate directly: <code>for line in file:</code> — the most memory-efficient approach for large files, reading one line at a time without loading the entire file.</li>
+      </ul>
+      <p><strong>Writing:</strong> <code>.write(text)</code> writes a string. <code>.writelines(lines)</code> writes a list of strings without adding newlines — you must include them yourself. For appending, use mode <code>"a"</code>: <code>with open("log.txt", "a") as f: f.write("New entry\\n")</code>.</p>
+      <p><strong>File paths:</strong> Use raw strings or double backslashes on Windows to avoid escape sequences: <code>r"C:\\Users\\name\\file.txt"</code> or <code>"C:/Users/name/file.txt"</code> (forward slashes work on Windows too). The <code>os.path</code> module provides path manipulation utilities: <code>os.path.join("folder", "subfolder", "file.txt")</code> builds the correct path for your OS. Modern Python prefers <code>pathlib</code>: <code>from pathlib import Path; path = Path("folder") / "subfolder" / "file.txt"</code> — this is cleaner, cross-platform, and provides convenient methods like <code>.read_text()</code>, <code>.write_text()</code>, <code>.exists()</code>, <code>.suffix</code>, and <code>.stem</code>.</p>
+      <p><strong>Encoding:</strong> Files store bytes; encoding determines how bytes map to characters. Always specify the encoding when reading/writing text files: <code>open("file.txt", "r", encoding="utf-8")</code>. UTF-8 is the modern standard and supports every Unicode character. Omitting encoding can lead to <code>UnicodeDecodeError</code> on systems with different default encodings (like Windows, which may use cp1252).</p>
+      <p><strong>Common mistakes:</strong> Forgetting to close a file (solved by <code>with</code>). Not specifying encoding — leads to cross-platform bugs. Using <code>.read()</code> on a file that's too large to fit in memory — use line-by-line iteration instead. Forgetting that <code>"w"</code> overwrites existing content without warning — use <code>"x"</code> mode or check <code>os.path.exists()</code> first. Not handling <code>FileNotFoundError</code> when opening files for reading.</p>
+      <p><strong>Best practices:</strong> Always use <code>with open(...) as f:</code> — never call <code>.close()</code> manually. Always specify <code>encoding="utf-8"</code> for text files. Use <code>pathlib.Path</code> for modern, clean path handling. Process large files line-by-line rather than reading the entire file at once. Wrap file operations in try/except to handle <code>FileNotFoundError</code>, <code>PermissionError</code>, and <code>IOError</code>.</p>
+      <p><strong>Real-world use case:</strong> Processing a 2GB server log file: <code>with open("server.log", "r", encoding="utf-8") as f: for line in f: if "ERROR" in line: error_count += 1</code> — this processes the file line-by-line, using minimal memory regardless of file size. For writing: an application that logs user activity to <code>activity.log</code> in append mode, creating a new log file each day with the date as the filename using pathlib.</p>
+      <div class="tip"><strong>Try it:</strong> Change the code to read the file line by line using a for loop. Then try append mode <code>"a"</code> to add a second line and read the file again. Finally, use <code>pathlib.Path</code> to read the file: <code>from pathlib import Path; print(Path("example.txt").read_text())</code>.</div>
     `
   },
   {
@@ -743,16 +866,19 @@ points = [(1, 5), (3, 2), (2, 8)]
 points.sort(key=lambda p: p[1])
 print("Sorted by y:", points)`,
     content: `
-      <p>A <strong>lambda</strong> is a small, anonymous function defined with the <code>lambda</code> keyword. Unlike regular functions defined with <code>def</code>, lambdas are written in a single expression and do not have a name.</p>
-      <p>Syntax: <code>lambda arguments: expression</code>. The expression is evaluated and returned automatically — no <code>return</code> keyword needed.</p>
-      <p>Lambdas are most useful when you need a simple function for a short period, especially as an argument to other functions:</p>
+      <p>A <strong>lambda</strong> is a small, anonymous function defined with the <code>lambda</code> keyword. Unlike regular functions defined with <code>def</code>, lambdas are written in a single expression, have no name, and cannot contain statements or annotations. Syntax: <code>lambda arguments: expression</code>. The expression is evaluated and returned automatically — no <code>return</code> keyword needed: <code>lambda x, y: x + y</code> creates a function that adds two numbers.</p>
+      <p>Lambdas shine when you need a simple, throwaway function, especially as an argument to higher-order functions:</p>
       <ul>
-        <li><code>sorted(list, key=lambda x: x[1])</code> — sort by a custom key</li>
-        <li><code>map(lambda x: x*2, numbers)</code> — transform each element</li>
-        <li><code>filter(lambda x: x > 0, numbers)</code> — keep matching elements</li>
+        <li><strong>sorted() with a custom key:</strong> <code>students.sort(key=lambda s: s["grade"])</code> — sort a list of dicts by the "grade" field. Also works with <code>max()</code> and <code>min()</code>: <code>max(points, key=lambda p: p[1])</code> finds the tuple with the largest y-coordinate.</li>
+        <li><strong>map():</strong> <code>list(map(lambda x: x * 1.15, prices))</code> — apply a 15% tax to each price.</li>
+        <li><strong>filter():</strong> <code>list(filter(lambda x: len(x) > 5, words))</code> — keep only words longer than 5 characters.</li>
       </ul>
-      <p>While lambdas are convenient, they are limited to a single expression. For anything more complex, define a proper function with <code>def</code>.</p>
-      <div class="tip"><strong>Note:</strong> Lambdas are not necessary — anything you can do with a lambda you can do with a regular function. Use them when they make your code more readable.</div>
+      <p><strong>When NOT to use lambda:</strong> If the logic requires statements (if/elif/else chains, loops, try/except, variable assignments), you cannot use lambda — use <code>def</code>. If the function is used in multiple places, define it once with <code>def</code> to avoid repetition. If the lambda expression is too long to read comfortably on one line, use <code>def</code>. As a rule of thumb: if you need more than a single expression or the expression is longer than ~80 characters, write a regular function.</p>
+      <p><strong>Lambda vs def comparison:</strong> Both create function objects that can be called the same way. <code>def</code> functions have a name (helpful in tracebacks), support docstrings, annotations, and multiple statements. Lambdas are limited to a single expression and have no name or docstring — if they raise an error, the traceback shows <code>&lt;lambda&gt;</code> which is less helpful for debugging. Performance-wise, they are identical — choice is purely about readability and capability.</p>
+      <p><strong>Common mistakes:</strong> Trying to use statements inside a lambda — <code>lambda x: return x + 1</code> is a <code>SyntaxError</code>. Using a lambda when <code>functools.partial</code> or a regular function would be clearer. Assigning a lambda to a variable (<code>add = lambda x, y: x + y</code>) is poor style — if you're going to name it, use <code>def</code> instead. That's what <code>def</code> is for.</p>
+      <p><strong>Best practices:</strong> Use lambdas only for simple, single-use operations. Prefer list comprehensions over <code>map()</code> with lambdas for readability. Use <code>key=</code> arguments in <code>sorted()</code>, <code>max()</code>, <code>min()</code> — these are the most common and idiomatic use cases. If the lambda body is complex, refactor it into a named function with a descriptive name.</p>
+      <p><strong>Real-world use case:</strong> Sorting a list of product objects by price descending: <code>products.sort(key=lambda p: p["price"], reverse=True)</code>. Finding the employee with the highest salary: <code>best = max(employees, key=lambda e: e.salary)</code>. Grouping data with <code>itertools.groupby</code>: <code>for city, group in groupby(people, key=lambda p: p["city"]):</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Use <code>max()</code> with a lambda to find the longest word in a list: <code>words = ["cat", "elephant", "dog"]; print(max(words, key=lambda w: len(w)))</code>. Then use <code>sorted()</code> with a lambda that sorts by the last character of each word. Finally, compare the readability of a lambda vs a <code>def</code> for a multi-step key function.</div>
     `
   },
   {
@@ -771,15 +897,29 @@ print(json_str)
 parsed = json.loads(json_str)
 print("Name:", parsed["name"])`,
     content: `
-      <p>JSON (JavaScript Object Notation) is a lightweight data interchange format widely used in web APIs, configuration files, and data storage. Python's built-in <code>json</code> module makes it easy to work with.</p>
-      <p>The two main functions are:</p>
+      <p>JSON (JavaScript Object Notation) is the universal data interchange format for web APIs, configuration files, and data storage. Python's built-in <code>json</code> module makes reading, writing, and transforming JSON effortless. Understanding JSON is essential for almost any modern Python application that communicates over the internet.</p>
+      <p><strong>Core functions — strings vs files:</strong></p>
       <ul>
-        <li><code>json.dumps()</code> — converts a Python object (dict, list, etc.) into a JSON string. Use <code>indent</code> for pretty-printing: <code>json.dumps(data, indent=2)</code>.</li>
-        <li><code>json.loads()</code> — parses a JSON string back into a Python object. The result is typically a dictionary or list.</li>
+        <li><code>json.dumps()</code> — converts a Python object to a JSON <strong>string</strong>. Use <code>indent</code> for pretty-printing: <code>json.dumps(data, indent=2, sort_keys=True)</code>. Control encoding with <code>ensure_ascii=False</code> to preserve non-ASCII characters like emojis. The <code>default</code> parameter specifies a function for objects that aren't natively serializable (like <code>datetime</code> or <code>Decimal</code>).</li>
+        <li><code>json.loads()</code> — parses a JSON <strong>string</strong> back into a Python object. Returns a dict for JSON objects, list for JSON arrays, etc.</li>
+        <li><code>json.dump(obj, file)</code> — writes directly to a file object. No <code>s</code> suffix: <code>with open("data.json", "w") as f: json.dump(data, f, indent=2)</code>.</li>
+        <li><code>json.load(file)</code> — reads directly from a file object: <code>with open("data.json") as f: data = json.load(f)</code>.</li>
       </ul>
-      <p>JSON supports these data types: strings, numbers, booleans, null, arrays (lists), and objects (dictionaries). This maps neatly to Python's data types, making the conversion straightforward.</p>
-      <p>For reading from and writing to files directly, use <code>json.dump()</code> (without s) and <code>json.load()</code> (without s) with a file object.</p>
-      <div class="tip"><strong>Real-world use:</strong> Most public APIs return JSON. You will use <code>json.loads()</code> constantly when fetching data from the web.</div>
+      <p><strong>JSON to Python type mapping:</strong></p>
+      <ul>
+        <li>JSON object <code>{}</code> &rarr; Python <code>dict</code></li>
+        <li>JSON array <code>[]</code> &rarr; Python <code>list</code></li>
+        <li>JSON string &rarr; Python <code>str</code></li>
+        <li>JSON number &rarr; Python <code>int</code> or <code>float</code></li>
+        <li>JSON boolean <code>true/false</code> &rarr; Python <code>True/False</code> (note capitalization)</li>
+        <li>JSON null &rarr; Python <code>None</code></li>
+      </ul>
+      <p><strong>Handling nested JSON:</strong> Real-world JSON often has multiple levels of nesting. Access nested data by chaining keys and indices: <code>data["users"][0]["address"]["city"]</code>. For safety, use <code>.get()</code> at each level: <code>data.get("users", [{}])[0].get("address", {}).get("city")</code>. For extremely deep nesting, consider using <code>jsonpath-ng</code> library or flatten the structure with recursive helper functions.</p>
+      <p><strong>Error handling with JSON:</strong> Always wrap JSON parsing in try/except because the input might be malformed: <code>try: data = json.loads(raw_text); except json.JSONDecodeError as e: print(f"Invalid JSON: {e}")</code>. <code>json.JSONDecodeError</code> provides <code>.msg</code>, <code>.doc</code>, <code>.pos</code>, <code>.lineno</code>, and <code>.colno</code> for detailed error reporting. Also handle <code>TypeError</code> when serializing objects that aren't JSON-serializable (like datetime objects — use the <code>default</code> parameter with a custom converter).</p>
+      <p><strong>Common mistakes:</strong> Forgetting that JSON uses <code>true</code>/<code>false</code>/<code>null</code> (lowercase) while Python uses <code>True</code>/<code>False</code>/<code>None</code> — the <code>json</code> module handles this conversion automatically. Trying to serialize non-serializable types (datetimes, Decimals, custom objects) — provide a <code>default</code> converter. Using single quotes in JSON strings — JSON requires double quotes. Trailing commas in JSON objects or arrays — JSON does not allow them.</p>
+      <p><strong>Best practices:</strong> Always specify <code>indent=2</code> for human-readable output. Use <code>ensure_ascii=False</code> to preserve Unicode characters. Validate JSON before processing by catching <code>JSONDecodeError</code>. For large JSON files, consider streaming parsers like <code>ijson</code>. Use <code>sort_keys=True</code> for consistent, diff-friendly output in version-controlled config files.</p>
+      <p><strong>Real-world use case:</strong> Fetching data from a public API: <code>import urllib.request; response = urllib.request.urlopen("https://api.github.com/users/python"); data = json.loads(response.read()); print(data["login"], data["public_repos"])</code>. Or storing application configuration: read a <code>config.json</code> with <code>json.load()</code> and access settings like database credentials or feature flags.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>ensure_ascii=False</code> to the <code>dumps</code> call and include a Unicode string like "café". Then try serializing a nested structure and use <code>.get()</code> to safely access a deeply nested key. Finally, wrap the <code>loads</code> call in try/except and pass intentionally invalid JSON to see the error message.</div>
     `
   },
   {
@@ -796,14 +936,18 @@ print("Evens:", evens)
 print("Squares LC:", [x**2 for x in nums])
 print("Evens LC:", [x for x in nums if x % 2 == 0])`,
     content: `
-      <p><code>map()</code> and <code>filter()</code> are built-in functions that work with iterables. They are part of Python's <strong>functional programming</strong> toolkit.</p>
-      <p><strong>map(function, iterable)</strong> applies the given function to every item in the iterable and returns a map object (which you can convert to a list). It transforms data without using an explicit loop.</p>
-      <p><strong>filter(function, iterable)</strong> keeps only the items for which the function returns <code>True</code>. It selects data based on a condition.</p>
-      <p>Both functions return <strong>lazy iterators</strong> — they process items on demand rather than creating the entire result in memory at once. Wrap them with <code>list()</code> to materialize the results.</p>
-      <p>In modern Python, <strong>list comprehensions</strong> are often preferred over map and filter because they are more readable. Compare:</p>
+      <p><code>map()</code> and <code>filter()</code> are built-in functions from Python's <strong>functional programming</strong> toolkit. <code>map(function, iterable)</code> applies the given function to every item and returns a lazy iterator of results. <code>filter(function, iterable)</code> keeps only items for which the function returns <code>True</code>. Both return <strong>lazy iterators</strong> — they process items on demand rather than creating entire result lists in memory. Wrap them with <code>list()</code> to materialize results: <code>list(map(str.upper, names))</code>.</p>
+      <p><strong>List comprehensions vs map/filter:</strong> In modern Python, list comprehensions are generally preferred because they are more readable and Pythonic:</p>
       <p><code>list(map(lambda x: x*2, nums))</code> vs <code>[x*2 for x in nums]</code></p>
-      <p>However, map and filter can be more memory-efficient when working with very large datasets.</p>
-      <div class="tip"><strong>Note:</strong> In Python 3, map and filter return iterators, not lists. In Python 2, they returned lists. This change saves memory.</div>
+      <p><code>list(filter(lambda x: x > 0, nums))</code> vs <code>[x for x in nums if x > 0]</code></p>
+      <p>Comprehensions win on readability because the intent (<em>transform each item</em> or <em>select items by condition</em>) is immediately visible. However, map/filter can be more memory-efficient when combined with other lazy operations, and they shine when you already have a named function (avoiding lambda): <code>list(map(str.strip, lines))</code> vs <code>[s.strip() for s in lines]</code>. When using an existing built-in or imported function, <code>map</code> can be cleaner.</p>
+      <p><strong>Generator expressions vs map/filter:</strong> Generator expressions <code>(x*2 for x in nums)</code> are the lazy equivalent of list comprehensions and compete directly with map/filter. Generator expressions are more readable than map/filter with lambdas and can express both mapping and filtering simultaneously: <code>(x*2 for x in nums if x > 0)</code>. The equivalent with map and filter requires nesting: <code>map(lambda x: x*2, filter(lambda x: x > 0, nums))</code>. Generator expressions win here for readability. Use map/filter over generator expressions when you already have a named function to apply.</p>
+      <p><strong>Combining map and filter:</strong> You can chain them to perform both operations. First filter, then map: <code>result = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, nums)))</code>. This reads "filter even numbers, then square them." The operations are applied lazily — each item passes through filter, and if accepted, through map. For readability, consider breaking this into multiple lines or using a list comprehension with a condition instead.</p>
+      <p><strong>functools.reduce:</strong> For more advanced functional operations, <code>functools.reduce()</code> repeatedly applies a function to accumulate a single result: <code>from functools import reduce; total = reduce(lambda a, b: a + b, nums)</code> sums all numbers (same as <code>sum(nums)</code>). Reduce is powerful for operations like computing factorials, finding products, or building dictionaries from lists. However, Python has specialized functions for common reduce operations: <code>sum()</code>, <code>any()</code>, <code>all()</code>, <code>max()</code>, <code>min()</code>. Only use reduce when no dedicated function exists.</p>
+      <p><strong>When to use each:</strong> Use list comprehensions for simple transformations and filters (90% of cases). Use map with existing named functions (no lambda) for clean functional-style code. Use filter when you have a predicate function that already exists. Use generator expressions when dealing with very large datasets to save memory. Use reduce only for operations that genuinely accumulate a single result and have no built-in alternative. Avoid using map/filter with lambdas when a comprehension reads better — which is most of the time.</p>
+      <p><strong>Common mistakes:</strong> Forgetting to wrap map/filter with <code>list()</code> to get a list — they return iterators, not lists. Using map with a lambda that has side effects (like <code>print</code>) — a for loop is clearer. Nesting map and filter too deeply — two nested calls are the maximum before readability suffers badly. Using reduce for simple operations that have built-in functions.</p>
+      <p><strong>Real-world use case:</strong> Processing log file lines: <code>cleaned = list(map(str.strip, raw_lines)); errors = list(filter(lambda l: "[ERROR]" in l, cleaned))</code>. Or numeric processing: calculating total sales with tax from a list of items: <code>prices_with_tax = list(map(lambda p: p * 1.08, filter(lambda p: p > 0, raw_prices)))</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Chain map and filter to transform a list of numbers: first filter to keep only odds, then map to cube them. Then rewrite the same operation as a list comprehension and compare readability. Finally, use <code>functools.reduce</code> to find the maximum value in a list without using <code>max()</code>.</div>
     `
   },
   {
@@ -817,17 +961,25 @@ print("Evens LC:", [x for x in nums if x % 2 == 0])`,
 my_dog = Dog("Rex")
 print(my_dog.bark())`,
     content: `
-      <p><strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm that organizes code into <strong>classes</strong> and <strong>objects</strong>. Instead of writing functions that operate on data, you combine data and behavior together.</p>
-      <p>A <strong>class</strong> is a blueprint. An <strong>object</strong> is an instance of that blueprint. For example, <code>Dog</code> is a class, and <code>my_dog = Dog("Rex")</code> creates an object.</p>
-      <p>The <strong><code>__init__</code> method</strong> is the constructor — it runs automatically when you create a new object. The <code>self</code> parameter refers to the current instance and is used to access the object's attributes and methods.</p>
-      <p>Key OOP concepts include:</p>
+      <p><strong>Object-Oriented Programming (OOP)</strong> organizes code into <strong>classes</strong> (blueprints) and <strong>objects</strong> (instances). Instead of writing functions that operate on separate data structures, you bundle data and behavior together. A <code>Dog</code> class defines what all dogs have in common; <code>my_dog = Dog("Rex")</code> creates a specific dog object. Python supports full OOP with a clean, intuitive syntax.</p>
+      <p><strong>The __init__ method and self:</strong> The <code>__init__</code> constructor runs automatically when you create an object. The <code>self</code> parameter refers to the current instance and is used to access attributes and methods. It is automatic — Python passes it for you when calling methods: <code>my_dog.bark()</code> becomes <code>Dog.bark(my_dog)</code> internally.</p>
+      <p><strong>Inheritance and super():</strong> Inheritance lets you create specialized classes from general ones. A subclass inherits all methods and attributes from its parent class and can override or extend them:</p>
+      <p><code>class Animal:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>&nbsp;&nbsp;&nbsp;&nbsp;def speak(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise NotImplementedError<br><br>class Dog(Animal):<br>&nbsp;&nbsp;&nbsp;&nbsp;def speak(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f"{self.name} says Woof!"</code></p>
+      <p>Use <code>super()</code> to call the parent class's methods: <code>class Cat(Animal):<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, toy):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(name)&nbsp;&nbsp;# Call parent constructor<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.toy = toy</code>. This avoids duplicating parent initialization code and is especially important in multiple inheritance scenarios to ensure MRO (Method Resolution Order) is handled correctly.</p>
+      <p><strong>@classmethod vs @staticmethod:</strong> Both are decorators for methods that don't operate on instances, but they differ:</p>
       <ul>
-        <li><strong>Encapsulation</strong> — bundling data and methods together</li>
-        <li><strong>Inheritance</strong> — creating new classes based on existing ones</li>
-        <li><strong>Polymorphism</strong> — using the same interface for different types</li>
+        <li><strong>@classmethod</strong> receives the class (<code>cls</code>) as the first argument. It can access and modify class-level attributes and is used for factory methods: <code>@classmethod def from_birth_year(cls, name, year): return cls(name, datetime.now().year - year)</code>.</li>
+        <li><strong>@staticmethod</strong> receives neither <code>self</code> nor <code>cls</code> — it's just a regular function placed inside a class for logical grouping. It cannot modify class or instance state: <code>@staticmethod def is_adult(age): return age >= 18</code>.</li>
       </ul>
-      <p>Classes help organize complex programs and make code reusable and maintainable.</p>
-      <div class="tip"><strong>Note:</strong> The <code>self</code> parameter is automatic. You do not pass it when calling a method — Python passes it for you.</div>
+      <p><strong>The @property decorator:</strong> Allows you to define methods that can be accessed like attributes, with optional computed values, validation, and controlled access:</p>
+      <p><code>class Circle:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, radius):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._radius = radius<br>&nbsp;&nbsp;&nbsp;&nbsp;@property<br>&nbsp;&nbsp;&nbsp;&nbsp;def area(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 3.14 * self._radius ** 2<br>&nbsp;&nbsp;&nbsp;&nbsp;@property<br>&nbsp;&nbsp;&nbsp;&nbsp;def radius(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self._radius<br>&nbsp;&nbsp;&nbsp;&nbsp;@radius.setter<br>&nbsp;&nbsp;&nbsp;&nbsp;def radius(self, value):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if value < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Radius cannot be negative")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._radius = value</code></p>
+      <p>Usage: <code>c = Circle(5); print(c.area); c.radius = 10; print(c.area)</code>. The <code>area</code> is computed on demand, and <code>radius</code> has validation — all accessed like simple attributes.</p>
+      <p><strong>Dunder methods (special methods):</strong> Double-underscore methods let your objects interoperate with Python's built-in operations. Key ones include: <code>__str__</code> (called by <code>print()</code>), <code>__repr__</code> (developer-friendly representation), <code>__len__</code> (called by <code>len()</code>), <code>__eq__</code> (<code>==</code>), <code>__lt__</code> (<code>&lt;</code>), <code>__getitem__</code> (<code>obj[key]</code>), <code>__add__</code> (<code>+</code>), <code>__bool__</code> (truthiness). Implementing these makes your classes feel like built-in types.</p>
+      <p><strong>Encapsulation and name mangling:</strong> Python uses conventions rather than strict access control. A single underscore prefix (<code>_hidden</code>) means "internal use" (convention, not enforced). Double underscore prefix (<code>__private</code>) triggers name mangling to <code>_ClassName__private</code>, making accidental access harder — useful for avoiding name conflicts in inheritance hierarchies.</p>
+      <p><strong>Common mistakes:</strong> Forgetting <code>self</code> as the first parameter of instance methods — causes <code>TypeError</code>. Accessing <code>__init__</code> directly instead of letting Python call it automatically. Using <code>@staticmethod</code> when <code>@classmethod</code> is needed (or vice versa). Not calling <code>super().__init__()</code> in subclasses, leaving parent attributes uninitialized. Using bare <code>except:</code> inside class methods — catches system-exit signals too.</p>
+      <p><strong>Best practices:</strong> Use properties instead of getter/setter methods — they're more Pythonic. Favor composition over inheritance ("has-a" is often better than "is-a"). Keep classes focused on a single responsibility. Document public methods with docstrings. Use <code>__repr__</code> to provide useful debugging information. Use <code>__slots__</code> to save memory when creating many instances of a class.</p>
+      <p><strong>Real-world use case:</strong> Modeling a banking system: <code>Account</code> base class with <code>checking_account</code> and <code>SavingsAccount</code> subclasses. The base class handles common logic (balance, owner, account number), while subclasses implement specific rules (withdrawal fees, interest rates). <code>@property</code> provides computed balance, <code>@classmethod</code> creates accounts from CSV data, and dunder methods enable sorting by balance or comparing accounts.</p>
+      <div class="tip"><strong>Try it:</strong> Add a <code>__str__</code> method to the Dog class that returns a friendly description. Then create a subclass <code>Puppy(Dog)</code> with a modified <code>bark()</code> that includes a cute suffix. Add a <code>@property</code> that returns the dog's age in human years. Finally, try <code>super()</code> to extend the parent's <code>__init__</code>.</div>
     `
   },
   {
@@ -838,17 +990,25 @@ from random import randint
 print(f"Pi: {math.pi}")
 print(f"Random 1-10: {randint(1, 10)}")`,
     content: `
-      <p>Python's standard library is vast — it includes hundreds of modules for everything from mathematics to web development. The <strong>import</strong> statement lets you use this functionality in your code.</p>
-      <p>There are several ways to import:</p>
+      <p>Python's standard library is vast — hundreds of modules covering mathematics, networking, file I/O, data processing, web development, and more. The <strong>import</strong> statement is how you access this power and organize your own code into reusable units. Understanding import styles and module structure is essential for writing maintainable Python projects at any scale.</p>
+      <p><strong>Import styles and when to use each:</strong></p>
       <ul>
-        <li><code>import math</code> — imports the entire module. Access functions with <code>math.sqrt()</code>.</li>
-        <li><code>from math import sqrt</code> — imports only <code>sqrt</code>. Use it directly without the module prefix.</li>
-        <li><code>from math import *</code> — imports everything. Avoid this — it pollutes your namespace and can cause naming conflicts.</li>
-        <li><code>import math as m</code> — imports with an alias for shorter access: <code>m.sqrt()</code>.</li>
+        <li><code>import math</code> — imports the entire module. Access with <code>math.sqrt()</code>. Best when you use many functions from a module — the prefix prevents naming collisions and makes the source clear.</li>
+        <li><code>from math import sqrt, pi</code> — imports specific names directly. Best when you use only a few items and the module name would add unnecessary verbosity. Keep the list short.</li>
+        <li><code>from math import *</code> — imports all public names. <strong>Avoid this</strong> — it pollutes your namespace, can silently override existing names, and makes it impossible to tell where a function comes from. Only acceptable in interactive sessions or quick scripts.</li>
+        <li><code>import math as m</code> — imports with an alias. Use for modules with long names or to avoid name conflicts: <code>import numpy as np; import pandas as pd</code> — these are community conventions you should follow.</li>
       </ul>
-      <p>You can also create your own modules. Any <code>.py</code> file is a module. Put functions and classes in a file, and import it from another file.</p>
-      <p>Some of the most useful standard library modules: <code>math</code>, <code>random</code>, <code>datetime</code>, <code>json</code>, <code>os</code>, <code>sys</code>, <code>collections</code>, <code>itertools</code>.</p>
-      <div class="tip"><strong>Best practice:</strong> Put all imports at the top of your file, grouped in order: standard library, third-party, then your own modules.</div>
+      <p><strong>The __name__ == "__main__" pattern:</strong> This allows a file to be both used as a reusable module and run as a standalone script:</p>
+      <p><code>def main():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Running as script...")<br><br>if __name__ == "__main__":<br>&nbsp;&nbsp;&nbsp;&nbsp;main()</code></p>
+      <p>When you run a Python file directly (<code>python myfile.py</code>), Python sets <code>__name__</code> to <code>"__main__"</code>. When the file is imported as a module, <code>__name__</code> is set to the module's name. This pattern lets you put test code or CLI logic inside the guard so it doesn't run when the module is imported elsewhere — critical for writing reusable modules.</p>
+      <p><strong>Creating your own modules and packages:</strong> Any <code>.py</code> file is a module. Put functions and classes in <code>utils.py</code> and import from another file: <code>from utils import clean_text</code>. A <strong>package</strong> is a directory of modules with an <code>__init__.py</code> file (can be empty, but required in Python 3.3-3.12 — in 3.3+ you can use implicit namespace packages). Structure:</p>
+      <p><code>my_project/<br>&nbsp;&nbsp;__init__.py<br>&nbsp;&nbsp;utils/<br>&nbsp;&nbsp;&nbsp;&nbsp;__init__.py<br>&nbsp;&nbsp;&nbsp;&nbsp;strings.py<br>&nbsp;&nbsp;&nbsp;&nbsp;files.py<br>&nbsp;&nbsp;main.py</code></p>
+      <p>Then <code>from my_project.utils.strings import capitalize</code> or <code>from my_project import utils</code>. The <code>__init__.py</code> can control what gets exported via <code>__all__</code> or run initialization code.</p>
+      <p><strong>sys.path and how Python finds modules:</strong> When you import a module, Python searches the list of directories in <code>sys.path</code>: (1) the directory of the script being run, (2) directories listed in the <code>PYTHONPATH</code> environment variable, (3) standard library directories, (4) site-packages (for third-party packages installed via pip). You can inspect and modify <code>sys.path</code> programmatically — but modifying it is usually a sign of a packaging problem. Instead, use proper virtual environments and <code>pip install -e .</code> for development.</p>
+      <p><strong>Common mistakes:</strong> Circular imports — module A imports module B which imports module A. Restructure code or use lazy imports inside functions. Import errors from misspelled module names or missing installations. Using <code>from x import *</code> in production code. Not organizing imports — causing confusion about where functions come from. Putting executable code (not inside a function or guard) in a module that's meant to be imported.</p>
+      <p><strong>Best practices:</strong> Organize imports in three groups, separated by blank lines: standard library, third-party, local modules. Within each group, sort alphabetically. Use absolute imports (<code>from package.module import name</code>) rather than relative imports (<code>from ..module import name</code>) — absolute imports are clearer and less fragile. Use <code>if __name__ == "__main__":</code> guard for all script files. Install third-party packages with pip and use virtual environments to manage dependencies.</p>
+      <p><strong>Real-world use case:</strong> A data analysis project might import: <code>import os, sys</code> (stdlib), <code>import pandas as pd, import numpy as np, import matplotlib.pyplot as plt</code> (third-party), <code>from myproject.loaders import load_data; from myproject.analysis import calculate_stats</code> (local). This three-group organization makes dependencies immediately visible and enables reuse across different scripts.</p>
+      <div class="tip"><strong>Try it:</strong> Create a module in your mind: write a function in the editor, then imagine putting it in a separate file <code>utils.py</code> and importing it. Then use the <code>if __name__ == "__main__":</code> pattern to add test code that only runs when the file is executed directly. Finally, import a module with an alias: <code>import datetime as dt</code> and use <code>dt.datetime.now()</code>.</div>
     `
   },
   {
@@ -867,17 +1027,20 @@ def say_hello():
 
 say_hello()`,
     content: `
-      <p><strong>Decorators</strong> are a powerful feature that allows you to modify or extend the behavior of functions or classes without changing their source code. They are widely used in Python frameworks and libraries.</p>
-      <p>A decorator is essentially a function that takes another function as an argument, wraps some behavior around it, and returns the modified function. The <code>@decorator</code> syntax is syntactic sugar for <code>my_func = decorator(my_func)</code>.</p>
-      <p>Common uses of decorators include:</p>
-      <ul>
-        <li><strong>Logging</strong> — automatically log when a function is called</li>
-        <li><strong>Timing</strong> — measure how long a function takes to execute</li>
-        <li><strong>Authentication</strong> — check if a user is logged in before executing</li>
-        <li><strong>Caching</strong> — store and reuse results of expensive function calls</li>
-      </ul>
-      <p>The <code>functools.wraps</code> decorator is often used when writing decorators to preserve the original function's metadata (name, docstring).</p>
-      <div class="tip"><strong>Note:</strong> You can stack multiple decorators on one function. They apply from bottom to top: the closest decorator to the function runs first.</div>
+      <p><strong>Decorators</strong> let you modify or extend the behavior of functions or classes without changing their source code. They are widely used in Python web frameworks (Flask, Django), testing tools, and libraries. A decorator is a function that takes another function as an argument, wraps new behavior around it, and returns the modified function. The <code>@decorator</code> syntax is syntactic sugar: <code>@timer def my_func(): pass</code> is equivalent to <code>my_func = timer(my_func)</code>.</p>
+      <p><strong>Preserving metadata with @wraps:</strong> When you write a decorator, the wrapper function replaces the original — this hides the original function's name, docstring, and signature. Use <code>@functools.wraps(func)</code> on the wrapper to copy this metadata:</p>
+      <p><code>from functools import wraps<br><br>def logger(func):<br>&nbsp;&nbsp;&nbsp;&nbsp;@wraps(func)<br>&nbsp;&nbsp;&nbsp;&nbsp;def wrapper(*args, **kwargs):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Calling {func.__name__}")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return func(*args, **kwargs)<br>&nbsp;&nbsp;&nbsp;&nbsp;return wrapper</code></p>
+      <p>Without <code>@wraps</code>, <code>help(my_function)</code> would show the wrapper's signature and no docstring. Always use <code>@wraps</code> in your decorators — it preserves the original function's <code>__name__</code>, <code>__doc__</code>, <code>__module__</code>, and <code>__annotations__</code>.</p>
+      <p><strong>Decorators with arguments:</strong> If you need to parameterize a decorator, add an outer layer:</p>
+      <p><code>def repeat(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;def decorator(func):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@wraps(func)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def wrapper(*args, **kwargs):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for _ in range(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func(*args, **kwargs)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return wrapper<br>&nbsp;&nbsp;&nbsp;&nbsp;return decorator<br><br>@repeat(n=3)<br>def say_hi():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Hello!")</code></p>
+      <p>Usage: <code>say_hi()</code> prints "Hello!" three times. The pattern is <code>decorator_factory(arguments) -> decorator -> wrapper</code>. This triple-nesting is essential to understand for working with Flask route decorators like <code>@app.route("/")</code>.</p>
+      <p><strong>Class-based decorators:</strong> You can also implement decorators as classes using <code>__call__</code>:</p>
+      <p><code>class CountCalls:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, func):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@wraps(func)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.func = func<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;def __call__(self, *args, **kwargs):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Call #{self.count} of {self.func.__name__}")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.func(*args, **kwargs)</code></p>
+      <p>Class-based decorators are useful when you need to maintain state (like call counters, caches) or provide additional methods on the decorated function.</p>
+      <p><strong>Real-world examples:</strong> <strong>Timing</strong> — measure and log execution time of functions for performance profiling. <strong>Logging</strong> — automatically log every function call with arguments and return values for debugging. <strong>Caching (memoization)</strong> — store results of expensive computations and return cached results for repeated calls with the same arguments (<code>@functools.lru_cache</code>). <strong>Authentication</strong> — check user permissions before executing a view function in web frameworks. <strong>Rate limiting</strong> — restrict how often a function can be called within a time window.</p>
+      <p><strong>Common mistakes:</strong> Forgetting to use <code>@wraps</code> — breaks introspection and documentation tools. Forgetting to return the wrapper function from the decorator — the decorator must <code>return wrapper</code> or it returns <code>None</code>. Not forwarding <code>*args</code> and <code>**kwargs</code> from the wrapper to the original function — breaks functions with any arguments. Stacking decorators in the wrong order — remember they apply bottom-up (nearest to the function first).</p>
+      <p><strong>Best practices:</strong> Always use <code>@wraps</code> to preserve function metadata. Forward <code>*args, **kwargs</code> in all wrappers. Keep decorators focused on one concern. Document what the decorator does and any side effects. Use <code>functools.lru_cache</code> instead of writing your own memoization. For decorator arguments, use the three-level nesting pattern consistently.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>@wraps</code> to the existing <code>timer</code> decorator, then print <code>say_hello.__name__</code> to confirm the original name is preserved. Then create a new decorator that logs the arguments and return value of the decorated function. Finally, stack two decorators on one function and observe the execution order.</div>
     `
   },
   {
@@ -895,13 +1058,19 @@ for num in count_up_to(5):
 squares = (x**2 for x in range(5))
 print(list(squares))`,
     content: `
-      <p><strong>Generators</strong> are functions that produce a sequence of values lazily — they yield one value at a time instead of computing and storing all values at once. This makes them exceptionally memory-efficient for large datasets.</p>
-      <p>Unlike regular functions that use <code>return</code> and terminate, a generator function uses the <code>yield</code> keyword. When called, it returns a generator object without executing the function. Each time you request the next value (via <code>next()</code> or a for loop), the function runs until it hits <code>yield</code>, produces the value, and pauses — saving its state for the next call.</p>
-      <p><strong>Generator expressions</strong> are the lazy equivalent of list comprehensions. They use parentheses instead of square brackets:</p>
-      <p><code>squares = (x**2 for x in range(1000000))</code></p>
-      <p>This creates a generator that produces squares on demand, using almost no memory — unlike a list comprehension which would create a million-element list.</p>
-      <p>Generators are perfect for: reading large files line by line, infinite sequences, data streams, and pipeline processing.</p>
-      <div class="tip"><strong>Key insight:</strong> A generator remembers its state between yields. This is different from a regular function which starts fresh on every call.</div>
+      <p><strong>Generators</strong> produce sequences of values lazily — they yield one value at a time instead of computing and storing all values at once. This makes them exceptionally memory-efficient, especially for large or infinite datasets. A generator function uses <code>yield</code> instead of <code>return</code>. When called, it returns a generator object without executing the function body. Each time you request the next value via <code>next()</code> or a for loop, the function runs until it hits <code>yield</code>, produces the value, and pauses — preserving its entire state (local variables, instruction pointer) for the next call.</p>
+      <p><strong>Generator expressions vs list comprehensions:</strong> Both have the same syntax except for brackets. A list comprehension <code>[x**2 for x in range(10_000_000)]</code> would allocate a 10-million-element list, consuming hundreds of megabytes of memory. A generator expression <code>(x**2 for x in range(10_000_000))</code> uses almost no memory — it computes each value on demand. Use generator expressions when you only need to iterate once and the dataset is large. Use list comprehensions when you need random access, need to iterate multiple times, or the dataset is small enough to fit in memory comfortably.</p>
+      <p><strong>yield from — delegating to sub-generators:</strong> Python 3.3+ introduced <code>yield from</code> for yielding all values from another iterable or generator. It simplifies chaining or flattening generators:</p>
+      <p><code>def chain(*iterables):<br>&nbsp;&nbsp;&nbsp;&nbsp;for it in iterables:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield from it  # equivalent to: for item in it: yield item</code></p>
+      <p>This is cleaner than manually iterating and yielding each item. <code>yield from</code> also handles communication (send/throw/close) automatically, which manual iteration does not.</p>
+      <p><strong>send(), throw(), and close() — bidirectional generators:</strong> Generators can receive values via <code>.send(value)</code>, which becomes the return value of <code>yield</code> inside the generator:</p>
+      <p><code>def echo():<br>&nbsp;&nbsp;&nbsp;&nbsp;while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;received = yield<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Got: {received}")<br><br>g = echo()<br>next(g)&nbsp;&nbsp;# Prime the generator (advance to first yield)<br>g.send("Hello")&nbsp;&nbsp;# Prints "Got: Hello"</code></p>
+      <p><code>.throw(exception_type)</code> raises an exception at the yield point inside the generator. <code>.close()</code> sends a <code>GeneratorExit</code> exception, causing the generator to exit. This pattern is used for coroutines, data pipelines, and cooperative multitasking.</p>
+      <p><strong>Practical use cases for generators:</strong> Processing large files line-by-line without loading the entire file into memory (<code>def read_large_file(path): with open(path) as f: for line in f: yield line.strip()</code>). Generating infinite sequences (<code>def fibonacci(): a, b = 0, 1; while True: yield a; a, b = b, a + b</code>). Implementing data processing pipelines where each stage is a generator that reads from the previous stage. Streaming API responses. Implementing custom iterators for complex traversal patterns (tree traversal, graph search).</p>
+      <p><strong>Common mistakes:</strong> Forgetting to prime a generator with <code>next()</code> before <code>.send()</code> — raises <code>TypeError: can't send non-None value to a just-started generator</code>. Using <code>return value</code> in a generator — in Python 3, <code>return value</code> in a generator provides the value in a <code>StopIteration</code> exception (accessible via <code>StopIteration.value</code> or by using <code>yield from</code>). Creating a generator but never consuming it — it does nothing until iterated. Using a list comprehension when a generator expression would be more memory-efficient for large datasets.</p>
+      <p><strong>Best practices:</strong> Use generator expressions for one-time iteration over large datasets. Use generator functions for complex sequences that require state or logic. Use <code>yield from</code> for delegating to sub-generators. Remember that generators are single-use — once exhausted, they cannot be restarted (create a new one instead). For expensive-to-create generators, consider using <code>itertools.tee()</code> if you need multiple independent iterators.</p>
+      <p><strong>Real-world use case:</strong> A log processing pipeline: <code>def read_logs(path): yield from open(path); def filter_errors(lines): for line in lines: if "ERROR" in line: yield line; def extract_fields(lines): for line in lines: yield parse_log_line(line)</code>. Each stage is a generator that lazily processes data from the previous stage, allowing processing of gigabyte-sized log files with constant memory usage.</p>
+      <div class="tip"><strong>Try it:</strong> Write a generator that yields the first N Fibonacci numbers. Then use <code>yield from</code> to concatenate two sequences. Finally, use <code>.send()</code> to create a generator that accumulates values: <code>def accumulator(): total = 0; while True: total += yield total</code> and send it numbers to see running totals.</div>
     `
   },
   {
@@ -924,13 +1093,23 @@ print("""
   Line 3
 """)`,
     content: `
-      <p>The <code>input()</code> function is Python's built-in way to read user input from the terminal. It pauses execution, displays an optional prompt string, and waits for the user to type something and press Enter. The function always returns a <strong>string</strong> — so if you need a number, you must convert it with <code>int()</code> or <code>float()</code>.</p>
-      <p>The <code>print()</code> function outputs text to the console. You can pass multiple arguments separated by commas; they'll be printed with a space between them. The <code>sep</code> and <code>end</code> parameters let you customize the separator and line ending:</p>
-      <p><code>print(1, 2, 3, sep='-', end='!')  # → 1-2-3!</code></p>
-      <p><strong>f-strings</strong> (formatted string literals) are the modern way to embed expressions inside strings. Prefix the string with <code>f</code> and use curly braces for variables:</p>
-      <p><code>print(f"Hello {name.upper()}")</code></p>
-      <p>F-strings are faster and more readable than concatenation (<code>+</code>) or the older <code>%</code> formatting and <code>.format()</code> methods.</p>
-      <div class="tip"><strong>Security tip:</strong> Always convert and validate user input. Never pass raw input to <code>eval()</code> or <code>exec()</code> — it's a major security risk.</div>
+      <p>The <code>input()</code> function is Python's built-in way to read user input from the terminal. When called, it pauses program execution, displays an optional prompt string to guide the user, and waits for the user to type something and press Enter. The function then returns whatever was typed as a <strong>string</strong>. This means if you ask for a number and want to do math, you must explicitly convert the result using <code>int()</code> or <code>float()</code>.</p>
+      <p><strong>Important note about <code>input()</code>:</strong> Before Python 3, there was a function called <code>raw_input()</code> that worked like modern <code>input()</code>, while <code>input()</code> actually evaluated the input as Python code. This security nightmare was fixed in Python 3 — now <code>input()</code> always returns a string safely. Never use <code>eval(input())</code> — it recreates the old dangerous behavior and can allow malicious code execution.</p>
+      <p>The <code>print()</code> function outputs text to the console. It is remarkably flexible. You can pass multiple arguments separated by commas, and <code>print()</code> will display them with a space between each: <code>print("The answer is", 42)</code> outputs <code>The answer is 42</code>. The function also accepts two important keyword parameters:</p>
+      <ul>
+        <li><code>sep</code> — the separator between arguments (default is a space): <code>print(1, 2, 3, sep='-')</code> outputs <code>1-2-3</code></li>
+        <li><code>end</code> — what to print at the end (default is a newline <code>\\n</code>): <code>print("Loading", end="...")</code> keeps the cursor on the same line</li>
+      </ul>
+      <p>These parameters are incredibly useful for formatting output. For example, to print items without spaces: <code>print("item1", "item2", "item3", sep="")</code>. To print on the same line: <code>print(".", end="")</code> in a loop creates a progress indicator.</p>
+      <p><strong>f-strings</strong> (formatted string literals) are the modern and recommended way to embed expressions inside strings. Prefix the string with <code>f</code> and use curly braces for variables or expressions: <code>print(f"Hello {name.upper()}! You are {age} years old.")</code>. You can put any valid Python expression inside the braces: arithmetic, function calls, even conditionals. F-strings are faster, more readable, and less error-prone than the older approaches:</p>
+      <ul>
+        <li><strong>Concatenation:</strong> <code>"Hello " + name + "!"</code> — clunky with multiple variables</li>
+        <li><strong><code>%</code> formatting:</strong> <code>"Hello %s!" % name</code> — easy to mismatch types</li>
+        <li><strong><code>.format()</code>:</strong> <code>"Hello {}!".format(name)</code> — verbose for complex cases</li>
+      </ul>
+      <p><strong>Multi-line output:</strong> Use triple quotes to print strings that span multiple lines. Everything between the triple quotes, including newlines, is preserved exactly as written. This is useful for formatted reports, ASCII art, or any structured text output.</p>
+      <p><strong>Common mistake:</strong> Forgetting to convert input to a number. If you write <code>age = input("Age: ")</code> then <code>age + 1</code>, Python will raise a <code>TypeError</code> because you cannot add a string and an integer. Always convert numeric input explicitly.</p>
+      <div class="tip"><strong>Try it:</strong> Modify the code to ask for two numbers and print their sum. Then try using <code>sep="\\n"</code> to print each item on a separate line. Experiment with different <code>end</code> values.</div>
     `
   },
   {
@@ -954,17 +1133,31 @@ total_price = 49.99
 TAX_RATE = 0.08
 tax = total_price * TAX_RATE`,
     content: `
-      <p><strong>Comments</strong> explain code to human readers (including your future self). In Python, use <code>#</code> for single-line comments and triple-quoted strings (<code>\"\"\" \"\"\"</code>) for multi-line docstrings. A comment should explain <em>why</em> something is done, not <em>what</em> the code does — the code itself should be clear enough for that.</p>
-      <p><strong>Best practices to follow:</strong></p>
+      <p><strong>Comments</strong> exist to explain code to human readers — including your future self who will come back to this code six months from now. Writing good comments is a skill that separates professional developers from beginners. In Python, use <code>#</code> for single-line comments and triple-quoted strings (<code>\"\"\" \"\"\"</code>) for multi-line docstrings. A good comment explains <em>why</em> something is done a certain way, not <em>what</em> the code does — the code itself should be clear enough to communicate what it does without comments.</p>
+      <p><strong>Types of comments in Python:</strong></p>
       <ul>
-        <li><strong>Use meaningful names</strong> — <code>user_age</code> not <code>ua</code> or <code>x</code></li>
-        <li><strong>Follow PEP 8</strong> — Python's style guide: 4-space indentation, blank lines around functions, lowercase_with_underscores for variables</li>
-        <li><strong>Keep functions small</strong> — each function should do one thing well</li>
-        <li><strong>Avoid magic numbers</strong> — define constants with UPPER_CASE names (<code>TAX_RATE = 0.08</code>)</li>
-        <li><strong>Write docstrings</strong> — document what every function, class, and module does</li>
-        <li><strong>DRY (Don't Repeat Yourself)</strong> — if you copy-paste code, refactor it into a function</li>
+        <li><strong>Inline comments</strong> (<code>#</code>) — explain a specific line or block. Use sparingly and only when the code is not self-explanatory.</li>
+        <li><strong>Docstrings</strong> (<code>\"\"\" \"\"\"</code>) — document functions, classes, and modules. These can be accessed programmatically via <code>help()</code> or <code>__doc__</code>, making them essential for creating usable libraries.</li>
+        <li><strong>TODO comments</strong> (<code># TODO: fix this later</code>) — mark unfinished work. Many IDEs highlight these for easy navigation.</li>
       </ul>
-      <div class="tip"><strong>Remember:</strong> Code is read far more often than it is written. Optimize for readability first.</div>
+      <p><strong>Best practices for writing clean, professional Python:</strong></p>
+      <ul>
+        <li><strong>Use meaningful names</strong> — <code>user_age</code> is far better than <code>ua</code> or <code>x</code>. Good names eliminate the need for many comments.</li>
+        <li><strong>Follow PEP 8</strong> — Python's official style guide. Key rules: 4-space indentation (not tabs), 2 blank lines around top-level functions, 1 blank line around methods, lowercase_with_underscores for variables and functions, UPPER_CASE for constants.</li>
+        <li><strong>Keep functions small</strong> — each function should do exactly one thing and do it well. If a function is doing multiple things, split it. Small functions are easier to test, debug, and reuse.</li>
+        <li><strong>Avoid magic numbers</strong> — never scatter raw numbers like <code>86400</code> (seconds in a day) throughout your code. Instead, define a named constant: <code>SECONDS_IN_DAY = 86400</code>. This makes the code self-documenting and easy to change in one place.</li>
+        <li><strong>Write docstrings for every public function, class, and module</strong> — they enable auto-generated documentation and help users understand how to use your code without reading the implementation.</li>
+        <li><strong>DRY (Don't Repeat Yourself)</strong> — if you find yourself copy-pasting code, extract it into a function or variable. Repeated code is a breeding ground for bugs when you update one instance but forget to update the others.</li>
+        <li><strong>Keep imports at the top</strong> — standard library imports first, then third-party, then your own modules, each group separated by a blank line.</li>
+      </ul>
+      <p><strong>Common mistakes in commenting:</strong></p>
+      <ul>
+        <li>Writing obvious comments: <code>x = x + 1  # increment x by 1</code> — the code already says this. Explain why, not what.</li>
+        <li>Letting comments rot: When you update code, update the comments too. Outdated comments are worse than no comments — they actively mislead readers.</li>
+        <li>Using comments as a substitute for clean code: Instead of commenting confusing logic, rewrite the logic to be clearer.</li>
+      </ul>
+      <p>Remember the golden rule of Python: <strong>Readability counts</strong>. Code is read far more often than it is written. Spend the extra few seconds to make your code clear — your future self and your teammates will thank you.</p>
+      <div class="tip"><strong>Try it:</strong> Add a function with a docstring and use <code>help(function_name)</code> to see how Python displays it. Then add a <code># TODO</code> comment about a feature you would add next.</div>
     `
   },
   {
@@ -998,19 +1191,34 @@ print(parts)  # ['Hello', '123', 'World', '456']
 email_pattern = r"[\\w.-]+@[\\w.-]+\\.\\w+"
 phone_pattern = r"\\d{3}-\\d{3}-\\d{4}"`,
     content: `
-      <p><strong>Regular expressions (regex)</strong> are powerful patterns for matching, searching, and manipulating text. Python's <code>re</code> module provides full regex support. Raw strings (<code>r"..."</code>) are recommended to avoid escaping backslashes.</p>
-      <p><strong>Common metacharacters:</strong></p>
+      <p><strong>Regular expressions (regex)</strong> are patterns for matching, searching, and manipulating text with surgical precision. Python's <code>re</code> module provides full regex support. Always use raw strings (<code>r"..."</code>) for regex patterns — without them, backslashes need double escaping (<code>\\\\d</code> instead of <code>\\d</code>), making patterns much harder to read and maintain.</p>
+      <p><strong>Common metacharacters and their meanings:</strong></p>
       <ul>
-        <li><code>.</code> — any character except newline</li>
-        <li><code>\\d</code> — digit (0–9), <code>\\w</code> — word character (letter/digit/underscore), <code>\\s</code> — whitespace</li>
-        <li><code>*</code> — 0 or more, <code>+</code> — 1 or more, <code>?</code> — 0 or 1, <code>{n,m}</code> — n to m repetitions</li>
-        <li><code>[abc]</code> — character class (a, b, or c), <code>[^abc]</code> — negation</li>
-        <li><code>^</code> — start of string, <code>$</code> — end of string</li>
-        <li><code>()</code> — capture group, <code>(?:)</code> — non-capturing group</li>
+        <li><code>.</code> — any character except newline. Use <code>re.DOTALL</code> to include newlines.</li>
+        <li><code>\\d</code> — digit (0–9), <code>\\w</code> — word character (letter, digit, underscore), <code>\\s</code> — whitespace (space, tab, newline). Uppercase versions negate: <code>\\D</code> = non-digit, <code>\\W</code> = non-word, <code>\\S</code> = non-whitespace.</li>
+        <li><code>*</code> — 0 or more (greedy), <code>+</code> — 1 or more (greedy), <code>?</code> — 0 or 1 (optional), <code>{n,m}</code> — between n and m repetitions. Add <code>?</code> after to make it non-greedy (match the shortest possible string).</li>
+        <li><code>[abc]</code> — character class: matches a, b, or c. <code>[^abc]</code> negates: matches anything except a, b, c. <code>[a-z]</code> is a range. Use <code>[]</code> to match literal characters.</li>
+        <li><code>^</code> — start of string (or start of line with <code>re.MULTILINE</code>). <code>$</code> — end of string (or end of line with <code>re.MULTILINE</code>).</li>
       </ul>
-      <p><strong>Key functions:</strong> <code>findall()</code> returns all matches as a list, <code>search()</code> finds the first match anywhere, <code>match()</code> checks only at the start, <code>sub()</code> replaces matches, <code>split()</code> splits on the pattern.</p>
-      <p><strong>Flags</strong> modify behavior: <code>re.IGNORECASE</code> for case-insensitive, <code>re.MULTILINE</code> for ^/$ to match per line, <code>re.DOTALL</code> for . to match newlines.</p>
-      <div class="tip"><strong>Pro tip:</strong> Test your regex interactively at regex101.com. Use verbose mode <code>re.VERBOSE</code> for complex patterns with inline comments and whitespace.</div>
+      <p><strong>Groups and capturing:</strong> Parentheses <code>()</code> create capture groups that extract portions of a match. After a successful match, use <code>.group(1)</code> to access the first captured group, <code>.group(2)</code> for the second, etc. <code>.group(0)</code> returns the entire match. <strong>Named groups</strong> make code more readable: <code>(?P&lt;name&gt;pattern)</code> — access with <code>.group("name")</code> or <code>.groupdict()</code>:</p>
+      <p><code>pattern = r"(?P&lt;area&gt;\\d{3})-(?P&lt;prefix&gt;\\d{3})-(?P&lt;number&gt;\\d{4})"<br>match = re.search(pattern, "Call 555-123-4567 today!")<br>if match:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(match.groupdict())  # {'area': '555', 'prefix': '123', 'number': '4567'}</code></p>
+      <p>Use non-capturing groups <code>(?:pattern)</code> when you need grouping for repetition or alternation but don't need to capture the matched text — they're faster and avoid cluttering group numbering.</p>
+      <p><strong>Lookahead and lookbehind:</strong> These zero-width assertions check for patterns before or after the current position without consuming characters:</p>
+      <ul>
+        <li><strong>Positive lookahead</strong> <code>(?=...)</code> — matches if followed by pattern: <code>r"\\d+(?= dollars)"</code> matches "100" in "100 dollars" but not "100 euros".</li>
+        <li><strong>Negative lookahead</strong> <code>(?!...)</code> — matches if NOT followed by pattern: <code>r"\\d+(?! dollars)"</code> matches "100" in "100 euros" but not in "100 dollars".</li>
+        <li><strong>Positive lookbehind</strong> <code>(?&lt;=...)</code> — matches if preceded by pattern: <code>r"(?&lt;=\\$)\\d+"</code> matches "50" in "$50".</li>
+        <li><strong>Negative lookbehind</strong> <code>(?&lt;!...)</code> — matches if NOT preceded by pattern.</li>
+      </ul>
+      <p><strong>Verbose mode (re.VERBOSE):</strong> For complex patterns, use <code>re.VERBOSE</code> (or <code>re.X</code>) to write multi-line patterns with whitespace and comments:</p>
+      <p><code>pattern = r"""<br>&nbsp;&nbsp;&nbsp;&nbsp;(?P&lt;year&gt;\\d{4})&nbsp;&nbsp;# Year: 4 digits<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Separator<br>&nbsp;&nbsp;&nbsp;&nbsp;(?P&lt;month&gt;\\d{2})&nbsp;# Month: 2 digits<br>&nbsp;&nbsp;&nbsp;&nbsp;-<br>&nbsp;&nbsp;&nbsp;&nbsp;(?P&lt;day&gt;\\d{2})&nbsp;&nbsp;&nbsp;&nbsp;# Day: 2 digits<br>"""<br>re.match(pattern, "2025-01-15", re.VERBOSE)</code></p>
+      <p>This dramatically improves readability for complex patterns — treat it as a best practice for any non-trivial regex.</p>
+      <p><strong>Common patterns:</strong> Email: <code>r"[\\w.-]+@[\\w.-]+\\.\\w+"</code> (basic — real email validation is more complex). Phone: <code>r"\\d{3}-\\d{3}-\\d{4}"</code>. Date: <code>r"\\d{4}-\\d{2}-\\d{2}"</code> or <code>r"(?P&lt;year>\\d{4})-(?P&lt;month>\\d{2})-(?P&lt;day>\\d{2})"</code>. URL: <code>r"https?://[\\w./-]+"</code>. IP address: <code>r"\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}"</code>. HTML tag: <code>r"<[^>]+>"</code> (but use an HTML parser for real HTML).</p>
+      <p><strong>Key functions reference:</strong> <code>findall()</code> returns all matches as a list of strings (or tuples of groups). <code>finditer()</code> returns match objects lazily — use for large texts. <code>search()</code> finds first match anywhere, returns a match object or <code>None</code>. <code>match()</code> checks only at the start of the string. <code>fullmatch()</code> requires the pattern to match the entire string. <code>sub(pattern, repl, text)</code> replaces matches with a string or function. <code>subn()</code> same as sub but also returns count. <code>split()</code> splits on the pattern. <code>escape()</code> escapes all metacharacters — use when you need to match user input literally.</p>
+      <p><strong>Common mistakes:</strong> Forgetting to use raw strings <code>r"..."</code> — <code>"\\d"</code> is actually a backslash followed by 'd', but without raw string, <code>"\\d"</code> is just 'd'. Over-greedy matching: <code>r"<.*>"</code> matches from the first < to the last > — use <code>r"<.*?>"</code> for minimal matching. Using regex to parse HTML or JSON — use dedicated parsers. Not handling the case when <code>search()</code> or <code>match()</code> returns <code>None</code> — always check <code>if match:</code> before accessing groups.</p>
+      <p><strong>Best practices:</strong> Always use raw strings. Compile frequently-used patterns with <code>re.compile()</code> for performance. Use named groups for clarity in complex patterns. Test regex interactively on regex101.com. Prefer non-capturing groups <code>(?:...)</code> unless you need the captured text. Use <code>re.VERBOSE</code> for any pattern longer than a single line. Consider that simpler string methods (<code>.startswith()</code>, <code>.split()</code>, <code>.find()</code>) often suffice without regex.</p>
+      <p><strong>Real-world use case:</strong> Extracting all URLs from an HTML page: <code>urls = re.findall(r'href=["\\\'](https?://[^"\\\']+)["\\\']', html_content)</code>. Validating email format before sending to an API: <code>if re.match(r"[^@]+@[^@]+\\.[^@]+", email): send_email(email)</code>. Cleaning user input for safe logging: <code>safe_text = re.sub(r"[<>&]", "", raw_input)</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Add a named group to extract the username and domain from an email address: <code>r"(?P&lt;user&gt;[\\w.-]+)@(?P&lt;domain&gt;[\\w.-]+)"</code>. Then use <code>re.VERBOSE</code> to write a multi-line pattern for matching phone numbers. Finally, use a lookahead assertion to match all numbers followed by "px" but capture only the digits.</div>
     `
   },
   {
@@ -1040,19 +1248,30 @@ next_week = today + timedelta(weeks=1)
 diff = next_week - yesterday
 print(diff.days)  # 8`,
     content: `
-      <p>Python's <code>datetime</code> module supplies classes for manipulating dates and times. The three main classes are <code>datetime</code> (date + time), <code>date</code> (date only), and <code>timedelta</code> (duration).</p>
-      <p><strong>Formatting with strftime:</strong></p>
+      <p>Python's <code>datetime</code> module supplies classes for manipulating dates and times. The three main classes are <code>datetime</code> (date + time), <code>date</code> (date only), <code>time</code> (time only), and <code>timedelta</code> (duration). For timezone support, use <code>zoneinfo</code> (Python 3.9+) or the third-party <code>pytz</code> library. Mastering datetime operations is essential for logging, scheduling, data analysis, and any application that deals with time.</p>
+      <p><strong>Formatting with strftime and parsing with strptime:</strong> These are inverse operations. <code>strftime</code> formats a datetime object into a string. <code>strptime</code> parses a string into a datetime object using a format string that must match exactly:</p>
       <ul>
-        <li><code>%Y</code> — 4-digit year, <code>%y</code> — 2-digit year</li>
-        <li><code>%m</code> — month (01–12), <code>%d</code> — day (01–31)</li>
-        <li><code>%H</code> — 24-hour (00–23), <code>%I</code> — 12-hour (01–12)</li>
-        <li><code>%M</code> — minute, <code>%S</code> — second, <code>%p</code> — AM/PM</li>
-        <li><code>%A</code> — full weekday name, <code>%B</code> — full month name</li>
+        <li><code>%Y</code> — 4-digit year (2025), <code>%y</code> — 2-digit year (25)</li>
+        <li><code>%m</code> — zero-padded month (01–12), <code>%d</code> — zero-padded day (01–31)</li>
+        <li><code>%H</code> — 24-hour (00–23), <code>%I</code> — 12-hour (01–12), <code>%p</code> — AM/PM</li>
+        <li><code>%M</code> — minute (00–59), <code>%S</code> — second (00–59), <code>%f</code> — microsecond (000000–999999)</li>
+        <li><code>%A</code> — full weekday name (Monday), <code>%a</code> — abbreviated (Mon)</li>
+        <li><code>%B</code> — full month name (January), <code>%b</code> — abbreviated (Jan)</li>
+        <li><code>%j</code> — day of year (001–366), <code>%U</code> — week number (Sunday-first), <code>%W</code> — week number (Monday-first)</li>
+        <li><code>%z</code> — UTC offset (+0000), <code>%Z</code> — timezone name (UTC)</li>
       </ul>
-      <p><strong>Parsing with strptime:</strong> converts a string to a <code>datetime</code> object. The format string must match the input exactly.</p>
-      <p><strong>Date math:</strong> <code>timedelta</code> represents a duration. You can add/subtract days, seconds, microseconds, milliseconds, minutes, hours, and weeks. Subtracting two dates gives a <code>timedelta</code>.</p>
-      <p>Also useful: <code>date.weekday()</code> returns 0 (Monday) to 6 (Sunday), and <code>date.isoweekday()</code> returns 1 (Monday) to 7 (Sunday).</p>
-      <div class="tip"><strong>Gotcha:</strong> <code>datetime.now()</code> returns local time. For UTC, use <code>datetime.utcnow()</code> and <code>pytz</code> or <code>zoneinfo</code> for timezone-aware operations.</div>
+      <p>Example: <code>datetime.strptime("2025-01-15 14:30", "%Y-%m-%d %H:%M")</code>. Any mismatch in the format string causes a <code>ValueError</code> — be especially careful with leading zeros and AM/PM vs 24-hour formats.</p>
+      <p><strong>Date arithmetic with timedelta:</strong> <code>timedelta</code> represents a duration (days, seconds, microseconds, milliseconds, minutes, hours, weeks). Add or subtract from dates and datetimes:</p>
+      <p><code>from datetime import timedelta<br>today = date.today()<br>yesterday = today - timedelta(days=1)<br>next_week = today + timedelta(weeks=1)<br>next_hour = datetime.now() + timedelta(hours=1)<br>diff = next_week - yesterday  # Returns a timedelta<br>print(diff.days)</code></p>
+      <p>You can also construct timedeltas from seconds: <code>timedelta(seconds=3600)</code> equals one hour. For more complex arithmetic like adding months or years (which have variable lengths), use the <code>dateutil</code> library: <code>from dateutil.relativedelta import relativedelta; today + relativedelta(months=1)</code>.</p>
+      <p><strong>Timezone handling with zoneinfo:</strong> Python 3.9+ includes <code>zoneinfo</code> for timezone-aware datetime handling:</p>
+      <p><code>from zoneinfo import ZoneInfo<br>from datetime import datetime<br><br># Create timezone-aware datetime<br>ny = datetime.now(ZoneInfo("America/New_York"))<br>london = datetime.now(ZoneInfo("Europe/London"))<br>tokyo = datetime.now(ZoneInfo("Asia/Tokyo"))<br><br># Convert between timezones<br>ny_utc = ny.astimezone(ZoneInfo("UTC"))<br>print(ny_utc)</code></p>
+      <p>Always store datetimes in UTC internally, and convert to local timezones only for display. Never use <code>datetime.utcnow()</code> — it returns a naive datetime (without timezone info). Instead, use <code>datetime.now(ZoneInfo("UTC"))</code> or <code>datetime.now(timezone.utc)</code> to get timezone-aware UTC time.</p>
+      <p><strong>Business day calculations:</strong> For workday arithmetic (skip weekends, account for holidays), use the <code>dateutil</code> or <code>numpy</code> libraries. A simple check for weekends: <code>if today.weekday() < 5: print("Business day")</code>. For adding business days: <code>from dateutil.rrule import rrule, DAILY, MO, TU, WE, TH, FR; next_5_bizdays = list(rrule(DAILY, count=5, byweekday=(MO, TU, WE, TH, FR), dtstart=today))</code>.</p>
+      <p><strong>Common mistakes:</strong> Using naive datetimes (without timezone) in international applications — use <code>zoneinfo</code> instead. Assuming <code>timedelta(months=1)</code> works — it doesn't (months have variable length). Using <code>datetime.now()</code> defaults to local time, which can cause confusion in server applications. Forgetting that <code>strptime</code> format must match the input string exactly including delimiters and leading zeros. Using <code>%I</code> (12-hour) without <code>%p</code> (AM/PM) causes ambiguous results.</p>
+      <p><strong>Best practices:</strong> Always store and exchange datetimes in UTC. Only convert to local time for user display. Use timezone-aware datetimes (<code>tzinfo</code> set). Use <code>zoneinfo</code> (Python 3.9+) instead of <code>pytz</code> for new projects. Use <code>dateutil.relativedelta</code> for month/year arithmetic. Cache <code>ZoneInfo</code> objects — constructing them is somewhat expensive. Use ISO 8601 format (<code>%Y-%m-%dT%H:%M:%S%z</code>) for date storage and exchange — it's unambiguous and sortable.</p>
+      <p><strong>Real-world use case:</strong> An appointment scheduling app needs to: (1) accept a user's local time and timezone, (2) convert to UTC for storage, (3) display the time in the viewer's local timezone. Database timestamps are stored as UTC with timezone info. Business logic checks: "is this within business hours in the store's timezone?" Calculations: "show all appointments for the next 30 days" — computed with <code>datetime.now(ZoneInfo("UTC")) + timedelta(days=30)</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Add <code>timedelta(hours=5, minutes=30)</code> to the current time and print it. Then use <code>strftime("%A, %B %d, %Y at %I:%M %p")</code> for a human-friendly format. Finally, create a timezone-aware datetime using <code>ZoneInfo("America/New_York")</code> and convert it to UTC.</div>
     `
   },
   {
@@ -1085,20 +1304,28 @@ with open("output.csv", "w", newline="") as f:
     writer.writeheader()
     writer.writerow({"Name": "Charlie", "Age": 35, "City": "Paris"})`,
     content: `
-      <p><strong>CSV (Comma-Separated Values)</strong> is a simple file format for storing tabular data. Python's built-in <code>csv</code> module makes it easy to read and write CSV files.</p>
-      <p><strong>Two approaches:</strong></p>
+      <p><strong>CSV (Comma-Separated Values)</strong> is a universal file format for tabular data — exported by Excel, Google Sheets, databases, and countless other tools. Python's built-in <code>csv</code> module provides robust support for reading and writing CSV files, handling edge cases like embedded commas, quoted fields, and different line-ending conventions.</p>
+      <p><strong>Two approaches: reader/writer vs DictReader/DictWriter:</strong></p>
       <ul>
-        <li><strong><code>csv.reader</code> / <code>csv.writer</code></strong> — work with lists of rows. Each row is a list of strings.</li>
-        <li><strong><code>csv.DictReader</code> / <code>csv.DictWriter</code></strong> — work with dictionaries. Each row is a dict keyed by the header names. More readable and less error-prone for files with many columns.</li>
+        <li><strong><code>csv.reader</code> / <code>csv.writer</code></strong> — work with rows as lists. Simple and fast, but you must remember column positions: <code>row[0]</code>, <code>row[1]</code>, etc. This is fragile — if columns are reordered, your code breaks silently.</li>
+        <li><strong><code>csv.DictReader</code> / <code>csv.DictWriter</code></strong> — work with rows as dictionaries keyed by header names. Much more readable and robust: <code>row["Name"]</code>, <code>row["Age"]</code>. If columns are reordered, your code still works. <code>DictWriter</code> also automatically writes the header row via <code>.writeheader()</code>. DictReader automatically uses the first row as headers. This is the recommended approach for most production code.</li>
       </ul>
-      <p><strong>Important details:</strong></p>
+      <p><strong>Handling headers:</strong> DictReader reads the first row as fieldnames automatically. If your CSV has no header, pass <code>fieldnames=["col1", "col2"]</code> to the constructor. DictWriter requires you to specify <code>fieldnames</code> — this determines both the column order in the output and which keys are written. Call <code>.writeheader()</code> to write the header row. You can also write additional rows using a regular writer if needed.</p>
+      <p><strong>Custom delimiters:</strong> Not all CSVs use commas! Tab-separated files (TSV) use <code>delimiter="\\t"</code>. European formats sometimes use semicolons: <code>delimiter=";"</code>. Always inspect the file first and specify the delimiter explicitly: <code>csv.reader(f, delimiter=";")</code>.</p>
+      <p><strong>Quoting control:</strong> The <code>quoting</code> parameter controls when fields are quoted:</p>
       <ul>
-        <li>Always open files with <code>newline=""</code> when writing CSVs to avoid extra blank lines on Windows</li>
-        <li>Specify <code>delimiter</code> for non-comma separators (e.g., <code>csv.reader(f, delimiter=';')</code>)</li>
-        <li>Use <code>quoting=csv.QUOTE_ALL</code> to quote every field, or <code>QUOTE_NONNUMERIC</code> for selective quoting</li>
-        <li>CSV files can contain special characters; use <code>encoding="utf-8"</code> for proper Unicode support</li>
+        <li><code>csv.QUOTE_MINIMAL</code> (default) — quote only when necessary (fields containing delimiter, quotechar, or newlines)</li>
+        <li><code>csv.QUOTE_ALL</code> — quote every field. Compatible with more parsers but produces larger files.</li>
+        <li><code>csv.QUOTE_NONNUMERIC</code> — quote all non-numeric fields. Reader converts unquoted fields to floats.</li>
+        <li><code>csv.QUOTE_NONE</code> — never quote. May produce invalid CSV if fields contain special characters.</li>
       </ul>
-      <div class="tip"><strong>Pro tip:</strong> For large CSV files (100k+ rows), consider using <code>pandas.read_csv()</code> which is faster and more memory-efficient than the standard library reader.</div>
+      <p><strong>Large file processing:</strong> For files with hundreds of thousands or millions of rows, never read the entire file into memory. Process row by row using a for loop:</p>
+      <p><code>with open("large.csv", "r", encoding="utf-8") as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;reader = csv.DictReader(f)<br>&nbsp;&nbsp;&nbsp;&nbsp;for row in reader:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process_row(row)&nbsp;&nbsp;# One row at a time</code></p>
+      <p>This uses constant memory regardless of file size. For very large CSV processing, consider <code>pandas.read_csv(chunksize=10000)</code> or parallel processing with <code>multiprocessing</code>. The built-in CSV module is pure Python and may be slow for multi-million-row files — in that case, <code>pandas</code> (which uses optimized C code) is significantly faster.</p>
+      <p><strong>Common mistakes:</strong> Forgetting <code>newline=""</code> when opening files for writing — on Windows, this adds extra blank lines between rows. Not specifying <code>encoding="utf-8"</code> — causes UnicodeDecodeError with international characters. Assuming every row has the same number of columns — always validate or handle <code>ValueError</code>. Using <code>csv.reader</code> when <code>csv.DictReader</code> would be more maintainable. Not accounting for header rows — DictReader skips them automatically, reader does not.</p>
+      <p><strong>Best practices:</strong> Always use <code>newline=""</code> in file open when working with CSV. Always specify <code>encoding="utf-8"</code>. Prefer <code>DictReader</code>/<code>DictWriter</code> over reader/writer for clarity. Handle potential <code>ValueError</code> for malformed rows. Use <code>fieldnames</code> parameter explicitly when you need to ensure column order. For cross-platform CSV, use <code>lineterminator="\\r\\n"</code> in writer. Check for empty cells: <code>if row.get("column"):</code> handles missing or empty values gracefully.</p>
+      <p><strong>Real-world use case:</strong> Processing a sales report: <code>with open("sales.csv", "r", encoding="utf-8") as f: reader = csv.DictReader(f); total = sum(float(row["Amount"]) for row if row["Status"] == "Completed")</code>. Or generating a report: export user data from a database to CSV for download, using DictWriter to write headers and rows with proper quoting and UTF-8 encoding.</p>
+      <div class="tip"><strong>Try it:</strong> Add a row to the CSV using DictWriter instead of writer. Then read it back with DictReader and access columns by name. Try changing the delimiter to <code>";"</code> and see how the output changes. Finally, add <code>quoting=csv.QUOTE_ALL</code> and observe the difference in the output file.</div>
     `
   },
   {
@@ -1132,18 +1359,25 @@ async def main():
 # Run the async entry point
 asyncio.run(main())`,
     content: `
-      <p><strong><code>asyncio</code></strong> is Python's standard library for writing concurrent code using the <code>async</code> / <code>await</code> syntax. It allows you to handle multiple I/O-bound tasks (network requests, file reads, database queries) seemingly in parallel within a single thread.</p>
+      <p><strong><code>asyncio</code></strong> is Python's standard library for writing concurrent code using <code>async</code> / <code>await</code> syntax. It allows you to handle multiple I/O-bound tasks (network requests, file reads, database queries) seemingly in parallel within a single thread. Understanding asyncio is essential for modern Python development — it powers FastAPI, aiohttp, async database drivers, and many other tools.</p>
       <p><strong>Key concepts:</strong></p>
       <ul>
-        <li><strong><code>async def</code></strong> — defines a coroutine (an async function)</li>
-        <li><strong><code>await</code></strong> — yields control back to the event loop, allowing other tasks to run while waiting</li>
-        <li><strong><code>asyncio.run(main())</code></strong> — the entry point that creates and runs the event loop</li>
-        <li><strong><code>asyncio.create_task()</code></strong> — schedules a coroutine to run concurrently</li>
-        <li><strong><code>asyncio.gather()</code></strong> — runs multiple coroutines concurrently and returns all results</li>
+        <li><strong><code>async def</code></strong> — defines a coroutine (an async function). Calling it returns a coroutine object that must be awaited or scheduled.</li>
+        <li><strong><code>await</code></strong> — yields control back to the event loop, allowing other tasks to run while waiting for an I/O operation to complete. This is the cooperative hand-off point.</li>
+        <li><strong><code>asyncio.run(main())</code></strong> — the single entry point that creates, runs, and cleans up the event loop. Call this exactly once in your program.</li>
+        <li><strong><code>asyncio.create_task()</code></strong> — schedules a coroutine to run concurrently as a Task. The task starts executing immediately in the background. You can await it later to get its result.</li>
+        <li><strong><code>asyncio.gather(*coros)</code></strong> — runs multiple coroutines concurrently and returns all results as a list. All coroutines must complete before it returns. If any raises an exception, all other tasks are cancelled.</li>
+        <li><strong><code>asyncio.wait()</code></strong> — more flexible than gather. Accepts a set of tasks/futures and returns two sets: done and pending. Supports <code>timeout</code>, <code>return_when=FIRST_COMPLETED</code>, <code>FIRST_EXCEPTION</code>, or <code>ALL_COMPLETED</code>.</li>
       </ul>
-      <p><strong>When to use asyncio:</strong> I/O-bound tasks where you spend most of the time waiting (web scraping, API calls, database queries). It's <em>not</em> suitable for CPU-bound tasks (calculation, data processing) — use <code>multiprocessing</code> for that.</p>
-      <p><strong>Note:</strong> <code>asyncio.sleep()</code> is the async version of <code>time.sleep()</code>. Never use <code>time.sleep()</code> inside an async function — it blocks the entire event loop.</p>
-      <div class="tip"><strong>Key insight:</strong> asyncio is single-threaded. It achieves concurrency by switching between tasks at <code>await</code> points, not by running code in parallel. Think of it as cooperative multitasking.</div>
+      <p><strong>asyncio vs threading:</strong> Both enable concurrency, but differently. <strong>Threading</strong> uses multiple OS threads with preemptive multitasking — the OS decides when to switch between threads. Threads can run CPU-bound code concurrently (though the GIL limits this for CPU-bound tasks). Threads are harder to reason about due to race conditions and require locks. <strong>asyncio</strong> uses a single thread with cooperative multitasking — your code decides when to yield at <code>await</code> points. There are no race conditions because only one task runs at a time. asyncio is more memory-efficient (tasks are much lighter than threads) and scales to tens of thousands of concurrent tasks. However, asyncio only helps with I/O-bound tasks — for CPU-bound work, use <code>multiprocessing</code>.</p>
+      <p><strong>aiohttp example (real HTTP requests):</strong> Replace the simulated <code>fetch_data</code> with real HTTP calls:</p>
+      <p><code>import aiohttp<br>import asyncio<br><br>async def fetch_url(session, url):<br>&nbsp;&nbsp;&nbsp;&nbsp;async with session.get(url) as response:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return await response.text()<br><br>async def main():<br>&nbsp;&nbsp;&nbsp;&nbsp;urls = ["https://api.github.com", "https://httpbin.org/get"]<br>&nbsp;&nbsp;&nbsp;&nbsp;async with aiohttp.ClientSession() as session:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results = await asyncio.gather(*(fetch_url(session, u) for u in urls))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Fetched {len(results)} pages")<br><br>asyncio.run(main())</code></p>
+      <p>This fetches all URLs concurrently — total time equals the slowest request, not the sum of all requests. For hundreds of URLs, this provides massive speedup compared to sequential requests.</p>
+      <p><strong>Async context managers:</strong> Use <code>async with</code> for resources that need async setup and teardown — like database connections, aiohttp sessions, and file handles:<br><code>async with aiohttp.ClientSession() as session:<br>&nbsp;&nbsp;&nbsp;&nbsp;async with session.get(url) as resp:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = await resp.json()</code></p>
+      <p><strong>Common pitfalls:</strong> Using <code>time.sleep()</code> in async code — blocks the entire event loop; always use <code>asyncio.sleep()</code>. Forgetting to <code>await</code> a coroutine — calling an async function returns a coroutine object, not the result. Not awaiting a <code>create_task</code> result — the task runs but you never see its result or exception. Mixing blocking I/O (file reads, <code>requests</code> library) with asyncio — use asyncio-compatible libraries (aiohttp, aiofiles) instead. Running too many concurrent tasks without rate limiting — use <code>asyncio.Semaphore</code> to limit concurrency. Creating new event loops inside tasks — use <code>asyncio.run()</code> only once.</p>
+      <p><strong>Best practices:</strong> Use <code>asyncio.gather()</code> for simple "run all these and wait" scenarios. Use <code>asyncio.wait()</code> for more control (timeout, first-completed). Use <code>asyncio.create_task()</code> for background tasks that you'll check later. Use <code>asyncio.Semaphore</code> to limit concurrent API calls. Always handle exceptions in tasks — unhandled exceptions in background tasks are silently lost. Keep async functions focused on I/O — move CPU-intensive work to a thread pool with <code>asyncio.to_thread()</code>. Use <code>asyncio.timeout()</code> (Python 3.11+) or <code>asyncio.wait_for()</code> to add timeouts.</p>
+      <p><strong>Real-world use case:</strong> A web scraper that fetches prices from 100 e-commerce pages simultaneously — with asyncio + aiohttp, this completes in the time of the slowest page (~2 seconds) rather than 100 sequential requests (~200 seconds). A rate limiter (<code>Semaphore(5)</code>) ensures only 5 concurrent requests. Results are processed as they arrive using <code>asyncio.as_completed()</code>.</p>
+      <div class="tip"><strong>Try it:</strong> Change <code>asyncio.gather</code> to <code>asyncio.wait</code> with <code>return_when=FIRST_COMPLETED</code> and see which task finishes first. Then add a <code>Semaphore</code> to limit to 1 concurrent task and observe the total time. Finally, intentionally use <code>time.sleep(1)</code> inside an async function and see how it blocks all concurrent tasks.</div>
     `
   },
   {
@@ -1181,15 +1415,22 @@ def managed_file(filename, mode):
         print("Exiting context")
         f.close()`,
     content: `
-      <p><strong>Context managers</strong> let you allocate and release resources precisely using the <code>with</code> statement. The most common example is file handling — the file is automatically closed when the block exits, even if an error occurs.</p>
-      <p><strong>How they work:</strong></p>
+      <p><strong>Context managers</strong> let you allocate and release resources precisely using the <code>with</code> statement. The most familiar example is file handling — <code>with open(...) as f:</code> automatically closes the file when the block exits, even if an exception occurs. This pattern eliminates entire categories of bugs related to resource leaks. Mastering context managers is a hallmark of professional Python code.</p>
+      <p><strong>How context managers work (the protocol):</strong> Any object with <code>__enter__</code> and <code>__exit__</code> methods can be used with <code>with</code>:</p>
       <ul>
-        <li><code>__enter__</code> — runs when entering the <code>with</code> block. Returns the resource (e.g., the file object)</li>
-        <li><code>__exit__</code> — runs when leaving the <code>with</code> block (normal exit, exception, or <code>return</code>). Receives the exception type, value, and traceback. Return <code>True</code> to suppress an exception.</li>
+        <li><code>__enter__(self)</code> — runs when entering the <code>with</code> block. Should return the resource (the value bound to the <code>as</code> variable).</li>
+        <li><code>__exit__(self, exc_type, exc_val, exc_tb)</code> — runs when leaving the block, regardless of how it exits (normal completion, exception, <code>return</code>). Parameters are <code>None</code> if no exception occurred. Return <code>True</code> to suppress an exception (rarely a good idea), or <code>False</code>/<code>None</code> to let exceptions propagate.</li>
       </ul>
-      <p><strong>Using <code>contextlib</code>:</strong> The <code>@contextmanager</code> decorator lets you write context managers as generator functions. The code before <code>yield</code> is <code>__enter__</code>, the yield value is the resource, and the code after <code>yield</code> is <code>__exit__</code> (wrapped in <code>try/finally</code> for safety).</p>
-      <p>Context managers are useful for: file handles, database connections, locks, network sockets, temporary directories, and changing directories temporarily.</p>
-      <div class="tip"><strong>Best practice:</strong> If you see a pattern like <code>open()</code> + <code>close()</code> always paired together, wrap it in a context manager for safety.</div>
+      <p><strong>Using contextlib.contextmanager:</strong> The <code>@contextmanager</code> decorator from <code>contextlib</code> lets you write context managers as simple generator functions, avoiding the need for a class:</p>
+      <p><code>from contextlib import contextmanager<br><br>@contextmanager<br>def database_connection(db_name):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Connecting to {db_name}...")<br>&nbsp;&nbsp;&nbsp;&nbsp;conn = {"name": db_name, "connected": True}&nbsp;&nbsp;# Simulate connection<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield conn&nbsp;&nbsp;# This is the __enter__ return value<br>&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Disconnecting from {db_name}...")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conn["connected"] = False</code></p>
+      <p>The code before <code>yield</code> is <code>__enter__</code>, the yielded value is the resource, and the code after <code>yield</code> (in <code>finally</code>) is <code>__exit__</code>. The <code>try/finally</code> ensures cleanup even if the user's code inside the <code>with</code> block raises an exception. This pattern is cleaner than class-based context managers for most use cases.</p>
+      <p><strong>Nested contexts and combining context managers:</strong> You can nest <code>with</code> statements, or use a single <code>with</code> with multiple context managers separated by commas (Python 2.7+/3.1+):<br><code>with open("input.txt") as infile, open("output.txt", "w") as outfile:<br>&nbsp;&nbsp;&nbsp;&nbsp;outfile.write(infile.read().upper())</code></p>
+      <p>This is equivalent to nested <code>with</code> blocks but more compact. For many context managers, use <code>contextlib.ExitStack</code> for dynamic context management: <code>with ExitStack() as stack: files = [stack.enter_context(open(f)) for f in filenames]</code> — all files are cleaned up when the stack exits, even if an error occurs partway through.</p>
+      <p><strong>Real-world patterns:</strong> <strong>Database connections</strong> — a context manager that acquires a connection from a pool, provides it to the block, and returns it to the pool on exit. <strong>File handles</strong> — Python's built-in <code>open()</code> is a context manager. <strong>Locks</strong> — <code>threading.Lock</code> can be used as a context manager: <code>with lock: critical_section()</code> — automatically acquires and releases the lock. <strong>Timers</strong> — measure wall-clock time for a block of code. <strong>Temporary directories</strong> — create a temp dir, yield its path, and clean it up on exit. <strong>Changing directories</strong> — save current dir, change to a new dir, and restore on exit. <strong>Redirecting stdout</strong> — temporarily redirect print output to a file or buffer.</p>
+      <p><strong>Common mistakes:</strong> Returning a value from <code>__exit__</code> that's not <code>True</code> or <code>False</code> — Python treats any truthy value as "suppress exception," which can unintentionally hide bugs. Relying on <code>__exit__</code> to run after <code>sys.exit()</code> or <code>os._exit()</code> — these terminate immediately without calling context managers. Not wrapping the <code>yield</code> in <code>try/finally</code> in <code>@contextmanager</code> generators — if the block raises an exception, the cleanup code after yield never runs. Using a context manager that swallows exceptions (<code>return True</code>) without logging them first.</p>
+      <p><strong>Best practices:</strong> Always use <code>try/finally</code> around <code>yield</code> in <code>@contextmanager</code> functions. For class-based managers, never suppress exceptions unless you have a very specific reason — let them propagate by returning <code>None</code> or <code>False</code>. Use <code>contextlib.contextmanager</code> for simple cases and class-based for complex resource management. Use <code>contextlib.ExitStack</code> for dynamic or unknown numbers of context managers. Combine related resources in a single context manager when they're always used together.</p>
+      <p><strong>Real-world use case:</strong> A web application that opens a database connection for each request, runs the request handler, and then closes the connection — all wrapped in an <code>@contextmanager</code> that handles connection pooling, error logging, and transaction rollback on failure. This pattern is used by SQLAlchemy's session management and Django's database connections.</p>
+      <div class="tip"><strong>Try it:</strong> Write a <code>@contextmanager</code> that temporarily changes the current working directory: save <code>os.getcwd()</code>, <code>os.chdir(new_dir)</code>, then <code>yield</code>, and in <code>finally</code> restore the original directory. Then test it by printing the working directory inside and outside the context. Finally, combine multiple context managers in a single <code>with</code> statement.</div>
     `
   }
 ];
