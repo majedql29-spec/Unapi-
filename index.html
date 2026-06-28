@@ -755,10 +755,33 @@ body.light-mode .info-close:hover { color: #1e1e1e; background: #f0f0f0; }
 /* ===== SPLASH ===== */
 #splashScreen {
     position: fixed; inset: 0; z-index: 99999; background: #0d1117;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
     animation: splashFade 0.4s ease 3.2s forwards;
 }
-.splash-content { text-align: center; }
+.splash-shape {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    animation: splashFloat 4s ease-in-out infinite;
+}
+.splash-shape-1 {
+    width: 240px; height: 240px; top: -80px; right: -60px;
+    background: radial-gradient(circle, rgba(78,201,176,0.08), transparent 70%);
+    animation-delay: 0s;
+}
+.splash-shape-2 {
+    width: 180px; height: 180px; bottom: -40px; left: -60px;
+    background: radial-gradient(circle, rgba(88,166,255,0.06), transparent 70%);
+    animation-delay: -1.5s;
+}
+.splash-shape-3 {
+    width: 100px; height: 100px; top: 40%; left: 10%;
+    background: radial-gradient(circle, rgba(210,153,34,0.05), transparent 70%);
+    animation-delay: -3s;
+}
+@keyframes splashFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-12px) scale(1.05); }
+}
+.splash-content { position: relative; z-index: 1; text-align: center; }
 .splash-logo {
     width: 64px; height: 64px; border-radius: 14px; overflow: hidden; margin: 0 auto 20px;
     box-shadow: 0 0 0 1px rgba(78,201,176,0.12), 0 8px 32px rgba(0,0,0,0.3);
@@ -885,6 +908,9 @@ body.light-mode .auth-body .auth-skip button { color: #888; }
 body.light-mode .auth-body .auth-skip button:hover { color: #555; background: rgba(0,0,0,0.04); }
 
 body.light-mode #splashScreen { background: #fff; }
+body.light-mode .splash-shape-1 { background: radial-gradient(circle, rgba(35,134,54,0.06), transparent 70%); }
+body.light-mode .splash-shape-2 { background: radial-gradient(circle, rgba(9,105,218,0.05), transparent 70%); }
+body.light-mode .splash-shape-3 { background: radial-gradient(circle, rgba(219,156,17,0.04), transparent 70%); }
 body.light-mode .splash-title { color: #1e1e1e; }
 body.light-mode .splash-sub { color: #888; }
 body.light-mode .cm-keyword { color: #a626a4 !important; }
@@ -930,6 +956,9 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
 <body>
 
 <div id="splashScreen">
+    <div class="splash-shape splash-shape-1"></div>
+    <div class="splash-shape splash-shape-2"></div>
+    <div class="splash-shape splash-shape-3"></div>
     <div class="splash-content">
         <div class="splash-logo"><img src="logo.png" alt="Uscrovis" loading="lazy"></div>
         <div class="splash-title">Uscrovis</div>
