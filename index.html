@@ -460,6 +460,14 @@ body.light-mode .btn-signin:hover { background: rgba(35,134,54,0.08); }
 .btn-learn:hover { border-color: #4ec9b0; color: #4ec9b0; background: rgba(78,201,176,0.05); }
 body.light-mode .btn-learn { color: #1e1e1e; border-color: #d0d7de; }
 body.light-mode .btn-learn:hover { border-color: #238636; color: #238636; }
+.btn-donate {
+    background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: none; font-weight: 600;
+    padding: 8px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 5px; font-family: inherit; box-shadow: 0 2px 8px rgba(245,158,11,0.2);
+}
+.btn-donate:hover { box-shadow: 0 4px 20px rgba(245,158,11,0.35); transform: translateY(-1px); }
+.btn-donate:active { transform: translateY(0); }
+body.light-mode .btn-donate { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
 .btn-sm { padding: 4px 12px; font-size: 11px; border-radius: 8px; }
 /* ===== MAIN ===== */
 .main { display: flex; flex: 1; overflow: hidden; }
@@ -1288,6 +1296,7 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
         <button id="mobileToggle" title="Toggle sidebar">&#9776;</button>
         <span id="openFileLabel" style="font-size:11px;color:#8b949e;display:none"></span>
         <a href="learn.html" class="btn btn-learn" id="learnBtn">&#128218; Learn</a>
+        <button class="btn btn-donate" id="donateHeaderBtn">&#10084;&#65039; Donate</button>
         <button class="btn btn-run" id="runBtn">▶ Run</button>
         <button class="btn btn-signin" id="signInBtn" style="display:none">Sign In</button>
         <button class="avatar-btn" id="avatarBtn">?</button>
@@ -2266,12 +2275,14 @@ clearBtn.addEventListener('click', () => { output.innerHTML = ''; });
 
 // ===== DONATE MODAL =====
 const donateBtn = document.getElementById('donateBtn');
+const donateHeaderBtn = document.getElementById('donateHeaderBtn');
 const donateOverlay = document.getElementById('donateOverlay');
 const donateClose = document.getElementById('donateClose');
-if (donateBtn && donateOverlay) {
+if (donateOverlay) {
     function openDonate() { donateOverlay.classList.add('open'); }
     function closeDonate() { donateOverlay.classList.remove('open'); }
-    donateBtn.addEventListener('click', openDonate);
+    if (donateBtn) donateBtn.addEventListener('click', openDonate);
+    if (donateHeaderBtn) donateHeaderBtn.addEventListener('click', openDonate);
     donateClose.addEventListener('click', closeDonate);
     donateOverlay.addEventListener('click', e => { if (e.target === donateOverlay) closeDonate(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && donateOverlay.classList.contains('open')) closeDonate(); });
