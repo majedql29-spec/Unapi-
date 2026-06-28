@@ -128,6 +128,22 @@ body.light-mode .learn-content .tip strong { color: #238636; }
 .btn-run:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(35,134,54,0.4); }
 .btn-run:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
+/* ===== AD SECTION ===== */
+.ad-section {
+  margin-top: 40px; padding-top: 24px;
+  border-top: 1px solid #21262d; text-align: center;
+}
+body.light-mode .ad-section { border-top-color: #e0e0e0; }
+.ad-label {
+  font-size: 9px; color: #484f58; text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+body.light-mode .ad-label { color: #bbb; }
+.ad-inner {
+  max-width: 468px; margin: 0 auto;
+}
+.ad-inner iframe { border: 0; padding: 0; width: 100%; height: auto; overflow: hidden; display: block; margin: auto; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .learn-panel { flex-direction: column; }
@@ -264,7 +280,8 @@ function showLesson(i) {
   const body = document.getElementById('learnBody');
   body.innerHTML = lesson.content +
     '<div class="code-block">' + lesson.code + '</div>' +
-    '<button class="btn btn-run" onclick="openInEditor(' + i + ')" style="margin-top:12px">Open in Editor & Run</button>';
+    '<button class="btn btn-run" onclick="openInEditor(' + i + ')" style="margin-top:12px">Open in Editor & Run</button>' +
+    '<div class="ad-section"><div class="ad-label">\u2014 Ad \u2014</div><div class="ad-inner"><iframe data-aa="2445989" src="//acceptable.a-ads.com/2445989/?size=Adaptive" style="border:0;padding:0;width:100%;height:auto;overflow:hidden;display:block;margin:auto"></iframe></div></div>';
 }
 
 function openInEditor(i) {
