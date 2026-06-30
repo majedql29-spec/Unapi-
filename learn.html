@@ -357,19 +357,6 @@ body.light-mode .lesson-nav .nav-btn:disabled:hover { border-color: #d0d7de; col
 .nav-center { font-size: 11px; color: #484f58; }
 body.light-mode .nav-center { color: #888; }
 
-/* ===== AD SECTION ===== */
-.ad-section {
-  margin-top: 40px; padding-top: 24px;
-  border-top: 1px solid #21262d; text-align: center;
-}
-body.light-mode .ad-section { border-top-color: #e0e0e0; }
-.ad-label {
-  font-size: 9px; color: #484f58; text-transform: uppercase; letter-spacing: 1.5px;
-  margin-bottom: 16px;
-}
-body.light-mode .ad-label { color: #bbb; }
-.ad-inner { max-width: 468px; margin: 0 auto; }
-.ad-inner iframe { border: 0; padding: 0; width: 100%; height: auto; overflow: hidden; display: block; margin: auto; }
 
 /* ===== KBD HINT ===== */
 .kbd-hint {
@@ -1534,7 +1521,7 @@ function showLesson(i) {
       '<span class="nav-center">' + (i + 1) + ' / ' + LESSONS.length + '</span>' +
       '<button class="nav-btn" onclick="goLesson(' + (i + 1) + ')"' + (nextDisabled ? ' disabled' : '') + '>Next &rarr;</button>' +
     '</div>' +
-    '<div class="ad-section"><div class="ad-label">\u2014 Ad \u2014</div><div class="ad-inner"><iframe data-aa="2445996" src="//ad.a-ads.com/2445996/?size=320x100" style="border:0;padding:0;width:320px;height:100px;overflow:hidden;display:block;margin:auto"></iframe></div></div>';
+'';
 
   // Reset reading progress
   document.getElementById('readingProgress').style.width = '0%';
