@@ -6,7 +6,6 @@ import os
 import tempfile
 import socketserver
 import time
-import re
 from collections import defaultdict
 
 MAX_CODE_SIZE = 100_000
@@ -106,6 +105,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.path = '/index.html'
+        if self.path.endswith('.py') or self.path.endswith('.env') or '.git' in self.path:
+            self.send_error(403)
+            return
         return super().do_GET()
 
     def log_message(self, format, *args): pass
