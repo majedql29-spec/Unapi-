@@ -5,6 +5,8 @@ import sys
 import os
 import tempfile
 import socketserver
+import time
+from collections import defaultdict
 
 BLOCKED_PATTERNS = [
     'import os', 'from os', 'import subprocess', 'from subprocess',
@@ -15,6 +17,18 @@ BLOCKED_PATTERNS = [
     'open("/', "open('/", 'open("c:', "open('c:",
     '__builtins__', '__builtins__.',
 ]
+
+RATE_LIMIT = 10
+RATE_WINDOW = 60
+_rate_map = defaultdict(list)
+
+def is_rate_limited(ip):
+    now = time.time()
+    _rate_map[ip] = [t for t in _rate_map[ip] if now - t < RATE_WINDOW]
+    if len(_rate_map[ip]) >= RATE_LIMIT:
+        return True
+    _rate_map[ip].append(now)
+    return False
 
 def is_code_safe(code):
     for pat in BLOCKED_PATTERNS:
@@ -46,6 +60,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):
         if self.path == '/api/run':
+            ip = self.client_address[0]
+            if is_rate_limited(ip):
+                return self.send_json({'output': '', 'error': 'Rate limit exceeded (10 runs per minute)'})
             data = self.read_body()
             code = data.get('code', '')
             safe, reason = is_code_safe(code)
