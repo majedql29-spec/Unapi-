@@ -10,10 +10,10 @@
   --text-primary: #e1e1e6;
   --text-secondary: #8b8b9e;
   --text-muted: #5c5c70;
-  --accent: #f97316;
-  --accent-hover: #fb923c;
-  --accent-dim: rgba(249, 115, 22, 0.15);
-  --accent-glow: rgba(249, 115, 22, 0.3);
+  --accent: #d9d9d9;
+  --accent-hover: #ffffff;
+  --accent-dim: rgba(217, 217, 217, 0.15);
+  --accent-glow: rgba(217, 217, 217, 0.3);
   --success: #22c55e;
   --error: #ef4444;
   --radius: 8px;
@@ -38,9 +38,9 @@ body.light-mode {
   --text-primary: #212529;
   --text-secondary: #6c757d;
   --text-muted: #adb5bd;
-  --accent: #d97706;
-  --accent-hover: #f59e0b;
-  --accent-dim: rgba(217, 119, 6, 0.1);
+  --accent: #222222;
+  --accent-hover: #000000;
+  --accent-dim: rgba(34, 34, 34, 0.1);
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
