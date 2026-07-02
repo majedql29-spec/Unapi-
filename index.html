@@ -621,15 +621,6 @@ body.light-mode .btn-signin:hover { background: rgba(217,119,6,0.08); }
 .btn-donate:active { transform: translateY(0); }
 .btn-sm { padding: 5px 14px; font-size: 11px; border-radius: 8px; }
 
-/* ===== PREVIEW PANEL ===== */
-.btn-preview { background: transparent; color: #8b949e; border: 1px solid #262633; }
-.btn-preview:hover { border-color: #f97316; color: #f97316; }
-.btn-preview.active { background: rgba(249,115,22,0.1); border-color: #f97316; color: #f97316; }
-#outputPanel.preview-mode #output { display: none; }
-#outputPanel.preview-mode #previewFrame { display: block; }
-body.light-mode .btn-preview { color: #656d76; border-color: #d0d7de; }
-body.light-mode .btn-preview:hover { border-color: #d97706; color: #d97706; }
-body.light-mode .btn-preview.active { background: rgba(217,119,6,0.08); border-color: #d97706; color: #d97706; }
 
 
 /* ===== DROPDOWN LEARN ===== */
@@ -728,30 +719,6 @@ body.light-mode .drop-item .di-badge { background: #e9ecef; color: #666; }
 }
 
 /* ===== SIDEBAR LANGUAGE SECTION ===== */
-.sidebar-section { border-top: 1px solid #22222e; }
-.sidebar-section-header {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 12px; font-size: 11px; font-weight: 600;
-    color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px;
-}
-.sidebar-section-header svg { opacity: 0.6; flex-shrink: 0; }
-.sidebar-lang-list { padding: 2px 6px 8px; }
-.sidebar-lang-item {
-    display: flex; align-items: center; gap: 8px;
-    width: 100%; padding: 6px 10px; border: none; border-radius: 6px;
-    background: transparent; color: #d1d5e0; font-size: 13px; cursor: pointer;
-    font-family: inherit; transition: all 0.12s; text-align: left;
-}
-.sidebar-lang-item:hover { background: #1a1a2e; color: #fff; }
-.sidebar-lang-item.active { background: rgba(249,115,22,0.1); color: #f97316; }
-.sli-dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-body.light-mode .sidebar-section { border-top-color: #e0e2e8; }
-body.light-mode .sidebar-section-header { color: #656d76; }
-body.light-mode .sidebar-lang-item { color: #1e1e1e; }
-body.light-mode .sidebar-lang-item:hover { background: #f0f2f5; }
-body.light-mode .sidebar-lang-item.active { background: rgba(217,119,6,0.08); color: #d97706; }
 
 /* Donate Modal */
 #donateOverlay {
@@ -1648,30 +1615,7 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
             </span>
         </div>
         <div class="sidebar-content" id="fileTree"></div>
-        <div class="sidebar-section" id="langSection">
-            <div class="sidebar-section-header">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                <span>Languages</span>
-            </div>
-            <div class="sidebar-lang-list">
-                <button class="sidebar-lang-item active" data-lang="python">
-                    <span class="sli-dot" style="background:#f97316"></span>
-                    <span>Python</span>
-                </button>
-                <button class="sidebar-lang-item" data-lang="html">
-                    <span class="sli-dot" style="background:#e34c26"></span>
-                    <span>HTML</span>
-                </button>
-                <button class="sidebar-lang-item" data-lang="css">
-                    <span class="sli-dot" style="background:#2965f1"></span>
-                    <span>CSS</span>
-                </button>
-                <button class="sidebar-lang-item" data-lang="javascript">
-                    <span class="sli-dot" style="background:#f0db4f"></span>
-                    <span>JavaScript</span>
-                </button>
-            </div>
-        </div>
+        <div class="sidebar-footer" id="sidebarFooter"></div>
         <div class="sidebar-footer" id="sidebarFooter"></div>
     </div>
     <div class="resize-handle" id="resizeSidebar"></div>
@@ -1680,16 +1624,14 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
         <textarea id="editor"></textarea>
     </div>
     <div class="resize-handle" id="resizeOutput"></div>
-    <div class="output-panel" id="outputPanel">
+        <div class="output-panel" id="outputPanel">
         <div class="panel-header" id="outputHeader">
-            <span id="outputLabel">📟 Output</span>
+            <span>📟 Output</span>
             <div class="output-actions">
-                <button class="btn btn-preview btn-sm" id="previewToggle" style="display:none">Preview</button>
                 <button class="btn btn-clear btn-sm" id="clearBtn">Clear</button>
             </div>
         </div>
         <div id="output"><span class="info">// Ready</span></div>
-        <iframe id="previewFrame" style="display:none;width:100%;flex:1;border:none;background:#fff"></iframe>
     </div>
 </div>
 </div>
@@ -1757,14 +1699,9 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
 <script>
-const LANG_CODES = {
-    python: `import math
+const DEFAULT_CODE = `import math
 
 def solve_quadratic(a, b, c):
     d = b**2 - 4*a*c
@@ -1916,9 +1853,7 @@ function setupCounter() {
 console.log(greet('User'));
 console.log('Array methods:');
 [1, 2, 3, 4, 5].forEach(n => console.log(n * 2));
-`
-};
-const DEFAULT_CODE = LANG_CODES.python;
+`;
 let auth = null;
 let currentUser = localStorage.getItem('currentUser');
 let currentFilePath = 'main.py';
@@ -2000,45 +1935,6 @@ CodeMirror.registerHelper("hint", "python", function(cm) {
     console.warn('CodeMirror error:', e.message);
 }
 
-// ===== LANGUAGE SELECTOR =====
-const previewToggle = document.getElementById('previewToggle');
-const previewFrame = document.getElementById('previewFrame');
-const outputLabel = document.getElementById('outputLabel');
-const sidebarLangItems = document.querySelectorAll('.sidebar-lang-item');
-const CM_MODES = { python: 'python', html: 'htmlmixed', css: 'css', javascript: 'javascript' };
-
-function switchLanguage(lang) {
-    currentLang = lang;
-    sidebarLangItems.forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
-    cm.setOption('mode', CM_MODES[lang]);
-    if (lang === 'python') {
-        previewToggle.style.display = 'none';
-        outputLabel.textContent = '📟 Output';
-        previewFrame.style.display = 'none';
-        document.getElementById('outputPanel').classList.remove('preview-mode');
-        document.getElementById('output').style.display = '';
-        previewToggle.classList.remove('active');
-    } else {
-        previewToggle.style.display = 'inline-flex';
-        outputLabel.textContent = '📟 Output';
-        if (document.getElementById('outputPanel').classList.contains('preview-mode')) {
-            previewFrame.style.display = 'block';
-            document.getElementById('output').style.display = 'none';
-        }
-    }
-    cm.setValue(LANG_CODES[lang]);
-    cm.focus();
-}
-
-sidebarLangItems.forEach(item => {
-    item.addEventListener('click', () => switchLanguage(item.dataset.lang));
-});
-
-previewToggle.addEventListener('click', () => {
-    const panel = document.getElementById('outputPanel');
-    panel.classList.toggle('preview-mode');
-    previewToggle.classList.toggle('active');
-});
 
 // ===== DOM =====
 const output = document.getElementById('output');
@@ -2790,51 +2686,29 @@ runBtn.addEventListener('click', async () => {
     output.innerHTML = '';
     runBtn.disabled = true; runBtn.textContent = '...';
     addOutputLine('Running at ' + nowStamp(), 'info-text');
+    addTypingIndicator();
+
+    const t0 = performance.now();
     try {
-        if (currentLang === 'python') {
-            addTypingIndicator();
-            const t0 = performance.now();
-            const res = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
-            const t1 = performance.now();
-            const elapsed = ((t1 - t0) / 1000).toFixed(2);
-            removeTypingIndicator();
-            if (res.ok) {
-                addOutputSep();
-                const data = await res.json();
-                if (data.output) data.output.split('\n').forEach(l => addOutputLine(l || ' ', 'stdout'));
-                if (data.error) data.error.split('\n').forEach(l => addOutputLine(l || ' ', 'stderr'));
-                if (!data.output && !data.error) addOutputLine('Done (no output)', 'success');
-                addOutputLine('Exit: 0  |  ' + elapsed + 's', 'info-text');
-            } else {
-                addOutputLine('Server error: ' + res.status, 'error-text');
-            }
+        const res = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
+        const t1 = performance.now();
+        const elapsed = ((t1 - t0) / 1000).toFixed(2);
+        removeTypingIndicator();
+        if (res.ok) {
+            addOutputSep();
+            const data = await res.json();
+            if (data.output) data.output.split('\n').forEach(l => addOutputLine(l || ' ', 'stdout'));
+            if (data.error) data.error.split('\n').forEach(l => addOutputLine(l || ' ', 'stderr'));
+            if (!data.output && !data.error) addOutputLine('Done (no output)', 'success');
+            addOutputLine('Exit: 0  |  ' + elapsed + 's', 'info-text');
         } else {
-            const panel = document.getElementById('outputPanel');
-            panel.classList.add('preview-mode');
-            previewToggle.classList.add('active');
-            const t0 = performance.now();
-            let html = code;
-            if (currentLang === 'css') {
-                html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CSS Preview</title><style>' + code + '</style></head><body><div class="card"><h1>CSS Preview</h1><p>Your styles are applied below.</p><button class="btn" onclick="alert(\'Hi!\')">Click me</button></div></body></html>';
-            } else if (currentLang === 'javascript') {
-                html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JS Preview</title></head><body><div id="app"><h1>JavaScript Preview</h1><div id="counter" style="font-size:32px;font-weight:bold;color:#f97316">0</div><button id="incBtn" style="background:#f97316;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer">+1</button></div><script>' + code + '<\/script></body></html>';
-            }
-            const blob = new Blob([html], { type: 'text/html' });
-            previewFrame.src = URL.createObjectURL(blob);
-            const t1 = performance.now();
-            addOutputLine('Rendered in ' + ((t1 - t0) / 1000).toFixed(2) + 's', 'success');
+            addOutputLine('Server error: ' + res.status, 'error-text');
         }
     } catch (e) {
         removeTypingIndicator();
-        if (currentLang === 'python') {
-            addOutputLine('Connection error — check your internet', 'error-text');
-        } else {
-            addOutputLine('Rendering error: ' + e.message, 'error-text');
-        }
-    } finally {
-        runBtn.disabled = false;
-        runBtn.textContent = '▶ Run';
+        addOutputLine('Connection error — check your internet', 'error-text');
     }
+    finally { runBtn.disabled = false; runBtn.textContent = '▶ Run'; }
 });
 
 clearBtn.addEventListener('click', () => { output.innerHTML = ''; });
