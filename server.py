@@ -103,6 +103,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_error_json('Not found')
 
     def do_GET(self):
+        host = self.headers.get('Host', '')
+        if 'jometcode.onrender.com' in host:
+            self.send_response(301)
+            self.send_header('Location', 'https://jometcode.2bd.net/')
+            self.end_headers()
+            return
         if self.path == '/':
             self.path = '/index.html'
         if self.path.endswith('.py') or self.path.endswith('.env') or '.git' in self.path:
