@@ -621,6 +621,51 @@ body.light-mode .btn-signin:hover { background: rgba(217,119,6,0.08); }
 .btn-donate:active { transform: translateY(0); }
 .btn-sm { padding: 5px 14px; font-size: 11px; border-radius: 8px; }
 
+/* ===== LANGUAGE SELECTOR ===== */
+.lang-selector { position: relative; display: inline-flex; }
+.lang-btn {
+    background: #12121e; border: 1px solid #1e1e30; color: #d1d5e0;
+    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    cursor: pointer; font-family: inherit; transition: all 0.15s;
+    display: inline-flex; align-items: center; gap: 4px;
+}
+.lang-btn:hover { border-color: #f97316; color: #f97316; }
+.lang-btn .drop-arrow { font-size: 7px; color: #5a5f7a; transition: transform 0.2s; }
+.lang-btn:hover .drop-arrow { color: #f97316; }
+.lang-btn.open .drop-arrow { transform: rotate(180deg); }
+.lang-menu {
+    position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px);
+    background: #16161e; border: 1px solid #22222e; border-radius: 10px;
+    padding: 4px; min-width: 130px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    opacity: 0; visibility: hidden; transition: all 0.15s ease; z-index: 100;
+}
+.lang-selector.open .lang-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.lang-option {
+    display: block; width: 100%; padding: 7px 14px; border: none; background: transparent;
+    color: #8b949e; font-size: 12px; cursor: pointer; border-radius: 6px;
+    font-family: inherit; text-align: left; transition: all 0.1s;
+}
+.lang-option:hover { background: rgba(255,255,255,0.04); color: #d1d5e0; }
+.lang-option.active { background: rgba(249,115,22,0.1); color: #f97316; }
+/* ===== PREVIEW PANEL ===== */
+.btn-preview { background: transparent; color: #8b949e; border: 1px solid #262633; }
+.btn-preview:hover { border-color: #f97316; color: #f97316; }
+.btn-preview.active { background: rgba(249,115,22,0.1); border-color: #f97316; color: #f97316; }
+#outputPanel.preview-mode #output { display: none; }
+#outputPanel.preview-mode #previewFrame { display: block; }
+body.light-mode .btn-preview { color: #656d76; border-color: #d0d7de; }
+body.light-mode .btn-preview:hover { border-color: #d97706; color: #d97706; }
+body.light-mode .btn-preview.active { background: rgba(217,119,6,0.08); border-color: #d97706; color: #d97706; }
+
+body.light-mode .lang-btn { background: #f0f2f5; border-color: #d0d7de; color: #1e1e1e; }
+body.light-mode .lang-btn:hover { border-color: #d97706; color: #d97706; }
+body.light-mode .lang-btn:hover .drop-arrow { color: #d97706; }
+body.light-mode .lang-menu { background: rgba(255,255,255,0.97); border-color: #d0d7de; }
+body.light-mode .lang-option { color: #656d76; }
+body.light-mode .lang-option:hover { background: #f6f8fa; color: #1e1e1e; }
+body.light-mode .lang-option.active { background: rgba(217,119,6,0.08); color: #d97706; }
+
 /* ===== DROPDOWN LEARN ===== */
 .drop-wrap { position: relative; display: inline-flex; }
 .drop-trigger {
@@ -1584,6 +1629,15 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
             </div>
         </div>
         <a href="learn.html#donate" class="drop-trigger" id="donateHeaderBtn" title="Support JometCode" style="text-decoration:none">Donate <span style="color:#f59e0b">&#10084;</span></a>
+        <div class="lang-selector" id="langSelector">
+            <button class="lang-btn" id="langBtn">Python <span class="drop-arrow">&#9660;</span></button>
+            <div class="lang-menu" id="langMenu">
+                <button class="lang-option active" data-lang="python">Python</button>
+                <button class="lang-option" data-lang="html">HTML</button>
+                <button class="lang-option" data-lang="css">CSS</button>
+                <button class="lang-option" data-lang="javascript">JavaScript</button>
+            </div>
+        </div>
     </div>
     <div class="header-right">
         <button id="mobileToggle" title="Toggle sidebar">&#9776;</button>
@@ -1620,12 +1674,14 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
     <div class="resize-handle" id="resizeOutput"></div>
     <div class="output-panel" id="outputPanel">
         <div class="panel-header" id="outputHeader">
-            <span>📟 Output</span>
+            <span id="outputLabel">📟 Output</span>
             <div class="output-actions">
+                <button class="btn btn-preview btn-sm" id="previewToggle" style="display:none">Preview</button>
                 <button class="btn btn-clear btn-sm" id="clearBtn">Clear</button>
             </div>
         </div>
         <div id="output"><span class="info">// Ready</span></div>
+        <iframe id="previewFrame" style="display:none;width:100%;flex:1;border:none;background:#fff"></iframe>
     </div>
 </div>
 </div>
@@ -1693,9 +1749,14 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
 <script>
-const DEFAULT_CODE = `import math
+const LANG_CODES = {
+    python: `import math
 
 def solve_quadratic(a, b, c):
     d = b**2 - 4*a*c
@@ -1777,7 +1838,79 @@ e = sum(1/factorial(n) for n in range(20))
 print(f"Euler's number (approx): {e}")
 print(f"Golden ratio: {(1 + math.sqrt(5)) / 2}")
 print(f"Natural log of 1000: {math.log(1000):.4f}")
-`;
+`,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #f97316; }
+        .card { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Hello from JometCode!</h1>
+    <div class="card">
+        <p>This is HTML rendered live in your browser.</p>
+        <button onclick="alert('Hi!')">Click me</button>
+    </div>
+</body>
+</html>`,
+    css: `/* CSS Demo - style anything on this page */
+body {
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #0b0b10, #1a1a22);
+    color: #e1e1e6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.card {
+    background: #16161e;
+    border: 1px solid #262633;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.card h1 { color: #f97316; margin: 0 0 12px; font-size: 28px; }
+.card p { color: #8b8b9e; line-height: 1.6; margin: 0 0 20px; }
+.card .btn {
+    background: #f97316; color: #fff; border: none;
+    padding: 10px 24px; border-radius: 24px; font-size: 14px;
+    cursor: pointer; transition: all 0.2s;
+}
+.card .btn:hover { background: #fb923c; transform: translateY(-2px); }`,
+    javascript: `// JavaScript Playground - write and run JS in your browser
+function greet(name) {
+    return \`Hello, \${name}! Welcome to JometCode.\`;
+}
+
+// DOM manipulation example
+function setupCounter() {
+    let count = 0;
+    const display = document.getElementById('counter');
+    document.getElementById('incBtn').addEventListener('click', () => {
+        count++;
+        display.textContent = count;
+    });
+}
+
+// Call functions
+console.log(greet('User'));
+console.log('Array methods:');
+[1, 2, 3, 4, 5].forEach(n => console.log(n * 2));
+`
+};
+const DEFAULT_CODE = LANG_CODES.python;
 let auth = null;
 let currentUser = localStorage.getItem('currentUser');
 let currentFilePath = 'main.py';
@@ -1858,6 +1991,57 @@ CodeMirror.registerHelper("hint", "python", function(cm) {
 } catch (e) {
     console.warn('CodeMirror error:', e.message);
 }
+
+// ===== LANGUAGE SELECTOR =====
+const langBtn = document.getElementById('langBtn');
+const langSelector = document.getElementById('langSelector');
+const langOptions = document.querySelectorAll('.lang-option');
+const previewToggle = document.getElementById('previewToggle');
+const previewFrame = document.getElementById('previewFrame');
+const outputLabel = document.getElementById('outputLabel');
+const CM_MODES = { python: 'python', html: 'htmlmixed', css: 'css', javascript: 'javascript' };
+
+function switchLanguage(lang) {
+    currentLang = lang;
+    langBtn.innerHTML = lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="drop-arrow">&#9660;</span>';
+    langOptions.forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
+    langSelector.classList.remove('open');
+    cm.setOption('mode', CM_MODES[lang]);
+    if (lang === 'python') {
+        cm.setOption('theme', 'default');
+        previewToggle.style.display = 'none';
+        outputLabel.textContent = '📟 Output';
+        previewFrame.style.display = 'none';
+        document.getElementById('outputPanel').classList.remove('preview-mode');
+        document.getElementById('output').style.display = '';
+        previewToggle.classList.remove('active');
+    } else {
+        previewToggle.style.display = 'inline-flex';
+        outputLabel.textContent = '📟 Output';
+        if (document.getElementById('outputPanel').classList.contains('preview-mode')) {
+            previewFrame.style.display = 'block';
+            document.getElementById('output').style.display = 'none';
+        }
+    }
+    cm.setValue(LANG_CODES[lang]);
+    cm.focus();
+}
+
+langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langSelector.classList.toggle('open');
+});
+document.addEventListener('click', () => langSelector.classList.remove('open'));
+
+langOptions.forEach(opt => {
+    opt.addEventListener('click', () => switchLanguage(opt.dataset.lang));
+});
+
+previewToggle.addEventListener('click', () => {
+    const panel = document.getElementById('outputPanel');
+    panel.classList.toggle('preview-mode');
+    previewToggle.classList.toggle('active');
+});
 
 // ===== DOM =====
 const output = document.getElementById('output');
@@ -2609,29 +2793,51 @@ runBtn.addEventListener('click', async () => {
     output.innerHTML = '';
     runBtn.disabled = true; runBtn.textContent = '...';
     addOutputLine('Running at ' + nowStamp(), 'info-text');
-    addTypingIndicator();
-
-    const t0 = performance.now();
     try {
-        const res = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
-        const t1 = performance.now();
-        const elapsed = ((t1 - t0) / 1000).toFixed(2);
-        removeTypingIndicator();
-        if (res.ok) {
-            addOutputSep();
-            const data = await res.json();
-            if (data.output) data.output.split('\n').forEach(l => addOutputLine(l || ' ', 'stdout'));
-            if (data.error) data.error.split('\n').forEach(l => addOutputLine(l || ' ', 'stderr'));
-            if (!data.output && !data.error) addOutputLine('Done (no output)', 'success');
-            addOutputLine('Exit: 0  |  ' + elapsed + 's', 'info-text');
+        if (currentLang === 'python') {
+            addTypingIndicator();
+            const t0 = performance.now();
+            const res = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
+            const t1 = performance.now();
+            const elapsed = ((t1 - t0) / 1000).toFixed(2);
+            removeTypingIndicator();
+            if (res.ok) {
+                addOutputSep();
+                const data = await res.json();
+                if (data.output) data.output.split('\n').forEach(l => addOutputLine(l || ' ', 'stdout'));
+                if (data.error) data.error.split('\n').forEach(l => addOutputLine(l || ' ', 'stderr'));
+                if (!data.output && !data.error) addOutputLine('Done (no output)', 'success');
+                addOutputLine('Exit: 0  |  ' + elapsed + 's', 'info-text');
+            } else {
+                addOutputLine('Server error: ' + res.status, 'error-text');
+            }
         } else {
-            addOutputLine('Server error: ' + res.status, 'error-text');
+            const panel = document.getElementById('outputPanel');
+            panel.classList.add('preview-mode');
+            previewToggle.classList.add('active');
+            const t0 = performance.now();
+            let html = code;
+            if (currentLang === 'css') {
+                html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CSS Preview</title><style>' + code + '</style></head><body><div class="card"><h1>CSS Preview</h1><p>Your styles are applied below.</p><button class="btn" onclick="alert(\'Hi!\')">Click me</button></div></body></html>';
+            } else if (currentLang === 'javascript') {
+                html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JS Preview</title></head><body><div id="app"><h1>JavaScript Preview</h1><div id="counter" style="font-size:32px;font-weight:bold;color:#f97316">0</div><button id="incBtn" style="background:#f97316;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer">+1</button></div><script>' + code + '<\/script></body></html>';
+            }
+            const blob = new Blob([html], { type: 'text/html' });
+            previewFrame.src = URL.createObjectURL(blob);
+            const t1 = performance.now();
+            addOutputLine('Rendered in ' + ((t1 - t0) / 1000).toFixed(2) + 's', 'success');
         }
     } catch (e) {
         removeTypingIndicator();
-        addOutputLine('Connection error — check your internet', 'error-text');
+        if (currentLang === 'python') {
+            addOutputLine('Connection error — check your internet', 'error-text');
+        } else {
+            addOutputLine('Rendering error: ' + e.message, 'error-text');
+        }
+    } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = '▶ Run';
     }
-    finally { runBtn.disabled = false; runBtn.textContent = '▶ Run'; }
 });
 
 clearBtn.addEventListener('click', () => { output.innerHTML = ''; });
