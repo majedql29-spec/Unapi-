@@ -8,7 +8,12 @@ import socketserver
 import time
 from collections import defaultdict
 
-MAX_CODE_SIZE = 100_000
+try:
+    import resource as _resource
+except ImportError:
+    _resource = None
+
+MAX_CODE_SIZE = 30_000
 
 BLOCKED_MODULES = [
     'os', 'subprocess', 'shutil', 'ctypes', 'sys', 'socket',
@@ -18,6 +23,7 @@ BLOCKED_MODULES = [
     'importlib', 'builtins', 'requests', 'httpx', 'aiohttp',
     'urllib3', 'inspect', 'code', 'pdb', 'webbrowser',
     'runpy', 'compileall', 'py_compile', 'zipimport',
+    'antigravity', 'turtle', 'tkinter',
 ]
 
 BLOCKED_PATTERNS = [
@@ -25,18 +31,26 @@ BLOCKED_PATTERNS = [
     'exec(', 'eval(', 'compile(',
     'open("/', "open('/", 'open("c:', "open('c:",
     'open( "', "open( '", 'open(b"', "open(b'",
-    'breakpoint(',
+    'breakpoint(', 'help(',
+    'vars(', 'globals(', 'locals(',
 ] + [f'import {m}' for m in BLOCKED_MODULES] \
   + [f'from {m}' for m in BLOCKED_MODULES]
 
-RATE_LIMIT = 10
+RATE_LIMIT = 5
 RATE_WINDOW = 60
+BLACKLIST_TIME = 300
 _rate_map = defaultdict(list)
+_blacklist = {}
 
 def is_rate_limited(ip):
     now = time.time()
+    if ip in _blacklist:
+        if now - _blacklist[ip] < BLACKLIST_TIME:
+            return True
+        del _blacklist[ip]
     _rate_map[ip] = [t for t in _rate_map[ip] if now - t < RATE_WINDOW]
     if len(_rate_map[ip]) >= RATE_LIMIT:
+        _blacklist[ip] = now
         return True
     _rate_map[ip].append(now)
     return False
@@ -69,9 +83,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def send_error_json(self, msg, code=400):
         self.send_json({'error': msg}, code)
 
+    MAX_BODY_SIZE = 50_000
+
     def read_body(self):
         length = int(self.headers.get('Content-Length', 0))
-        if length > MAX_CODE_SIZE + 1000:
+        if length > self.MAX_BODY_SIZE:
             raise ValueError('Request body too large')
         return json.loads(self.rfile.read(length))
 
@@ -85,7 +101,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path == '/api/run':
             ip = self.client_address[0]
             if is_rate_limited(ip):
-                return self.send_json({'output': '', 'error': 'Rate limit exceeded (10 runs per minute)'})
+                return self.send_json({'output': '', 'error': 'Rate limit exceeded (5 runs per minute)'})
             try:
                 data = self.read_body()
             except Exception:
@@ -98,13 +114,18 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             try:
                 with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False, encoding='utf-8') as f:
                     f.write(code); fname = f.name
+                kwargs = {}
+                if _resource:
+                    kwargs['preexec_fn'] = lambda: (
+                        _resource.setrlimit(_resource.RLIMIT_CPU, (5, 5)),
+                    )
                 res = subprocess.run(
-                    [sys.executable, '-I', fname],
-                    capture_output=True, text=True, timeout=10
+                    [sys.executable, '-I', '-u', fname],
+                    capture_output=True, text=True, timeout=5, **kwargs
                 )
                 self.send_json({'output': res.stdout, 'error': res.stderr})
             except subprocess.TimeoutExpired:
-                self.send_json({'output': '', 'error': 'Timeout (10 seconds)'})
+                self.send_json({'output': '', 'error': 'Timeout (5 seconds)'})
             except Exception:
                 self.send_json({'output': '', 'error': 'Execution error'})
             finally:
