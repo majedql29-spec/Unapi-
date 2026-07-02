@@ -621,33 +621,6 @@ body.light-mode .btn-signin:hover { background: rgba(217,119,6,0.08); }
 .btn-donate:active { transform: translateY(0); }
 .btn-sm { padding: 5px 14px; font-size: 11px; border-radius: 8px; }
 
-/* ===== LANGUAGE SELECTOR ===== */
-.lang-selector { position: relative; display: inline-flex; }
-.lang-btn {
-    background: #12121e; border: 1px solid #1e1e30; color: #d1d5e0;
-    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
-    cursor: pointer; font-family: inherit; transition: all 0.15s;
-    display: inline-flex; align-items: center; gap: 4px;
-}
-.lang-btn:hover { border-color: #f97316; color: #f97316; }
-.lang-btn .drop-arrow { font-size: 7px; color: #5a5f7a; transition: transform 0.2s; }
-.lang-btn:hover .drop-arrow { color: #f97316; }
-.lang-btn.open .drop-arrow { transform: rotate(180deg); }
-.lang-menu {
-    position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px);
-    background: #16161e; border: 1px solid #22222e; border-radius: 10px;
-    padding: 4px; min-width: 130px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
-    opacity: 0; visibility: hidden; transition: all 0.15s ease; z-index: 100;
-}
-.lang-selector.open .lang-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-.lang-option {
-    display: block; width: 100%; padding: 7px 14px; border: none; background: transparent;
-    color: #8b949e; font-size: 12px; cursor: pointer; border-radius: 6px;
-    font-family: inherit; text-align: left; transition: all 0.1s;
-}
-.lang-option:hover { background: rgba(255,255,255,0.04); color: #d1d5e0; }
-.lang-option.active { background: rgba(249,115,22,0.1); color: #f97316; }
 /* ===== PREVIEW PANEL ===== */
 .btn-preview { background: transparent; color: #8b949e; border: 1px solid #262633; }
 .btn-preview:hover { border-color: #f97316; color: #f97316; }
@@ -658,13 +631,6 @@ body.light-mode .btn-preview { color: #656d76; border-color: #d0d7de; }
 body.light-mode .btn-preview:hover { border-color: #d97706; color: #d97706; }
 body.light-mode .btn-preview.active { background: rgba(217,119,6,0.08); border-color: #d97706; color: #d97706; }
 
-body.light-mode .lang-btn { background: #f0f2f5; border-color: #d0d7de; color: #1e1e1e; }
-body.light-mode .lang-btn:hover { border-color: #d97706; color: #d97706; }
-body.light-mode .lang-btn:hover .drop-arrow { color: #d97706; }
-body.light-mode .lang-menu { background: rgba(255,255,255,0.97); border-color: #d0d7de; }
-body.light-mode .lang-option { color: #656d76; }
-body.light-mode .lang-option:hover { background: #f6f8fa; color: #1e1e1e; }
-body.light-mode .lang-option.active { background: rgba(217,119,6,0.08); color: #d97706; }
 
 /* ===== DROPDOWN LEARN ===== */
 .drop-wrap { position: relative; display: inline-flex; }
@@ -760,6 +726,32 @@ body.light-mode .drop-item .di-badge { background: #e9ecef; color: #666; }
     background: #121216;
     border-top: 1px solid #22222e;
 }
+
+/* ===== SIDEBAR LANGUAGE SECTION ===== */
+.sidebar-section { border-top: 1px solid #22222e; }
+.sidebar-section-header {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 12px; font-size: 11px; font-weight: 600;
+    color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.sidebar-section-header svg { opacity: 0.6; flex-shrink: 0; }
+.sidebar-lang-list { padding: 2px 6px 8px; }
+.sidebar-lang-item {
+    display: flex; align-items: center; gap: 8px;
+    width: 100%; padding: 6px 10px; border: none; border-radius: 6px;
+    background: transparent; color: #d1d5e0; font-size: 13px; cursor: pointer;
+    font-family: inherit; transition: all 0.12s; text-align: left;
+}
+.sidebar-lang-item:hover { background: #1a1a2e; color: #fff; }
+.sidebar-lang-item.active { background: rgba(249,115,22,0.1); color: #f97316; }
+.sli-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+body.light-mode .sidebar-section { border-top-color: #e0e2e8; }
+body.light-mode .sidebar-section-header { color: #656d76; }
+body.light-mode .sidebar-lang-item { color: #1e1e1e; }
+body.light-mode .sidebar-lang-item:hover { background: #f0f2f5; }
+body.light-mode .sidebar-lang-item.active { background: rgba(217,119,6,0.08); color: #d97706; }
 
 /* Donate Modal */
 #donateOverlay {
@@ -1629,15 +1621,7 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
             </div>
         </div>
         <a href="learn.html#donate" class="drop-trigger" id="donateHeaderBtn" title="Support JometCode" style="text-decoration:none">Donate <span style="color:#f59e0b">&#10084;</span></a>
-        <div class="lang-selector" id="langSelector">
-            <button class="lang-btn" id="langBtn">Python <span class="drop-arrow">&#9660;</span></button>
-            <div class="lang-menu" id="langMenu">
-                <button class="lang-option active" data-lang="python">Python</button>
-                <button class="lang-option" data-lang="html">HTML</button>
-                <button class="lang-option" data-lang="css">CSS</button>
-                <button class="lang-option" data-lang="javascript">JavaScript</button>
-            </div>
-        </div>
+    </div>
     </div>
     <div class="header-right">
         <button id="mobileToggle" title="Toggle sidebar">&#9776;</button>
@@ -1664,6 +1648,30 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
             </span>
         </div>
         <div class="sidebar-content" id="fileTree"></div>
+        <div class="sidebar-section" id="langSection">
+            <div class="sidebar-section-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span>Languages</span>
+            </div>
+            <div class="sidebar-lang-list">
+                <button class="sidebar-lang-item active" data-lang="python">
+                    <span class="sli-dot" style="background:#f97316"></span>
+                    <span>Python</span>
+                </button>
+                <button class="sidebar-lang-item" data-lang="html">
+                    <span class="sli-dot" style="background:#e34c26"></span>
+                    <span>HTML</span>
+                </button>
+                <button class="sidebar-lang-item" data-lang="css">
+                    <span class="sli-dot" style="background:#2965f1"></span>
+                    <span>CSS</span>
+                </button>
+                <button class="sidebar-lang-item" data-lang="javascript">
+                    <span class="sli-dot" style="background:#f0db4f"></span>
+                    <span>JavaScript</span>
+                </button>
+            </div>
+        </div>
         <div class="sidebar-footer" id="sidebarFooter"></div>
     </div>
     <div class="resize-handle" id="resizeSidebar"></div>
@@ -1993,22 +2001,17 @@ CodeMirror.registerHelper("hint", "python", function(cm) {
 }
 
 // ===== LANGUAGE SELECTOR =====
-const langBtn = document.getElementById('langBtn');
-const langSelector = document.getElementById('langSelector');
-const langOptions = document.querySelectorAll('.lang-option');
 const previewToggle = document.getElementById('previewToggle');
 const previewFrame = document.getElementById('previewFrame');
 const outputLabel = document.getElementById('outputLabel');
+const sidebarLangItems = document.querySelectorAll('.sidebar-lang-item');
 const CM_MODES = { python: 'python', html: 'htmlmixed', css: 'css', javascript: 'javascript' };
 
 function switchLanguage(lang) {
     currentLang = lang;
-    langBtn.innerHTML = lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="drop-arrow">&#9660;</span>';
-    langOptions.forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
-    langSelector.classList.remove('open');
+    sidebarLangItems.forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
     cm.setOption('mode', CM_MODES[lang]);
     if (lang === 'python') {
-        cm.setOption('theme', 'default');
         previewToggle.style.display = 'none';
         outputLabel.textContent = '📟 Output';
         previewFrame.style.display = 'none';
@@ -2027,14 +2030,8 @@ function switchLanguage(lang) {
     cm.focus();
 }
 
-langBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langSelector.classList.toggle('open');
-});
-document.addEventListener('click', () => langSelector.classList.remove('open'));
-
-langOptions.forEach(opt => {
-    opt.addEventListener('click', () => switchLanguage(opt.dataset.lang));
+sidebarLangItems.forEach(item => {
+    item.addEventListener('click', () => switchLanguage(item.dataset.lang));
 });
 
 previewToggle.addEventListener('click', () => {
