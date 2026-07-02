@@ -104,7 +104,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         host = self.headers.get('Host', '')
-        if 'jometcode.onrender.com' in host:
+        print(f'[DEBUG] Host: {host}', flush=True)
+        if 'onrender.com' in host or host == 'jometcode.onrender.com':
             self.send_response(301)
             self.send_header('Location', 'https://jometcode.2bd.net/')
             self.end_headers()
