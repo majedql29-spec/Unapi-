@@ -15,12 +15,17 @@ BLOCKED_MODULES = [
     'threading', 'multiprocessing', 'urllib', 'http.client',
     'smtplib', 'ftplib', 'telnetlib', 'pathlib', 'glob',
     'io', 'sqlite3', 'pickle', 'signal', 'asyncio',
+    'importlib', 'builtins', 'requests', 'httpx', 'aiohttp',
+    'urllib3', 'inspect', 'code', 'pdb', 'webbrowser',
+    'runpy', 'compileall', 'py_compile', 'zipimport',
 ]
 
 BLOCKED_PATTERNS = [
     '__import__', '__builtins__',
     'exec(', 'eval(', 'compile(',
     'open("/', "open('/", 'open("c:', "open('c:",
+    'open( "', "open( '", 'open(b"', "open(b'",
+    'breakpoint(',
 ] + [f'import {m}' for m in BLOCKED_MODULES] \
   + [f'from {m}' for m in BLOCKED_MODULES]
 
@@ -46,10 +51,18 @@ def is_code_safe(code):
     return True, ''
 
 class Handler(http.server.SimpleHTTPRequestHandler):
+    ALLOWED_ORIGIN = 'https://jometcode.2bd.net'
+
+    def end_headers(self):
+        self.send_header('Access-Control-Allow-Origin', self.ALLOWED_ORIGIN)
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('X-Frame-Options', 'DENY')
+        self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
+        super().end_headers()
+
     def send_json(self, data, code=200):
         self.send_response(code)
         self.send_header('Content-Type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
 
@@ -64,7 +77,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type,Authorization')
         self.end_headers()
