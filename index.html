@@ -554,7 +554,7 @@ body.light-mode .auth-body .terms-checkbox input[type="checkbox"] { accent-color
 /* ===== HEADER ===== */
 header {
     background: #121216;
-    padding: 0 24px; height: 50px;
+    padding: 0 16px; height: 42px;
     display: flex; align-items: center; justify-content: space-between;
     border-bottom: 1px solid #22222e;
     position: relative; gap: 12px;
@@ -565,26 +565,26 @@ header::after {
     background: linear-gradient(90deg, transparent, rgba(217,217,217,0.15), transparent);
 }
 header h1 {
-    font-size: 15px; font-weight: 600; color: #e6edf3;
-    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 600; color: #e6edf3;
+    display: flex; align-items: center; gap: 8px;
     letter-spacing: -0.2px;
 }
 header h1 .logo {
-    width: 26px; height: 26px;
-    border-radius: 7px;
+    width: 20px; height: 20px;
+    border-radius: 5px;
     display: inline-flex; align-items: center; justify-content: center;
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(217,217,217,0.08);
 }
 header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
-.header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
-.header-center { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
-.header-right { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: flex-end; }
+.header-left { display: flex; align-items: center; gap: 8px; flex: 1; }
+.header-center { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.header-right { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
 .avatar-btn {
     background: #12121e; border: 1px solid #1e1e30; color: #d1d5e0;
-    font-size: 13px; font-weight: 600; cursor: pointer;
-    padding: 0; border-radius: 10px; transition: all 0.2s;
-    width: 34px; height: 34px; display: inline-flex;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    padding: 0; border-radius: 8px; transition: all 0.2s;
+    width: 30px; height: 30px; display: inline-flex;
     align-items: center; justify-content: center;
 }
 .avatar-btn:hover { border-color: #d9d9d9; background: #1a1a2e; box-shadow: 0 0 0 2px rgba(217,217,217,0.08); }
@@ -595,9 +595,9 @@ header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
 }
 .btn-run {
     background: linear-gradient(135deg, #d9d9d9, #222222);
-    color: #fff; font-weight: 600; padding: 9px 22px;
-    border-radius: 24px;
-    display: flex; align-items: center; gap: 6px;
+    color: #fff; font-weight: 600; padding: 7px 16px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
     box-shadow: 0 2px 12px rgba(217,217,217,0.25);
 }
 .btn-run:hover { background: linear-gradient(135deg, #d9d9d9, #d9d9d9); box-shadow: 0 4px 20px rgba(217,217,217,0.4); transform: translateY(-1px); }
@@ -605,15 +605,15 @@ header h1 .logo img { width: 100%; height: 100%; object-fit: cover; }
 .btn-clear { background: #12121e; color: #8b949e; border: 1px solid #1e1e30; }
 .btn-clear:hover { background: #1a1a2e; color: #d1d5e0; border-color: #2a2a40; }
 .btn-signin {
-    background: transparent; color: #d9d9d9; border: 1px solid rgba(217,217,217,0.4); font-weight: 600; padding: 9px 20px;
-    border-radius: 24px; font-size: 13px; cursor: pointer; transition: all 0.2s;
+    background: transparent; color: #d9d9d9; border: 1px solid rgba(217,217,217,0.4); font-weight: 600; padding: 7px 16px;
+    border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s;
 }
 .btn-signin:hover { background: rgba(217,217,217,0.08); border-color: #d9d9d9; box-shadow: 0 0 20px rgba(217,217,217,0.06); }
 body.light-mode .btn-signin { color: #222222; border-color: #222222; }
 body.light-mode .btn-signin:hover { background: rgba(34,34,34,0.08); }
 .btn-donate {
     background: transparent; color: #d9d9d9; border: 1px solid rgba(217,217,217,0.25); font-weight: 500;
-    padding: 7px 12px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.25s;
+    padding: 4px 10px; border-radius: 16px; font-size: 12px; cursor: pointer; transition: all 0.25s;
     display: inline-flex; align-items: center; gap: 5px; font-family: inherit;
     line-height: 1;
 }
@@ -628,8 +628,8 @@ body.light-mode .btn-signin:hover { background: rgba(34,34,34,0.08); }
 .drop-trigger {
     background: none; border: none; color: #a8b0cc; font-size: 13px; font-weight: 500;
     cursor: pointer; transition: all 0.2s; font-family: inherit;
-    display: inline-flex; align-items: center; gap: 3px; padding: 6px 10px;
-    border-radius: 8px; letter-spacing: 0.1px;
+    display: inline-flex; align-items: center; gap: 3px; padding: 4px 8px;
+    border-radius: 6px; letter-spacing: 0.1px;
 }
 .drop-trigger:hover { color: #d1d5e0; background: rgba(255,255,255,0.03); }
 .drop-trigger .drop-arrow { font-size: 7px; transition: transform 0.2s; color: #5a5f7a; }
@@ -1391,10 +1391,10 @@ body.light-mode .cm-variable { color: #333 !important; }
     .sidebar.open { left: 0; }
     .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 199; backdrop-filter: blur(4px); }
     .sidebar-backdrop.show { display: block; }
-    header { padding: 0 12px; height: 44px; }
-    header h1 { font-size: 14px; }
-    header h1 .logo { width: 24px; height: 24px; }
-    .btn { padding: 6px 14px; font-size: 12px; }
+    header { padding: 0 12px; height: 40px; }
+    header h1 { font-size: 13px; }
+    header h1 .logo { width: 18px; height: 18px; }
+    .btn { padding: 5px 12px; font-size: 11px; }
     .btn-run { padding: 6px 16px; font-size: 12px; }
     .nav-tabs { gap: 2px; padding: 2px; }
     .nav-tab { font-size: 11px; padding: 5px 10px; }
@@ -1588,7 +1588,6 @@ body.light-mode #mobileToggle:hover { background: #f0f0f0; color: #333; }
             </div>
         </div>
         <a href="learn.html#donate" class="drop-trigger" id="donateHeaderBtn" title="Support JometCode" style="text-decoration:none">Donate <span style="color:#d9d9d9">&#10084;</span></a>
-    </div>
     </div>
     <div class="header-right">
         <button id="mobileToggle" title="Toggle sidebar">&#9776;</button>
